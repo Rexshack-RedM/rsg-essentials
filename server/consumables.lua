@@ -16,23 +16,6 @@ QRCore.Functions.CreateUseableItem("coffee", function(source, item)
     end
 end)
 
--- DrinkAlcohol
-
-QRCore.Functions.CreateUseableItem("vodka", function(source, item)
-    local Player = QRCore.Functions.GetPlayer(source)
-    TriggerClientEvent("consumables:client:DrinkAlcohol", source, item.name)
-end)
-
-QRCore.Functions.CreateUseableItem("beer", function(source, item)
-    local Player = QRCore.Functions.GetPlayer(source)
-    TriggerClientEvent("consumables:client:DrinkAlcohol", source, item.name)
-end)
-
-QRCore.Functions.CreateUseableItem("whiskey", function(source, item)
-    local Player = QRCore.Functions.GetPlayer(source)
-    TriggerClientEvent("consumables:client:DrinkAlcohol", source, item.name)
-end)
-
 -- EAT
 
 QRCore.Functions.CreateUseableItem("sandwich", function(source, item)

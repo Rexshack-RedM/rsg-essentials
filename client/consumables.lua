@@ -79,33 +79,6 @@ RegisterNetEvent("consumables:client:Smoke", function(itemName)
     end
 end)
 
-RegisterNetEvent("consumables:client:DrinkAlcohol", function(itemName)
-    if isBusy then
-        return
-    else
-        isBusy = not isBusy
-        sleep = 5000
-        SetCurrentPedWeapon(PlayerPedId(), GetHashKey("weapon_unarmed"))
-        Citizen.Wait(100)
-        local bottle = nil
-        if not IsPedOnMount(PlayerPedId()) and not IsPedInAnyVehicle(PlayerPedId()) then
-            doAnim("s_inv_whiskey01x", "SKEL_R_FINGER12", 0.0, -0.05, 0.22, 0.0, 180.0, 180.0, 'base_trans_cheers_putaway', 'mp_mech_inventory@drinking@moonshine@drunk@male_a', sleep)
-        end
-		Wait(sleep)
-		TriggerEvent("inventory:client:ItemBox", QRCore.Shared.Items[itemName], "remove")
-		TriggerServerEvent("QRCore:Server:RemoveItem", itemName, 1)
-		TriggerServerEvent("QRCore:Server:SetMetaData", "thirst", QRCore.Functions.GetPlayerData().metadata["thirst"] + ConsumeablesAlcohol[itemName])
-        Citizen.Wait(sleep)
-        if bottle ~= nil then
-            DetachEntity(bottle, true, true)
-            DeleteObject(bottle)
-        end
-        ClearPedTasks(PlayerPedId())
-        AnimDetatch (sleep)
-        isBusy = not isBusy
-    end
-end)
-
 RegisterNetEvent("consumables:client:Eat", function(itemName)
     if isBusy then
         return
