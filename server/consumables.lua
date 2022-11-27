@@ -46,6 +46,13 @@ QRCore.Functions.CreateUseableItem("chocolate", function(source, item)
     end
 end)
 
+QRCore.Functions.CreateUseableItem("stew", function(source, item)
+    local Player = QRCore.Functions.GetPlayer(source)
+	if Player.Functions.RemoveItem(item.name, 1, item.slot) then
+        TriggerClientEvent("consumables:client:EatStew", source, item.name)
+    end
+end)
+
 -- OTHER
 
 QRCore.Functions.CreateUseableItem("cigarette", function(source, item)

@@ -100,8 +100,21 @@ RegisterNetEvent("consumables:client:Eat", function(itemName)
     end
 end)
 
-RegisterNetEvent("qb:Dual", function()
-    local player = PlayerPedId()
-	Citizen.InvokeNative(0xB282DC6EBD803C75, player, GetHashKey("weapon_revolver_cattleman"), 500, true, 0)
-	Citizen.InvokeNative(0x5E3BDDBCB83F3D84, player, GetHashKey("weapon_pistol_volcanic"), 500, true, 0, true, 1.0)
+RegisterNetEvent("consumables:client:EatStew", function(itemName)
+    if isBusy then
+        return
+    else
+        isBusy = not isBusy
+		sleep = 5000
+        SetCurrentPedWeapon(PlayerPedId(), GetHashKey("weapon_unarmed"))
+		local bowl = CreateObject("p_bowl04x_stew", GetEntityCoords(PlayerPedId()), true, true, false, false, true)
+		local spoon = CreateObject("p_spoon01x", GetEntityCoords(PlayerPedId()), true, true, false, false, true)
+		Citizen.InvokeNative(0x669655FFB29EF1A9, bowl, 0, "Stew_Fill", 1.0)
+		Citizen.InvokeNative(0xCAAF2BCCFEF37F77, bowl, 20)
+		Citizen.InvokeNative(0xCAAF2BCCFEF37F77, spoon, 82)
+		TaskItemInteraction_2(PlayerPedId(), 599184882, bowl, GetHashKey("p_bowl04x_stew_ph_l_hand"), -583731576, 1, 0, -1.0)
+		TaskItemInteraction_2(PlayerPedId(), 599184882, spoon, GetHashKey("p_spoon01x_ph_r_hand"), -583731576, 1, 0, -1.0)
+		Citizen.InvokeNative(0xB35370D5353995CB, PlayerPedId(), -583731576, 1.0)
+		TriggerServerEvent("QRCore:Server:SetMetaData", "hunger", QRCore.Functions.GetPlayerData().metadata["hunger"] + ConsumeablesEat[itemName])
+    end
 end)

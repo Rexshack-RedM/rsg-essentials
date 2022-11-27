@@ -4,6 +4,7 @@ Config.Debug = false
 
 ConsumeablesEat = {
 	["bread"] = math.random(20, 40),
+	["stew"] = math.random(80, 100),
 }
 
 ConsumeablesDrink = {
