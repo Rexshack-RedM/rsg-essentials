@@ -527,6 +527,18 @@ QRCore.Commands.Add("youstink", "does a you stink emote", {}, false, function(so
 	TriggerClientEvent('emotes:client:doemote', src, -166523388)
 end)
 
+-- dances from animations
+
+QRCore.Commands.Add("dance13", "does a lil dance", {}, false, function(source)
+	src = source
+	TriggerClientEvent('emotes:client:dodance', src, "script_mp@emotes@dance@carefree@a@male@unarmed@full", "fullbody")
+end)
+
+QRCore.Commands.Add("dance14", "does another lil dance", {}, false, function(source)
+	src = source
+	TriggerClientEvent('emotes:client:dodance', src, "script_mp@emotes@dance@carefree@b@male@unarmed@full", "fullbody")
+end)
+
 -- dance emotes
 --[[
 QRCore.Commands.Add("dance1", "does a dance awkward emote", {}, false, function(source)
