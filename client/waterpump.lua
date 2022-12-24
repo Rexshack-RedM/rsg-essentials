@@ -1,4 +1,4 @@
-local QRCore = exports['qr-core']:GetCoreObject()
+local RSGCore = exports['rsg-core']:GetCoreObject()
 local isBusy = false
 
 function loadAnimDict(dict, anim)
@@ -48,7 +48,7 @@ Citizen.CreateThread(function()
 			if #(pos - objectPos) < 3.0 then
 				awayFromObject = false
 				DrawText3Ds(objectPos.x, objectPos.y, objectPos.z + 1.0, "USE [J]")
-				if IsControlJustReleased(0, QRCore.Shared.Keybinds['J']) then
+				if IsControlJustReleased(0, RSGCore.Shared.Keybinds['J']) then
 					TriggerEvent('rsg-waterpump:client:drinking')
 				end
 			end
@@ -70,7 +70,7 @@ Citizen.CreateThread(function()
 			if #(pos - objectPos) < 3.0 then
 				awayFromObject = false
 				DrawText3Ds(objectPos.x, objectPos.y, objectPos.z + 1.0, "USE [J]")
-				if IsControlJustReleased(0, QRCore.Shared.Keybinds['J']) then 
+				if IsControlJustReleased(0, RSGCore.Shared.Keybinds['J']) then 
 					TriggerEvent('rsg-waterpump:client:drinking')
 				end
 			end
@@ -95,7 +95,7 @@ RegisterNetEvent('rsg-waterpump:client:drinking', function()
             doAnim("p_mugcoffee01x", "SKEL_R_FINGER12", 0.0, -0.05, 0.03, 0.0, 180.0, 180.0, 'action', 'mech_inventory@drinking@coffee', sleep)
         end
 		Wait(sleep)
-		TriggerServerEvent("QRCore:Server:SetMetaData", "thirst", QRCore.Functions.GetPlayerData().metadata["thirst"] + math.random(25, 50))
+		TriggerServerEvent("RSGCore:Server:SetMetaData", "thirst", RSGCore.Functions.GetPlayerData().metadata["thirst"] + math.random(25, 50))
         ClearPedTasks(PlayerPedId())
         AnimDetatch (sleep)
         isBusy = not isBusy

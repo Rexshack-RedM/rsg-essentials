@@ -1,4 +1,4 @@
-local QRCore = exports['qr-core']:GetCoreObject()
+local RSGCore = exports['rsg-core']:GetCoreObject()
 local WashPrompt
 local DrinkPrompt
 local RiverGroup = GetRandomIntInRange(0, 0xffffff)
@@ -9,7 +9,7 @@ function WashPrompt()
         local str ="Wash"
         local wait = 0
         WashPrompt = Citizen.InvokeNative(0x04F97DE45A519419)
-        PromptSetControlAction(WashPrompt, QRCore.Shared.Keybinds['ENTER'])
+        PromptSetControlAction(WashPrompt, RSGCore.Shared.Keybinds['ENTER'])
         str = CreateVarString(10, 'LITERAL_STRING', str)
         PromptSetText(WashPrompt, str)
         PromptSetEnabled(WashPrompt, true)
@@ -26,7 +26,7 @@ function DrinkPrompt()
         local str ="Drink"
         local wait = 0
         DrinkPrompt = Citizen.InvokeNative(0x04F97DE45A519419)
-        PromptSetControlAction(DrinkPrompt, QRCore.Shared.Keybinds['J'])
+        PromptSetControlAction(DrinkPrompt, RSGCore.Shared.Keybinds['J'])
         str = CreateVarString(10, 'LITERAL_STRING', str)
         PromptSetText(DrinkPrompt, str)
         PromptSetEnabled(DrinkPrompt, true)
@@ -88,7 +88,7 @@ AddEventHandler('rsg-river:client:drink', function()
 	Citizen.Wait(0)
 	TaskStartScenarioInPlace(playerPed, GetHashKey('WORLD_HUMAN_BUCKET_DRINK_GROUND'), -1, true, false, false, false)
 	Citizen.Wait(17000)
-	TriggerServerEvent("QRCore:Server:SetMetaData", "thirst", QRCore.Functions.GetPlayerData().metadata["thirst"] + math.random(50, 100))
+	TriggerServerEvent("RSGCore:Server:SetMetaData", "thirst", RSGCore.Functions.GetPlayerData().metadata["thirst"] + math.random(50, 100))
 	ClearPedTasks(PlayerPedId())
 end)
 

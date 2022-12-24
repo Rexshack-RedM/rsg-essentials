@@ -1,9 +1,9 @@
-local QRCore = exports['qr-core']:GetCoreObject()
+local RSGCore = exports['rsg-core']:GetCoreObject()
 
 CreateThread(function()
     while true do
         Wait(7)
-        if IsControlJustPressed(0, QRCore.Shared.Keybinds['X']) then
+        if IsControlJustPressed(0, RSGCore.Shared.Keybinds['X']) then
             local ped = PlayerPedId()
             if not IsEntityDead(ped) and not Citizen.InvokeNative(0x9682F850056C9ADE, ped) then
                 local animDict = "script_proc@robberies@homestead@lonnies_shack@deception"

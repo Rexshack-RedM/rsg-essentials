@@ -1,4 +1,4 @@
-local QRCore = exports['qr-core']:GetCoreObject()
+local RSGCore = exports['rsg-core']:GetCoreObject()
 local isLoggedIn = LocalPlayer.state.isLoggedIn
 local ignoredGroups = {
     ['mod'] = true,
@@ -20,7 +20,7 @@ local timeMinutes = {
 }
 
 local function updatePermissionLevel()
-    QRCore.Functions.TriggerCallback('rsg-afkkick:server:GetPermissions', function(userGroups)
+    RSGCore.Functions.TriggerCallback('rsg-afkkick:server:GetPermissions', function(userGroups)
         for k in pairs(userGroups) do
             if ignoredGroups[k] then
                 checkUser = false
@@ -31,16 +31,16 @@ local function updatePermissionLevel()
     end)
 end
 
-RegisterNetEvent('QRCore:Client:OnPlayerLoaded', function()
+RegisterNetEvent('RSGCore:Client:OnPlayerLoaded', function()
     updatePermissionLevel()
     isLoggedIn = true
 end)
 
-RegisterNetEvent('QRCore:Client:OnPlayerUnload', function()
+RegisterNetEvent('RSGCore:Client:OnPlayerUnload', function()
     isLoggedIn = false
 end)
 
-RegisterNetEvent('QRCore:Client:OnPermissionUpdate', function()
+RegisterNetEvent('RSGCore:Client:OnPermissionUpdate', function()
     updatePermissionLevel()
 end)
 
@@ -57,9 +57,9 @@ CreateThread(function()
                             if time > 0 then
                                 local _type = timeMinutes[tostring(time)]
                                 if _type == 'minutes' then
-                                    QRCore.Functions.Notify('You are AFK and will be kicked in ' .. math.ceil(time / 60) .. ' minute(s)!', 'error', 10000)
+                                    RSGCore.Functions.Notify('You are AFK and will be kicked in ' .. math.ceil(time / 60) .. ' minute(s)!', 'error', 10000)
                                 elseif _type == 'seconds' then
-                                    QRCore.Functions.Notify('You are AFK and will be kicked in ' .. time .. ' seconds!', 'error', 10000)
+                                    RSGCore.Functions.Notify('You are AFK and will be kicked in ' .. time .. ' seconds!', 'error', 10000)
                                 end
                                 time -= 1
                             else

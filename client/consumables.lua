@@ -1,5 +1,5 @@
 local isBusy = false
-local QRCore = exports['qr-core']:GetCoreObject()
+local RSGCore = exports['rsg-core']:GetCoreObject()
 
 function loadAnimDict(dict, anim)
     while not HasAnimDictLoaded(dict) do Wait(0) RequestAnimDict(dict) end
@@ -40,8 +40,8 @@ RegisterNetEvent("consumables:client:Drink", function(itemName)
             doAnim("p_mugcoffee01x", "SKEL_R_FINGER12", 0.0, -0.05, 0.03, 0.0, 180.0, 180.0, 'action', 'mech_inventory@drinking@coffee', sleep)
         end
 		Wait(sleep)
-		TriggerEvent("inventory:client:ItemBox", QRCore.Shared.Items[itemName], "remove")
-		TriggerServerEvent("QRCore:Server:SetMetaData", "thirst", QRCore.Functions.GetPlayerData().metadata["thirst"] + ConsumeablesDrink[itemName])
+		TriggerEvent("inventory:client:ItemBox", RSGCore.Shared.Items[itemName], "remove")
+		TriggerServerEvent("RSGCore:Server:SetMetaData", "thirst", RSGCore.Functions.GetPlayerData().metadata["thirst"] + ConsumeablesDrink[itemName])
         ClearPedTasks(PlayerPedId())
         AnimDetatch (sleep)
         isBusy = not isBusy
@@ -71,7 +71,7 @@ RegisterNetEvent("consumables:client:Smoke", function(itemName)
             doAnim(item_model, "SKEL_R_FINGER12", pX, pY, pZ, rX, rY, rZ, 'base', 'amb_wander@code_human_smoking_wander@cigar@male_a@base', sleep)
         end
 		Wait(sleep)
-		TriggerEvent("inventory:client:ItemBox", QRCore.Shared.Items[itemName], "remove")
+		TriggerEvent("inventory:client:ItemBox", RSGCore.Shared.Items[itemName], "remove")
 		TriggerServerEvent('hud:server:RelieveStress', math.random(20, 40))
         ClearPedTasks(PlayerPedId())
         AnimDetatch (sleep)
@@ -92,8 +92,8 @@ RegisterNetEvent("consumables:client:Eat", function(itemName)
             TaskPlayAnim(PlayerPedId(), dict, 'quick_right_hand', 5.0, 5.0, -1, 1, false, false, false)
         end
 		Wait(sleep)
-		TriggerEvent("inventory:client:ItemBox", QRCore.Shared.Items[itemName], "remove")
-		TriggerServerEvent("QRCore:Server:SetMetaData", "hunger", QRCore.Functions.GetPlayerData().metadata["hunger"] + ConsumeablesEat[itemName])
+		TriggerEvent("inventory:client:ItemBox", RSGCore.Shared.Items[itemName], "remove")
+		TriggerServerEvent("RSGCore:Server:SetMetaData", "hunger", RSGCore.Functions.GetPlayerData().metadata["hunger"] + ConsumeablesEat[itemName])
 		TriggerServerEvent('hud:server:RelieveStress', math.random(2, 4))
         ClearPedTasks(PlayerPedId())
         isBusy = not isBusy
@@ -115,6 +115,6 @@ RegisterNetEvent("consumables:client:EatStew", function(itemName)
 		TaskItemInteraction_2(PlayerPedId(), 599184882, bowl, GetHashKey("p_bowl04x_stew_ph_l_hand"), -583731576, 1, 0, -1.0)
 		TaskItemInteraction_2(PlayerPedId(), 599184882, spoon, GetHashKey("p_spoon01x_ph_r_hand"), -583731576, 1, 0, -1.0)
 		Citizen.InvokeNative(0xB35370D5353995CB, PlayerPedId(), -583731576, 1.0)
-		TriggerServerEvent("QRCore:Server:SetMetaData", "hunger", QRCore.Functions.GetPlayerData().metadata["hunger"] + ConsumeablesEat[itemName])
+		TriggerServerEvent("RSGCore:Server:SetMetaData", "hunger", RSGCore.Functions.GetPlayerData().metadata["hunger"] + ConsumeablesEat[itemName])
     end
 end)

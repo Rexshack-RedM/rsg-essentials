@@ -1,11 +1,11 @@
-local QRCore = exports['qr-core']:GetCoreObject()
+local RSGCore = exports['rsg-core']:GetCoreObject()
 
 Citizen.CreateThread(function()
     local active = false
     local timer = 0
     while true do 
         Wait(0)
-        if IsControlJustPressed(0, QRCore.Shared.Keybinds['E']) then
+        if IsControlJustPressed(0, RSGCore.Shared.Keybinds['E']) then
             timer = 0
             active = true
             while  timer < 200 do 
@@ -17,7 +17,7 @@ Citizen.CreateThread(function()
             active = false
         end
 
-        if IsControlJustPressed(0, QRCore.Shared.Keybinds['F']) then
+        if IsControlJustPressed(0, RSGCore.Shared.Keybinds['F']) then
 			Wait(500)
 			SetRelationshipBetweenGroups(1, `PLAYER`, `PLAYER`)
 			active = false
