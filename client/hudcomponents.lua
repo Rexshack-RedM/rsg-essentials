@@ -29,8 +29,8 @@ Citizen.CreateThread(function()
 	Citizen.InvokeNative(0xC116E6DF68DCE667, 2, 2) -- ICON_DEADEYE / HIDE
 	Citizen.InvokeNative(0xC116E6DF68DCE667, 3, 2) -- ICON_DEADEYE_CORE / HIDE
 	
-	--Citizen.InvokeNative(0xC116E6DF68DCE667, 4, 2) -- ICON_HEALTH / HIDE
-	--Citizen.InvokeNative(0xC116E6DF68DCE667, 5, 2) -- ICON_HEALTH_CORE / HIDE
+	Citizen.InvokeNative(0xC116E6DF68DCE667, 4, 2) -- ICON_HEALTH / HIDE
+	Citizen.InvokeNative(0xC116E6DF68DCE667, 5, 2) -- ICON_HEALTH_CORE / HIDE
 	
 	--Citizen.InvokeNative(0xC116E6DF68DCE667, 6, 2) -- ICON_HORSE_HEALTH / HIDE
 	--Citizen.InvokeNative(0xC116E6DF68DCE667, 7, 2) -- ICON_HORSE_HEALTH_CORE / HIDE
