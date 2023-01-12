@@ -39,46 +39,46 @@ end
 
 -- pump prompt
 Citizen.CreateThread(function()
-	while true do
-		Citizen.Wait(0)
-		local pos, awayFromObject = GetEntityCoords(PlayerPedId()), true
-		local pumpObject = GetClosestObjectOfType(pos, 5.0, GetHashKey("p_waterpump01x"), false, false, false)
-		if pumpObject ~= 0 then
-			local objectPos = GetEntityCoords(pumpObject)
-			if #(pos - objectPos) < 3.0 then
-				awayFromObject = false
-				DrawText3Ds(objectPos.x, objectPos.y, objectPos.z + 1.0, "USE [J]")
-				if IsControlJustReleased(0, RSGCore.Shared.Keybinds['J']) then
-					TriggerEvent('rsg-waterpump:client:drinking')
-				end
-			end
-		end
-		if awayFromObject then
-			Citizen.Wait(1000)
-		end
-	end
+    while true do
+        Citizen.Wait(0)
+        local pos, awayFromObject = GetEntityCoords(PlayerPedId()), true
+        local pumpObject = GetClosestObjectOfType(pos, 5.0, GetHashKey("p_waterpump01x"), false, false, false)
+        if pumpObject ~= 0 then
+            local objectPos = GetEntityCoords(pumpObject)
+            if #(pos - objectPos) < 3.0 then
+                awayFromObject = false
+                DrawText3Ds(objectPos.x, objectPos.y, objectPos.z + 1.0, "USE [J]")
+                if IsControlJustReleased(0, RSGCore.Shared.Keybinds['J']) then
+                    TriggerEvent('rsg-waterpump:client:drinking')
+                end
+            end
+        end
+        if awayFromObject then
+            Citizen.Wait(1000)
+        end
+    end
 end)
 
 -- well pump prompt
 Citizen.CreateThread(function()
-	while true do
-		Citizen.Wait(0)
-		local pos, awayFromObject = GetEntityCoords(PlayerPedId()), true
-		local wellpumpObject = GetClosestObjectOfType(pos, 5.0, GetHashKey("p_wellpumpnbx01x"), false, false, false)
-		if wellpumpObject ~= 0 then
-			local objectPos = GetEntityCoords(wellpumpObject)
-			if #(pos - objectPos) < 3.0 then
-				awayFromObject = false
-				DrawText3Ds(objectPos.x, objectPos.y, objectPos.z + 1.0, "USE [J]")
-				if IsControlJustReleased(0, RSGCore.Shared.Keybinds['J']) then 
-					TriggerEvent('rsg-waterpump:client:drinking')
-				end
-			end
-		end
-		if awayFromObject then
-			Citizen.Wait(1000)
-		end
-	end
+    while true do
+        Citizen.Wait(0)
+        local pos, awayFromObject = GetEntityCoords(PlayerPedId()), true
+        local wellpumpObject = GetClosestObjectOfType(pos, 5.0, GetHashKey("p_wellpumpnbx01x"), false, false, false)
+        if wellpumpObject ~= 0 then
+            local objectPos = GetEntityCoords(wellpumpObject)
+            if #(pos - objectPos) < 3.0 then
+                awayFromObject = false
+                DrawText3Ds(objectPos.x, objectPos.y, objectPos.z + 1.0, "USE [J]")
+                if IsControlJustReleased(0, RSGCore.Shared.Keybinds['J']) then 
+                    TriggerEvent('rsg-waterpump:client:drinking')
+                end
+            end
+        end
+        if awayFromObject then
+            Citizen.Wait(1000)
+        end
+    end
 end)
 
 -- waterpump drink water
@@ -94,8 +94,8 @@ RegisterNetEvent('rsg-waterpump:client:drinking', function()
             local object = nil
             doAnim("p_mugcoffee01x", "SKEL_R_FINGER12", 0.0, -0.05, 0.03, 0.0, 180.0, 180.0, 'action', 'mech_inventory@drinking@coffee', sleep)
         end
-		Wait(sleep)
-		TriggerServerEvent("RSGCore:Server:SetMetaData", "thirst", RSGCore.Functions.GetPlayerData().metadata["thirst"] + math.random(25, 50))
+        Wait(sleep)
+        TriggerServerEvent("RSGCore:Server:SetMetaData", "thirst", RSGCore.Functions.GetPlayerData().metadata["thirst"] + math.random(25, 50))
         ClearPedTasks(PlayerPedId())
         AnimDetatch (sleep)
         isBusy = not isBusy

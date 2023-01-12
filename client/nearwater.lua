@@ -41,94 +41,94 @@ end
 Citizen.CreateThread(function()
     WashPrompt()
     DrinkPrompt()
-	while true do
-		Citizen.Wait(1)
-		local weapon = Citizen.InvokeNative(0x8425C5F057012DAB, PlayerPedId())
-		local weaponName = Citizen.InvokeNative(0x89CF5FF3D363311E, weapon, Citizen.ResultAsString())
-		local coords = GetEntityCoords(PlayerPedId())
-		local water = Citizen.InvokeNative(0x5BA7A68A346A5A91,coords.x+3, coords.y+3, coords.z)
-		local playerPed = PlayerPedId()
-		if weaponName == "WEAPON_FISHINGROD" then
-			return
-		end
-		for k,v in pairs(Config.WaterTypes) do 
-			if water == Config.WaterTypes[k]["waterhash"]  then
-				if IsPedOnFoot(PlayerPedId()) then
-					if IsEntityInWater(PlayerPedId()) then
-						-- wash
-						local Wash = CreateVarString(10, 'LITERAL_STRING', Config.WaterTypes[k]["name"])
-						PromptSetActiveGroupThisFrame(RiverGroup, Wash)
-						
-						if PromptHasHoldModeCompleted(WashPrompt) then
-							StartWash("amb_misc@world_human_wash_face_bucket@ground@male_a@idle_d", "idle_l")
-						end
-						-- drink
-						local drink = CreateVarString(10, 'LITERAL_STRING', Config.WaterTypes[k]["name"])
-						PromptSetActiveGroupThisFrame(RiverGroup, drink)
-						
-						if PromptHasHoldModeCompleted(DrinkPrompt) then
-							TriggerEvent('rsg-river:client:drink')	
-						end
-					end
-				end
-			end
-		end
-	end
+    while true do
+        Citizen.Wait(1)
+        local weapon = Citizen.InvokeNative(0x8425C5F057012DAB, PlayerPedId())
+        local weaponName = Citizen.InvokeNative(0x89CF5FF3D363311E, weapon, Citizen.ResultAsString())
+        local coords = GetEntityCoords(PlayerPedId())
+        local water = Citizen.InvokeNative(0x5BA7A68A346A5A91,coords.x+3, coords.y+3, coords.z)
+        local playerPed = PlayerPedId()
+        if weaponName == "WEAPON_FISHINGROD" then
+            return
+        end
+        for k,v in pairs(Config.WaterTypes) do 
+            if water == Config.WaterTypes[k]["waterhash"]  then
+                if IsPedOnFoot(PlayerPedId()) then
+                    if IsEntityInWater(PlayerPedId()) then
+                        -- wash
+                        local Wash = CreateVarString(10, 'LITERAL_STRING', Config.WaterTypes[k]["name"])
+                        PromptSetActiveGroupThisFrame(RiverGroup, Wash)
+                        
+                        if PromptHasHoldModeCompleted(WashPrompt) then
+                            StartWash("amb_misc@world_human_wash_face_bucket@ground@male_a@idle_d", "idle_l")
+                        end
+                        -- drink
+                        local drink = CreateVarString(10, 'LITERAL_STRING', Config.WaterTypes[k]["name"])
+                        PromptSetActiveGroupThisFrame(RiverGroup, drink)
+                        
+                        if PromptHasHoldModeCompleted(DrinkPrompt) then
+                            TriggerEvent('rsg-river:client:drink')    
+                        end
+                    end
+                end
+            end
+        end
+    end
 end)
 
 -- drink action
 AddEventHandler('rsg-river:client:drink', function()
-	local src = source
-	if drink ~= 0 then
-		SetEntityAsMissionEntity(drink)
-		DeleteObject(nativerioprop)
-		drink = 0
-	end
-	local playerPed = PlayerPedId()
-	Citizen.Wait(0)
-	TaskStartScenarioInPlace(playerPed, GetHashKey('WORLD_HUMAN_BUCKET_DRINK_GROUND'), -1, true, false, false, false)
-	Citizen.Wait(17000)
-	TriggerServerEvent("RSGCore:Server:SetMetaData", "thirst", RSGCore.Functions.GetPlayerData().metadata["thirst"] + math.random(50, 100))
-	ClearPedTasks(PlayerPedId())
+    local src = source
+    if drink ~= 0 then
+        SetEntityAsMissionEntity(drink)
+        DeleteObject(nativerioprop)
+        drink = 0
+    end
+    local playerPed = PlayerPedId()
+    Citizen.Wait(0)
+    TaskStartScenarioInPlace(playerPed, GetHashKey('WORLD_HUMAN_BUCKET_DRINK_GROUND'), -1, true, false, false, false)
+    Citizen.Wait(17000)
+    TriggerServerEvent("RSGCore:Server:SetMetaData", "thirst", RSGCore.Functions.GetPlayerData().metadata["thirst"] + math.random(50, 100))
+    ClearPedTasks(PlayerPedId())
 end)
 
 -- wash action
 StartWash = function(dic, anim)
-	LoadAnim(dic)
-	TaskPlayAnim(PlayerPedId(), dic, anim, 1.0, 8.0, 5000, 0, 0.0, false, false, false)
-	Citizen.Wait(5000)
-	ClearPedTasks(PlayerPedId())
-	ClearPedEnvDirt(PlayerPedId())
-	ClearPedBloodDamage(PlayerPedId())
-	N_0xe3144b932dfdff65(PlayerPedId(), 0.0, -1, 1, 1)
-	ClearPedDamageDecalByZone(PlayerPedId(), 10, "ALL")
-	Citizen.InvokeNative(0x7F5D88333EE8A86F, PlayerPedId(), 1)
+    LoadAnim(dic)
+    TaskPlayAnim(PlayerPedId(), dic, anim, 1.0, 8.0, 5000, 0, 0.0, false, false, false)
+    Citizen.Wait(5000)
+    ClearPedTasks(PlayerPedId())
+    ClearPedEnvDirt(PlayerPedId())
+    ClearPedBloodDamage(PlayerPedId())
+    N_0xe3144b932dfdff65(PlayerPedId(), 0.0, -1, 1, 1)
+    ClearPedDamageDecalByZone(PlayerPedId(), 10, "ALL")
+    Citizen.InvokeNative(0x7F5D88333EE8A86F, PlayerPedId(), 1)
 end
 
 LoadAnim = function(dic)
-	RequestAnimDict(dic)
-	while not (HasAnimDictLoaded(dic)) do
-		Citizen.Wait(0)
-	end
+    RequestAnimDict(dic)
+    while not (HasAnimDictLoaded(dic)) do
+        Citizen.Wait(0)
+    end
 end
 
 function whenKeyJustPressed(key)
-	if Citizen.InvokeNative(0x580417101DDB492F, 0, key) then
-		return true
-	else
-		return false
-	end
+    if Citizen.InvokeNative(0x580417101DDB492F, 0, key) then
+        return true
+    else
+        return false
+    end
 end
 
 -- debug water hash
 Citizen.CreateThread(function()
-	while true do
-		Citizen.Wait(1)
-		local coords = GetEntityCoords(PlayerPedId())
-		local water = Citizen.InvokeNative(0x5BA7A68A346A5A91,coords.x+3, coords.y+3, coords.z)
-		if Config.Debug == true then
-			print("water: "..tostring(water))
-			Wait(5000)
-		end
-	end
+    while true do
+        Citizen.Wait(1)
+        local coords = GetEntityCoords(PlayerPedId())
+        local water = Citizen.InvokeNative(0x5BA7A68A346A5A91,coords.x+3, coords.y+3, coords.z)
+        if Config.Debug == true then
+            print("water: "..tostring(water))
+            Wait(5000)
+        end
+    end
 end)

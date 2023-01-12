@@ -39,9 +39,9 @@ RegisterNetEvent("consumables:client:Drink", function(itemName)
             local object = nil
             doAnim("p_mugcoffee01x", "SKEL_R_FINGER12", 0.0, -0.05, 0.03, 0.0, 180.0, 180.0, 'action', 'mech_inventory@drinking@coffee', sleep)
         end
-		Wait(sleep)
-		TriggerEvent("inventory:client:ItemBox", RSGCore.Shared.Items[itemName], "remove")
-		TriggerServerEvent("RSGCore:Server:SetMetaData", "thirst", RSGCore.Functions.GetPlayerData().metadata["thirst"] + ConsumeablesDrink[itemName])
+        Wait(sleep)
+        TriggerEvent("inventory:client:ItemBox", RSGCore.Shared.Items[itemName], "remove")
+        TriggerServerEvent("RSGCore:Server:SetMetaData", "thirst", RSGCore.Functions.GetPlayerData().metadata["thirst"] + ConsumeablesDrink[itemName])
         ClearPedTasks(PlayerPedId())
         AnimDetatch (sleep)
         isBusy = not isBusy
@@ -70,9 +70,9 @@ RegisterNetEvent("consumables:client:Smoke", function(itemName)
             end
             doAnim(item_model, "SKEL_R_FINGER12", pX, pY, pZ, rX, rY, rZ, 'base', 'amb_wander@code_human_smoking_wander@cigar@male_a@base', sleep)
         end
-		Wait(sleep)
-		TriggerEvent("inventory:client:ItemBox", RSGCore.Shared.Items[itemName], "remove")
-		TriggerServerEvent('hud:server:RelieveStress', math.random(20, 40))
+        Wait(sleep)
+        TriggerEvent("inventory:client:ItemBox", RSGCore.Shared.Items[itemName], "remove")
+        TriggerServerEvent('hud:server:RelieveStress', math.random(20, 40))
         ClearPedTasks(PlayerPedId())
         AnimDetatch (sleep)
         isBusy = not isBusy
@@ -84,17 +84,17 @@ RegisterNetEvent("consumables:client:Eat", function(itemName)
         return
     else
         isBusy = not isBusy
-		sleep = 5000
+        sleep = 5000
         SetCurrentPedWeapon(PlayerPedId(), GetHashKey("weapon_unarmed"))
         Citizen.Wait(100)
         if not IsPedOnMount(PlayerPedId()) and not IsPedInAnyVehicle(PlayerPedId()) then
             local dict = loadAnimDict('mech_inventory@eating@multi_bite@wedge_a4-2_b0-75_w8_h9-4_eat_cheese')
             TaskPlayAnim(PlayerPedId(), dict, 'quick_right_hand', 5.0, 5.0, -1, 1, false, false, false)
         end
-		Wait(sleep)
-		TriggerEvent("inventory:client:ItemBox", RSGCore.Shared.Items[itemName], "remove")
-		TriggerServerEvent("RSGCore:Server:SetMetaData", "hunger", RSGCore.Functions.GetPlayerData().metadata["hunger"] + ConsumeablesEat[itemName])
-		TriggerServerEvent('hud:server:RelieveStress', math.random(2, 4))
+        Wait(sleep)
+        TriggerEvent("inventory:client:ItemBox", RSGCore.Shared.Items[itemName], "remove")
+        TriggerServerEvent("RSGCore:Server:SetMetaData", "hunger", RSGCore.Functions.GetPlayerData().metadata["hunger"] + ConsumeablesEat[itemName])
+        TriggerServerEvent('hud:server:RelieveStress', math.random(2, 4))
         ClearPedTasks(PlayerPedId())
         isBusy = not isBusy
     end
@@ -105,16 +105,16 @@ RegisterNetEvent("consumables:client:EatStew", function(itemName)
         return
     else
         isBusy = not isBusy
-		sleep = 5000
+        sleep = 5000
         SetCurrentPedWeapon(PlayerPedId(), GetHashKey("weapon_unarmed"))
-		local bowl = CreateObject("p_bowl04x_stew", GetEntityCoords(PlayerPedId()), true, true, false, false, true)
-		local spoon = CreateObject("p_spoon01x", GetEntityCoords(PlayerPedId()), true, true, false, false, true)
-		Citizen.InvokeNative(0x669655FFB29EF1A9, bowl, 0, "Stew_Fill", 1.0)
-		Citizen.InvokeNative(0xCAAF2BCCFEF37F77, bowl, 20)
-		Citizen.InvokeNative(0xCAAF2BCCFEF37F77, spoon, 82)
-		TaskItemInteraction_2(PlayerPedId(), 599184882, bowl, GetHashKey("p_bowl04x_stew_ph_l_hand"), -583731576, 1, 0, -1.0)
-		TaskItemInteraction_2(PlayerPedId(), 599184882, spoon, GetHashKey("p_spoon01x_ph_r_hand"), -583731576, 1, 0, -1.0)
-		Citizen.InvokeNative(0xB35370D5353995CB, PlayerPedId(), -583731576, 1.0)
-		TriggerServerEvent("RSGCore:Server:SetMetaData", "hunger", RSGCore.Functions.GetPlayerData().metadata["hunger"] + ConsumeablesEat[itemName])
+        local bowl = CreateObject("p_bowl04x_stew", GetEntityCoords(PlayerPedId()), true, true, false, false, true)
+        local spoon = CreateObject("p_spoon01x", GetEntityCoords(PlayerPedId()), true, true, false, false, true)
+        Citizen.InvokeNative(0x669655FFB29EF1A9, bowl, 0, "Stew_Fill", 1.0)
+        Citizen.InvokeNative(0xCAAF2BCCFEF37F77, bowl, 20)
+        Citizen.InvokeNative(0xCAAF2BCCFEF37F77, spoon, 82)
+        TaskItemInteraction_2(PlayerPedId(), 599184882, bowl, GetHashKey("p_bowl04x_stew_ph_l_hand"), -583731576, 1, 0, -1.0)
+        TaskItemInteraction_2(PlayerPedId(), 599184882, spoon, GetHashKey("p_spoon01x_ph_r_hand"), -583731576, 1, 0, -1.0)
+        Citizen.InvokeNative(0xB35370D5353995CB, PlayerPedId(), -583731576, 1.0)
+        TriggerServerEvent("RSGCore:Server:SetMetaData", "hunger", RSGCore.Functions.GetPlayerData().metadata["hunger"] + ConsumeablesEat[itemName])
     end
 end)
