@@ -6,15 +6,15 @@ author 'RexShack#3041'
 description 'rsg-essentials'
 
 client_scripts {
-	'client/*.lua'
+    'client/*.lua'
 }
 
 server_scripts {
-	'server/*.lua'
+    'server/*.lua'
 }
 
 shared_scripts {
-	'config.lua'
+    'config.lua'
 }
 
 lua54 'yes'
