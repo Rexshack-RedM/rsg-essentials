@@ -23,8 +23,8 @@
 
 Citizen.CreateThread(function()
 
-    --Citizen.InvokeNative(0xC116E6DF68DCE667, 0, 2) -- ICON_STAMINA / HIDE
-    --Citizen.InvokeNative(0xC116E6DF68DCE667, 1, 2) -- ICON_STAMINA_CORE / HIDE
+    Citizen.InvokeNative(0xC116E6DF68DCE667, 0, 2) -- ICON_STAMINA / HIDE
+    Citizen.InvokeNative(0xC116E6DF68DCE667, 1, 2) -- ICON_STAMINA_CORE / HIDE
     
     Citizen.InvokeNative(0xC116E6DF68DCE667, 2, 2) -- ICON_DEADEYE / HIDE
     Citizen.InvokeNative(0xC116E6DF68DCE667, 3, 2) -- ICON_DEADEYE_CORE / HIDE
