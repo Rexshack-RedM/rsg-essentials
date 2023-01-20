@@ -86,7 +86,7 @@ AddEventHandler('rsg-river:client:drink', function()
     end
     local playerPed = PlayerPedId()
     Citizen.Wait(0)
-    TaskStartScenarioInPlace(playerPed, GetHashKey('WORLD_HUMAN_BUCKET_DRINK_GROUND'), -1, true, false, false, false)
+    TaskStartScenarioInPlace(playerPed, GetHashKey('WORLD_HUMAN_CROUCH_INSPECT'), -1, true, false, false, false)
     Citizen.Wait(17000)
     TriggerServerEvent("RSGCore:Server:SetMetaData", "thirst", RSGCore.Functions.GetPlayerData().metadata["thirst"] + math.random(50, 100))
     ClearPedTasks(PlayerPedId())
