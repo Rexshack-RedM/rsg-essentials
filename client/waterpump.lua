@@ -12,7 +12,7 @@ exports['rsg-target']:AddTargetModel(WaterOutlet, {
             type = "client",
             event = 'rsg-waterpump:client:drinking',
             icon = "far fa-eye",
-            label = "Take a Drink",
+            label = Lang:t('label.take_a_drink'),
             distance = 2.0
         }
     }

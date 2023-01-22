@@ -5,16 +5,19 @@ game 'rdr3'
 author 'RexShack#3041'
 description 'rsg-essentials'
 
+shared_scripts {
+    '@rsg-core/shared/locale.lua',
+    'locales/en.lua',
+    'locales/*.lua',
+    'config.lua',
+}
+
 client_scripts {
     'client/*.lua'
 }
 
 server_scripts {
     'server/*.lua'
-}
-
-shared_scripts {
-    'config.lua'
 }
 
 lua54 'yes'
