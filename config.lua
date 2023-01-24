@@ -19,6 +19,27 @@ Config.Discord = {
     ["discord_small_image"]     = "dc_rich_small",
 }
 
+Config.Density = {
+    -- Ambient Animal Density
+    [1] = 1.0,
+    -- Scenario Animal Density
+    [2] = 1.0,
+    -- Ambient Human Density
+    [3] = 1.0,
+    -- Scenario Human Density
+    [4] = 1.0,
+    -- Ambient Ped Density
+    [5] = 1.0,
+    -- Scenario Ped Density
+    [6] = 1.0,
+    -- Parked Vehicle Density
+    [7] = 1.0,
+    -- Random Vehicle Density
+    [8] = 1.0,
+    -- Vehicle Density
+    [9] = 1.0,
+}
+
 Config.WaterTypes = {
     [1] =  {["name"] = "Sea of Coronado",       ["waterhash"] = -247856387,     ["watertype"] = "sea"},
     [2] =  {["name"] = "San Luis River",        ["waterhash"] = -1504425495,    ["watertype"] = "river"},
