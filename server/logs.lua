@@ -42,6 +42,6 @@ RegisterNetEvent('rsg-log:server:CreateLog', function(name, title, color, messag
     end
 end)
 
-RSGCore.Commands.Add('testwebhook', 'Test Your Discord Webhook For Logs (God Only)', {}, false, function()
-    TriggerEvent('rsg-log:server:CreateLog', 'testwebhook', 'Test Webhook', 'default', 'Webhook setup successfully')
+RSGCore.Commands.Add('testwebhook', Lang:t('log.test_your_discord_webhook'), {}, false, function()
+    TriggerEvent('rsg-log:server:CreateLog', 'testwebhook', Lang:t('log.test_webhook'), 'default', Lang:t('log.webhook_setup_successfully'))
 end, 'god')

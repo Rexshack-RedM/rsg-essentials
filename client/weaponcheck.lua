@@ -18,7 +18,7 @@ CreateThread(function()	-- Check if player has weapon in inventory --
                 if not hasItem then
                     SetCurrentPedWeapon(player, `WEAPON_UNARMED`, true)
                     RemoveAllPedWeapons(player, true, true)
-                    TriggerServerEvent("rsg-log:server:CreateLog", "anticheat", "Weapon Removed!", "orange", "** @staff ** " ..firstname.. " " ..lastname.. " had a weapon on them that they did not have in his inventory : anticheat has removed the weapon")
+                    TriggerServerEvent("rsg-log:server:CreateLog", "anticheat",  Lang:t('log.weapon_removed'), "orange", Lang:t('log.had_weapon_them_that_they_did_not_have',{firstname = firstname,lastname = lastname}))
                 end
             end
         end
