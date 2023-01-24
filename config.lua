@@ -11,6 +11,14 @@ ConsumeablesDrink = {
     ["water"] = math.random(35, 54),
 }
 
+Config.Discord = {
+    ["discord_id"]              = 12345678910,
+    ["discord_joinurl"]         = "",
+    ["discord_connecturl"]      = "https://example.org",
+    ["discord_big_image"]       = "dc_rich",
+    ["discord_small_image"]     = "dc_rich_small",
+}
+
 Config.WaterTypes = {
     [1] =  {["name"] = "Sea of Coronado",       ["waterhash"] = -247856387,     ["watertype"] = "sea"},
     [2] =  {["name"] = "San Luis River",        ["waterhash"] = -1504425495,    ["watertype"] = "river"},
