@@ -31,45 +31,45 @@ end)
 
 RegisterNetEvent('emotes:client:EmoteMenu', function()
     exports['rsg-menu']:openMenu({{
-        header = 'Emote Menu',
+        header = Lang:t('emotes.title'),
         isMenuHeader = true -- Set to true to make a nonclickable title
     }, {
-        header = '🚩 Actions',
+        header = Lang:t('emotes.actions.mainMenu'),
         params = {
             event = 'emotes:client:actionemotes',
         }
     }, {
-        header = '👋 Greeting',
+        header = Lang:t('emotes.greeting.mainMenu'),
         params = {
             event = 'emotes:client:greetemotes'
         }
     }, {
-        header = '🎭 Reactions',
+        header = Lang:t('emotes.reaction.mainMenu'),
         params = {
             event = 'emotes:client:reactionemotes'
         }
     },{
-        header = '😡 Taunting',
+        header = Lang:t('emotes.taunting.mainMenu'),
         params = {
             event = 'emotes:client:tauntemotes'
         }
     },{
-        header = '💃 Dancing',
+        header = Lang:t('emotes.close'),
         params = {
             event = 'emotes:client:danceemotes'
         }
     }, {
-        header = '❌ Exit',
+        header = Lang:t('emotes.actions.mainMenu'),
     }})
 end)
 
 RegisterNetEvent('emotes:client:actionemotes', function()
     Citizen.Wait(500)
     local EmoteMenu = {{
-        header = '🚩 Action Emotes',
+        header = Lang:t('emotes.actions.secondMenu'),
         isMenuHeader = true -- Set to true to make a nonclickable title
     }, {
-        header = '❌ Exit',
+        header = Lang:t('emotes.close'),
     }}
     for k, v in pairs(Config.Emotes.Actions) do
         EmoteMenu[#EmoteMenu + 1] = {
@@ -89,10 +89,10 @@ end)
 RegisterNetEvent('emotes:client:greetemotes', function()
     Citizen.Wait(500)
     local EmoteMenu = {{
-        header = '👋 Greeting Emotes',
+        header = Lang:t('emotes.greeting.secondMenu'),
         isMenuHeader = true -- Set to true to make a nonclickable title
     }, {
-        header = '❌ Exit',
+        header = Lang:t('emotes.close'),
     }}
     for k, v in pairs(Config.Emotes.Greeting) do
         EmoteMenu[#EmoteMenu + 1] = {
@@ -112,10 +112,10 @@ end)
 RegisterNetEvent('emotes:client:reactionemotes', function()
     Citizen.Wait(500)
     local EmoteMenu = {{
-        header = '🎭 Reactions Emotes',
+        header = Lang:t('emotes.reaction.secondMenu'),
         isMenuHeader = true -- Set to true to make a nonclickable title
     }, {
-        header = '❌ Exit',
+        header = Lang:t('emotes.close'),
     }}
     for k, v in pairs(Config.Emotes.Reactions) do
         EmoteMenu[#EmoteMenu + 1] = {
@@ -135,10 +135,10 @@ end)
 RegisterNetEvent('emotes:client:tauntemotes', function()
     Citizen.Wait(500)
     local EmoteMenu = {{
-        header = '😡 Taunt Emotes',
+        header = Lang:t('emotes.taunting.secondMenu'),
         isMenuHeader = true -- Set to true to make a nonclickable title
     }, {
-        header = '❌ Exit',
+        header = Lang:t('emotes.close'),
     }}
     for k, v in pairs(Config.Emotes.Taunting) do
         EmoteMenu[#EmoteMenu + 1] = {
@@ -158,10 +158,10 @@ end)
 RegisterNetEvent('emotes:client:danceemotes', function()
     Citizen.Wait(500)
     local EmoteMenu = {{
-        header = '💃 Dance Emotes',
+        header = Lang:t('emotes.dancing.secondMenu'),
         isMenuHeader = true -- Set to true to make a nonclickable title
     }, {
-        header = '❌ Exit',
+        header = Lang:t('emotes.close'),
     }}
     for k, v in pairs(Config.Emotes.Dancing) do
         EmoteMenu[#EmoteMenu + 1] = {
