@@ -1,11 +1,11 @@
 local RSGCore = exports['rsg-core']:GetCoreObject()
 
-RSGCore.Commands.Add('emotemenu', 'Open emote menu.', {}, false, function(source)
+RSGCore.Commands.Add('emotemenu', Lang:t('commands.emoteMenu'), {}, false, function(source)
     local src = source
     TriggerClientEvent('emotes:client:EmoteMenu', src)
 end)
 
-RSGCore.Commands.Add('em', 'Open emote menu.', {}, false, function(source)
+RSGCore.Commands.Add('em', Lang:t('commands.emoteMenu'), {}, false, function(source)
     local src = source
     TriggerClientEvent('emotes:client:EmoteMenu', src)
 end)

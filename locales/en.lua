@@ -13,13 +13,37 @@ local Translations = {
 		    var = 'text goes here',
     },
     commands = {
-		    var = 'text goes here',
+        emoteMenu = 'Open emote menu.',
     },
     progressbar = {
 		    var = 'text goes here',
     },
     label = {
         take_a_drink = 'Take a Drink'
+    },
+    emotes = {
+        title = ' Emote Menu',
+        action = {
+            mainMenu = '🚩 Actions',
+            secondMenu = '🚩 Actions Emotes'
+        },
+        greeting = {
+            mainMenu = '👋 Greeting',
+            secondMenu = '👋 Greeting Emotes'
+        },
+        reaction = {
+            mainMenu = '🎭 Reactions',
+            secondMenu = '🎭 Reactions Emotes'
+        },
+        taunting = {
+            mainMenu = '😡 Taunting',
+            secondMenu = '😡 Taunting Emotes'
+        },
+        dancing = {
+            mainMenu = '💃 Dancing',
+            secondMenu = '💃 Dancing Emotes'
+        },
+        close = '❌ Exit'
     },
     log = {
         weapon_removed = 'Weapon Removed!',
