@@ -12,7 +12,7 @@ exports['rsg-target']:AddTargetModel(WaterOutlet, {
             type = "client",
             event = 'rsg-waterpump:client:drinking',
             icon = "far fa-eye",
-            label = Lang:t('label.take_a_drink'),
+            label = "Drink from pump",
             distance = 2.0
         }
     }
@@ -28,7 +28,7 @@ RegisterNetEvent('rsg-waterpump:client:drinking', function()
         SetCurrentPedWeapon(PlayerPedId(), GetHashKey("weapon_unarmed"))
         Citizen.Wait(100)
         if not IsPedOnMount(ped) and not IsPedInAnyVehicle(ped) then
-            TaskStartScenarioInPlace(ped, GetHashKey('WORLD_HUMAN_DRINK_FLASK'), -1, true, false, false, false)
+            TaskStartScenarioInPlace(ped, GetHashKey('WORLD_HUMAN_CROUCH_INSPECT'), -1, true, false, false, false)
         end
         Wait(5000)
         TriggerServerEvent("RSGCore:Server:SetMetaData", "thirst", RSGCore.Functions.GetPlayerData().metadata["thirst"] + math.random(25, 50))
