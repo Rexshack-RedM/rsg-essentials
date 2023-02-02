@@ -3,6 +3,7 @@ local RSGCore = exports['rsg-core']:GetCoreObject()
 local Webhooks = {
     ['default'] = '',
     ['testwebhook'] = '',
+    ['fishing'] = '',
 }
 
 local Colors = { -- https://www.spycolor.com/
