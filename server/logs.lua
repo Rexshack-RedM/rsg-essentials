@@ -3,6 +3,21 @@ local RSGCore = exports['rsg-core']:GetCoreObject()
 local Webhooks = {
     ['default'] = '',
     ['testwebhook'] = '',
+    ['anticheat'] = '',
+    ['levels'] = '',
+    ['playermoney'] = '',
+    ['joinleave'] = '',
+    ['banking'] = '',
+    ['occ'] = '',
+    ['playerinventory'] = '',
+    ['robbing'] = '',
+    ['stash'] = '',
+    ['drop'] = '',
+    ['dealers'] = '',
+    ['shops'] = '',
+    ['bans'] = '',
+    ['bossmenu'] = '',
+    ['gangmenu'] = '',
     ['fishing'] = '',
 }
 
