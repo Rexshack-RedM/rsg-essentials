@@ -19,6 +19,7 @@ local Webhooks = {
     ['bossmenu'] = '',
     ['gangmenu'] = '',
     ['fishing'] = '',
+    ['goldpanning'] = '',
 }
 
 local Colors = { -- https://www.spycolor.com/
