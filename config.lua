@@ -19,6 +19,12 @@ Config.Discord = {
     ["discord_small_image"]     = "dc_rich_small",
 }
 
+-- discord webhook config
+Config.DiscordWHImage = 'https://cdn.discordapp.com/attachments/1032260791669375006/1066811751389208596/rsg256x256.png'
+Config.DiscordWHLogUserName = 'Rexshack Gaming Logs'
+Config.DiscordWHAuthorName = 'Rexshack Gaming'
+
+-- density config
 Config.Density = {
     -- Ambient Animal Density
     [1] = 1.0,
@@ -40,6 +46,7 @@ Config.Density = {
     [9] = 1.0,
 }
 
+-- water types config
 Config.WaterTypes = {
     [1] =  {["name"] = "Sea of Coronado",       ["waterhash"] = -247856387,     ["watertype"] = "sea"},
     [2] =  {["name"] = "San Luis River",        ["waterhash"] = -1504425495,    ["watertype"] = "river"},

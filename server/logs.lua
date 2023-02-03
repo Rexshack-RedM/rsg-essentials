@@ -31,15 +31,15 @@ RegisterNetEvent('rsg-log:server:CreateLog', function(name, title, color, messag
             },
             ['description'] = message,
             ['author'] = {
-                ['name'] = 'RSGCore Logs',
-                ['icon_url'] = 'https://media.discordapp.net/attachments/870094209783308299/870104331142189126/Logo_-_Display_Picture_-_Stylized_-_Red.png?width=670&height=670',
+                ['name'] = Config.DiscordWHAuthorName,
+                ['icon_url'] = Config.DiscordWHImage,
             },
         }
     }
-    PerformHttpRequest(webHook, function() end, 'POST', json.encode({ username = 'RSG Logs', embeds = embedData}), { ['Content-Type'] = 'application/json' })
+    PerformHttpRequest(webHook, function() end, 'POST', json.encode({ username = Config.DiscordWHLogUserName, embeds = embedData}), { ['Content-Type'] = 'application/json' })
     Citizen.Wait(100)
     if tag then
-        PerformHttpRequest(webHook, function() end, 'POST', json.encode({ username = 'RSG Logs', content = '@everyone'}), { ['Content-Type'] = 'application/json' })
+        PerformHttpRequest(webHook, function() end, 'POST', json.encode({ username = Config.DiscordWHLogUserName, content = '@everyone'}), { ['Content-Type'] = 'application/json' })
     end
 end)
 
