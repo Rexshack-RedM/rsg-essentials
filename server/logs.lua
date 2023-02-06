@@ -21,6 +21,7 @@ local Webhooks = {
     ['fishing'] = '',
     ['goldpanning'] = '',
     ['loot'] = '',
+    ['hotel'] = '',
 }
 
 local Colors = { -- https://www.spycolor.com/
