@@ -116,5 +116,6 @@ RegisterNetEvent("consumables:client:EatStew", function(itemName)
         TaskItemInteraction_2(PlayerPedId(), 599184882, spoon, GetHashKey("p_spoon01x_ph_r_hand"), -583731576, 1, 0, -1.0)
         Citizen.InvokeNative(0xB35370D5353995CB, PlayerPedId(), -583731576, 1.0)
         TriggerServerEvent("RSGCore:Server:SetMetaData", "hunger", RSGCore.Functions.GetPlayerData().metadata["hunger"] + ConsumeablesEat[itemName])
+        isBusy = not isBusy
     end
 end)
