@@ -14,7 +14,7 @@ end exports('dodictemote', dodictemote)
 -- [[ Events ]] --
 RegisterNetEvent("emotes:client:doemote")
 AddEventHandler("emotes:client:doemote", function(data)
-    Citizen.InvokeNative(0xB31A277C1AC7B7FF, PlayerPedId(), 0, 0, data.emote, 1, 1, 0, 0)
+    Citizen.InvokeNative(0xB31A277C1AC7B7FF, PlayerPedId(), 0, 0, data, 1, 1, 0, 0)
 end)
 
 RegisterNetEvent("emotes:client:dodictemote")
