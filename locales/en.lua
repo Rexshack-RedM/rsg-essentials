@@ -23,7 +23,7 @@ local Translations = {
     },
     emotes = {
         title = ' Emote Menu',
-        action = {
+        actions = {
             mainMenu = '🚩 Actions',
             secondMenu = '🚩 Actions Emotes'
         },
