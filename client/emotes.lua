@@ -17,6 +17,11 @@ AddEventHandler("emotes:client:doemote", function(data)
     Citizen.InvokeNative(0xB31A277C1AC7B7FF, PlayerPedId(), 0, 0, data, 1, 1, 0, 0)
 end)
 
+RegisterNetEvent("emotes:client:doemotemenu")
+AddEventHandler("emotes:client:doemotemenu", function(data)
+    Citizen.InvokeNative(0xB31A277C1AC7B7FF, PlayerPedId(), 0, 0, data.emote, 1, 1, 0, 0)
+end)
+
 RegisterNetEvent("emotes:client:dodictemote")
 AddEventHandler("emotes:client:dodictemote", function(data)
     local ped = PlayerPedId()
@@ -58,8 +63,6 @@ RegisterNetEvent('emotes:client:EmoteMenu', function()
         params = {
             event = 'emotes:client:danceemotes'
         }
-    }, {
-        header = Lang:t('emotes.actions.mainMenu'),
     }})
 end)
 
@@ -76,7 +79,7 @@ RegisterNetEvent('emotes:client:actionemotes', function()
             header = "/"..k,
             txt = v.desc,
             params = {
-                event = 'emotes:client:doemote',
+                event = 'emotes:client:doemotemenu',
                 args = {
                     emote = v.anim,
                 }
@@ -99,7 +102,7 @@ RegisterNetEvent('emotes:client:greetemotes', function()
             header = "/"..k,
             txt = v.desc,
             params = {
-                event = 'emotes:client:doemote',
+                event = 'emotes:client:doemotemenu',
                 args = {
                     emote = v.anim,
                 }
@@ -122,7 +125,7 @@ RegisterNetEvent('emotes:client:reactionemotes', function()
             header = "/"..k,
             txt = v.desc,
             params = {
-                event = 'emotes:client:doemote',
+                event = 'emotes:client:doemotemenu',
                 args = {
                     emote = v.anim,
                 }
@@ -145,7 +148,7 @@ RegisterNetEvent('emotes:client:tauntemotes', function()
             header = "/"..k,
             txt = v.desc,
             params = {
-                event = 'emotes:client:doemote',
+                event = 'emotes:client:doemotemenu',
                 args = {
                     emote = v.anim,
                 }
