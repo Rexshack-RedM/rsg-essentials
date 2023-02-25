@@ -53,6 +53,20 @@ RSGCore.Functions.CreateUseableItem("stew", function(source, item)
     end
 end)
 
+RSGCore.Functions.CreateUseableItem("cooked_meat", function(source, item)
+    local Player = RSGCore.Functions.GetPlayer(source)
+    if Player.Functions.RemoveItem(item.name, 1, item.slot) then
+        TriggerClientEvent("consumables:client:Eat", source, item.name)
+    end
+end)
+
+RSGCore.Functions.CreateUseableItem("cooked_fish", function(source, item)
+    local Player = RSGCore.Functions.GetPlayer(source)
+    if Player.Functions.RemoveItem(item.name, 1, item.slot) then
+        TriggerClientEvent("consumables:client:Eat", source, item.name)
+    end
+end)
+
 -- OTHER
 
 RSGCore.Functions.CreateUseableItem("cigarette", function(source, item)
