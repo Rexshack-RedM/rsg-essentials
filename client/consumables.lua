@@ -1,5 +1,8 @@
-local isBusy = false
 local RSGCore = exports['rsg-core']:GetCoreObject()
+
+local isBusy = false
+local testAnimDict = 'amb_rest_drunk@world_human_drinking@flask@male_a@stand_enter'
+local testAnim = 'enter_back_lf'
 
 function loadAnimDict(dict, anim)
     while not HasAnimDictLoaded(dict) do Wait(0) RequestAnimDict(dict) end
@@ -27,25 +30,54 @@ function AnimDetatch (sleep)
     end
 end
 
+AddEventHandler('rsg-essentials:client:DrinkingAnimation', function()
+    local ped = PlayerPedId()
+
+    loadAnimDict(testAnimDict)
+
+    Wait(100)
+
+    TaskPlayAnim(ped, testAnimDict, testAnim, 3.0, 3.0, -1, 1, 0, false, false, false)
+end)
+
 RegisterNetEvent("consumables:client:Drink", function(itemName)
-    if isBusy then
-        return
-    else
+    if isBusy then return end
+
+    local ped = PlayerPedId()
+    local coords = GetEntityCoords(ped)
+    local boneIndex = GetEntityBoneIndexByName(ped, "SKEL_R_Finger00")
+    local prop = CreateObject(GetHashKey("p_flask01x"), coords, true, true, true)
+    isBusy = not isBusy
+
+    SetCurrentPedWeapon(ped, `WEAPON_UNARMED`, true)
+    FreezeEntityPosition(ped, true)
+    ClearPedTasksImmediately(ped)
+
+    TriggerEvent('rsg-essentials:client:DrinkingAnimation')
+
+    Wait(2700) -- Timing is very important here :D
+
+    AttachEntityToEntity(prop, ped, boneIndex, 0.05, -0.14, -0.02, -75.0, 4.0, -12.0, true, true, true, false, 0, true)
+
+    RSGCore.Functions.Progressbar("drinking-water", "Drinking from the Flask", 4500, false, true,
+    {
+        disableMovement = true,
+        disableCarMovement = true,
+        disableMouse = false,
+        disableCombat = true,
+    }, {}, {}, {}, function()
+        ClearPedTasks(ped)
+        FreezeEntityPosition(ped, false)
+        SetCurrentPedWeapon(ped, GetHashKey("WEAPON_UNARMED"), true)
+
         isBusy = not isBusy
-        local sleep = 5000
-        SetCurrentPedWeapon(PlayerPedId(), GetHashKey("weapon_unarmed"))
-        Citizen.Wait(100)
-        if not IsPedOnMount(PlayerPedId()) and not IsPedInAnyVehicle(PlayerPedId()) then
-            local object = nil
-            doAnim("p_mugcoffee01x", "SKEL_R_FINGER12", 0.0, -0.05, 0.03, 0.0, 180.0, 180.0, 'action', 'mech_inventory@drinking@coffee', sleep)
-        end
-        Wait(sleep)
-        TriggerEvent("inventory:client:ItemBox", RSGCore.Shared.Items[itemName], "remove")
-        TriggerServerEvent("RSGCore:Server:SetMetaData", "thirst", RSGCore.Functions.GetPlayerData().metadata["thirst"] + ConsumeablesDrink[itemName])
-        ClearPedTasks(PlayerPedId())
-        AnimDetatch (sleep)
-        isBusy = not isBusy
-    end
+
+        SetEntityAsNoLongerNeeded(prop)
+        DeleteEntity(prop)
+        DeleteObject(prop)
+
+        RSGCore.Functions.Notify("You drank from your Flask!", 'success', 3000)
+    end)
 end)
 
 RegisterNetEvent("consumables:client:Smoke", function(itemName)
