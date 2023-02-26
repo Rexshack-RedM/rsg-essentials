@@ -76,6 +76,8 @@ RegisterNetEvent("consumables:client:Drink", function(itemName)
         DeleteEntity(prop)
         DeleteObject(prop)
 
+        TriggerServerEvent("RSGCore:Server:SetMetaData", "thirst", RSGCore.Functions.GetPlayerData().metadata["thirst"] + ConsumeablesDrink[itemName])
+
         RSGCore.Functions.Notify("You drank from your Flask!", 'success', 3000)
     end)
 end)
