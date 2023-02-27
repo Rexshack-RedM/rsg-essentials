@@ -1,22 +1,21 @@
 local Translations = {
     error = {
-        you_are_will_be_kicked_in = 'You are AFK and will be kicked in ${time} minute(s)!',
-        you_are_and_will_be_kicked_in_seconds = 'You are AFK and will be kicked in ${time} seconds!'
+        var = 'text goes here',
     },
     success = {
-		    var = 'text goes here',
+            var = 'text goes here',
     },
     primary = {
-		    var = 'text goes here',
+            var = 'text goes here',
     },
     menu = {
-		    var = 'text goes here',
+            var = 'text goes here',
     },
     commands = {
         emoteMenu = 'Open emote menu.',
     },
     progressbar = {
-		    var = 'text goes here',
+            var = 'text goes here',
     },
     label = {
         take_a_drink = 'Take a Drink'
@@ -51,7 +50,12 @@ local Translations = {
         test_webhook = 'Test Webhook',
         webhook_setup_successfully = 'Webhook setup successfully',
         test_your_discord_webhook = 'Test Your Discord Webhook For Logs (God Only)',
-    }
+    },
+    afk = {
+        will_kick = 'You are AFK and will be kicked in ',
+        time_seconds = ' seconds!',
+        time_minutes = ' minute(s)!'
+    },
 }
 
 Lang = Locale:new({
