@@ -41,20 +41,23 @@ end
 Citizen.CreateThread(function()
     WashPrompt()
     DrinkPrompt()
+
     while true do
-        Citizen.Wait(1)
-        local weapon = Citizen.InvokeNative(0x8425C5F057012DAB, PlayerPedId())
-        local weaponName = Citizen.InvokeNative(0x89CF5FF3D363311E, weapon, Citizen.ResultAsString())
-        local coords = GetEntityCoords(PlayerPedId())
-        local water = Citizen.InvokeNative(0x5BA7A68A346A5A91,coords.x+3, coords.y+3, coords.z)
+        Wait(4)
+
         local playerPed = PlayerPedId()
-        if weaponName == "WEAPON_FISHINGROD" then
-            return
-        end
+        local weapon = Citizen.InvokeNative(0x8425C5F057012DAB, playerPed)
+        local weaponName = Citizen.InvokeNative(0x89CF5FF3D363311E, weapon, Citizen.ResultAsString())
+        local coords = GetEntityCoords(playerPed)
+        local water = Citizen.InvokeNative(0x5BA7A68A346A5A91,coords.x+3, coords.y+3, coords.z)
+        local running = IsControlPressed(0, 0x8FFC75D6) or IsDisabledControlPressed(0, 0x8FFC75D6)
+
+        if running or weaponName == "WEAPON_FISHINGROD" then goto continue end
+
         for k,v in pairs(Config.WaterTypes) do 
             if water == Config.WaterTypes[k]["waterhash"]  then
-                if IsPedOnFoot(PlayerPedId()) then
-                    if IsEntityInWater(PlayerPedId()) then
+                if IsPedOnFoot(playerPed) then
+                    if IsEntityInWater(playerPed) then
                         -- wash
                         local Wash = CreateVarString(10, 'LITERAL_STRING', Config.WaterTypes[k]["name"])
                         PromptSetActiveGroupThisFrame(RiverGroup, Wash)
@@ -73,6 +76,8 @@ Citizen.CreateThread(function()
                 end
             end
         end
+
+        ::continue::
     end
 end)
 
