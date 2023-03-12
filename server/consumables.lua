@@ -92,3 +92,17 @@ RSGCore.Functions.CreateUseableItem("dual", function(source, item)
     local Player = RSGCore.Functions.GetPlayer(source)
     TriggerClientEvent("qb:Dual", source)
 end)
+
+-- player field bandage
+RSGCore.Functions.CreateUseableItem("fieldbandage", function(source, item)
+    local Player = RSGCore.Functions.GetPlayer(source)
+    TriggerClientEvent('consumables:client:UseFieldBandage', source)
+end)
+
+-- remove item
+RegisterNetEvent('consumables:server:removeitem', function(item, amount)
+    local src = source
+    local Player = RSGCore.Functions.GetPlayer(src)
+    Player.Functions.RemoveItem(item, amount)
+    TriggerClientEvent("inventory:client:ItemBox", src, RSGCore.Shared.Items[item], "remove")
+end)

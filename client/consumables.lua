@@ -153,3 +153,30 @@ RegisterNetEvent("consumables:client:EatStew", function(itemName)
         isBusy = not isBusy
     end
 end)
+
+-- player use bandage
+RegisterNetEvent('consumables:client:UseFieldBandage', function()
+    local ped = PlayerPedId()
+    local hasItem = RSGCore.Functions.HasItem('fieldbandage', 1)
+    if hasItem then
+        RSGCore.Functions.Progressbar("use_fieldbandage", "Using Field Bandage..", 4000, false, true, {
+            disableMovement = false,
+            disableCarMovement = false,
+            disableMouse = false,
+            disableCombat = true,
+        }, {
+            animDict = "mini_games@story@mob4@heal_jules@bandage@arthur",
+            anim = "bandage_fast",
+            flags = 1,
+        }, {}, {}, function() -- Done
+            StopAnimTask(ped, "mini_games@story@mob4@heal_jules@bandage@arthur", "bandage_fast", 1.0)
+            TriggerServerEvent('consumables:server:removeitem', 'fieldbandage', 1)
+            SetEntityHealth(ped, GetEntityHealth(ped) + 10)
+        end, function() -- Cancel
+            StopAnimTask(ped, "mini_games@story@mob4@heal_jules@bandage@arthur", "bandage_fast", 1.0)
+            RSGCore.Functions.Notify(Lang:t('error.canceled'), "error")
+        end)
+    else
+        RSGCore.Functions.Notify('you don\'t have any field bandages!', 'error')
+    end
+end)
