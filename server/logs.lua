@@ -23,6 +23,7 @@ local Webhooks = {
     ['loot'] = '',
     ['hotel'] = '',
     ['beekeeper'] = '',
+    ['ranch'] = '',
 }
 
 local Colors = { -- https://www.spycolor.com/
