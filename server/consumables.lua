@@ -53,6 +53,90 @@ RSGCore.Functions.CreateUseableItem("stew", function(source, item)
     end
 end)
 
+RSGCore.Functions.CreateUseableItem("consumable_meat_game_cooked", function(source, item)
+    local Player = RSGCore.Functions.GetPlayer(source)
+    if Player.Functions.RemoveItem(item.name, 1, item.slot) then
+        TriggerClientEvent("consumables:client:Eat", source, item.name)
+    end
+end)
+
+RSGCore.Functions.CreateUseableItem("big_game_meat_cooked", function(source, item)
+    local Player = RSGCore.Functions.GetPlayer(source)
+    if Player.Functions.RemoveItem(item.name, 1, item.slot) then
+        TriggerClientEvent("consumables:client:Eat", source, item.name)
+    end
+end)
+
+RSGCore.Functions.CreateUseableItem("consumable_meat_stringy_cooked", function(source, item)
+    local Player = RSGCore.Functions.GetPlayer(source)
+    if Player.Functions.RemoveItem(item.name, 1, item.slot) then
+        TriggerClientEvent("consumables:client:Eat", source, item.name)
+    end
+end)
+
+RSGCore.Functions.CreateUseableItem("consumable_meat_tender_pork_cooked", function(source, item)
+    local Player = RSGCore.Functions.GetPlayer(source)
+    if Player.Functions.RemoveItem(item.name, 1, item.slot) then
+        TriggerClientEvent("consumables:client:Eat", source, item.name)
+    end
+end)
+
+RSGCore.Functions.CreateUseableItem("consumable_meat_herptile_cooked", function(source, item)
+    local Player = RSGCore.Functions.GetPlayer(source)
+    if Player.Functions.RemoveItem(item.name, 1, item.slot) then
+        TriggerClientEvent("consumables:client:Eat", source, item.name)
+    end
+end)
+
+RSGCore.Functions.CreateUseableItem("consumable_meat_gristly_mutton_cooked", function(source, item)
+    local Player = RSGCore.Functions.GetPlayer(source)
+    if Player.Functions.RemoveItem(item.name, 1, item.slot) then
+        TriggerClientEvent("consumables:client:Eat", source, item.name)
+    end
+end)
+
+RSGCore.Functions.CreateUseableItem("consumable_meat_prime_beef_cooked", function(source, item)
+    local Player = RSGCore.Functions.GetPlayer(source)
+    if Player.Functions.RemoveItem(item.name, 1, item.slot) then
+        TriggerClientEvent("consumables:client:Eat", source, item.name)
+    end
+end)
+
+RSGCore.Functions.CreateUseableItem("consumable_meat_plump_bird_cooked", function(source, item)
+    local Player = RSGCore.Functions.GetPlayer(source)
+    if Player.Functions.RemoveItem(item.name, 1, item.slot) then
+        TriggerClientEvent("consumables:client:Eat", source, item.name)
+    end
+end)
+
+RSGCore.Functions.CreateUseableItem("consumable_meat_exotic_bird_cooked", function(source, item)
+    local Player = RSGCore.Functions.GetPlayer(source)
+    if Player.Functions.RemoveItem(item.name, 1, item.slot) then
+        TriggerClientEvent("consumables:client:Eat", source, item.name)
+    end
+end)
+
+RSGCore.Functions.CreateUseableItem("consumable_meat_mature_venison_cooked", function(source, item)
+    local Player = RSGCore.Functions.GetPlayer(source)
+    if Player.Functions.RemoveItem(item.name, 1, item.slot) then
+        TriggerClientEvent("consumables:client:Eat", source, item.name)
+    end
+end)
+
+RSGCore.Functions.CreateUseableItem("consumable_meat_gamey_bird_cooked", function(source, item)
+    local Player = RSGCore.Functions.GetPlayer(source)
+    if Player.Functions.RemoveItem(item.name, 1, item.slot) then
+        TriggerClientEvent("consumables:client:Eat", source, item.name)
+    end
+end)
+
+RSGCore.Functions.CreateUseableItem("cooked_fish", function(source, item)
+    local Player = RSGCore.Functions.GetPlayer(source)
+    if Player.Functions.RemoveItem(item.name, 1, item.slot) then
+        TriggerClientEvent("consumables:client:Eat", source, item.name)
+    end
+end)
+
 RSGCore.Functions.CreateUseableItem("cooked_meat", function(source, item)
     local Player = RSGCore.Functions.GetPlayer(source)
     if Player.Functions.RemoveItem(item.name, 1, item.slot) then
