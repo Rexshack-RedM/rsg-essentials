@@ -17,7 +17,11 @@ CreateUseableItem = function()
         RSGCore.Functions.CreateUseableItem(k, function(source, item)
             local Player = RSGCore.Functions.GetPlayer(source)
             if Player.Functions.RemoveItem(k, 1, item.slot) then
-                TriggerClientEvent("consumables:client:Eat", source, k)
+                if k == "stew" then
+                    TriggerClientEvent("consumables:client:EatStew", source, k)
+                else
+                    TriggerClientEvent("consumables:client:Eat", source, k)
+                end
             end
         end)
     end
