@@ -17,6 +17,7 @@ ConsumeablesEat = {
     ["consumable_meat_mature_venison_cooked"] = math.random(40, 70),
     ["consumable_meat_gamey_bird_cooked"] = math.random(30, 60),
     ["cooked_fish"] = math.random(30, 60),
+    ["cooked_meat"] = math.random(20, 40),
 }
 
 ConsumeablesDrink = {
