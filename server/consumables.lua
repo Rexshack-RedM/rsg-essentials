@@ -1,9 +1,8 @@
 local RSGCore = exports['rsg-core']:GetCoreObject()
 
 CreateUseableItem = function()
-    -- Obtention de la liste des boissons référencés dans le fichier de configuration.
+
     for k, _ in pairs(ConsumeablesDrink) do
-        -- Création de la nouriture
         RSGCore.Functions.CreateUseableItem(k, function(source, item)
             local Player = RSGCore.Functions.GetPlayer(source)
             if Player.Functions.RemoveItem(k, 1, item.slot) then
@@ -11,9 +10,9 @@ CreateUseableItem = function()
             end
         end)
     end
-    -- Obtention de la liste de nouriture référencés dans le fichier de configuration.
+
     for k, _ in pairs(ConsumeablesEat) do
-        -- Création de la nouriture
+
         RSGCore.Functions.CreateUseableItem(k, function(source, item)
             local Player = RSGCore.Functions.GetPlayer(source)
             if Player.Functions.RemoveItem(k, 1, item.slot) then
@@ -28,7 +27,6 @@ CreateUseableItem = function()
 
 end
 
---| Création des items au lancement du script.
 CreateUseableItem()
 
 -- OTHER
