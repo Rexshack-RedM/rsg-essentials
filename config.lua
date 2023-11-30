@@ -2,6 +2,9 @@ Config = Config or {}
 
 Config.Debug = false
 
+-- enable xmas weather
+Config.EnableXmas = false
+
 ConsumeablesEat = {
     ["bread"] = math.random(10, 20),
     ["stew"] = math.random(80, 100),
