@@ -112,6 +112,7 @@ StartWash = function(dic, anim)
     N_0xe3144b932dfdff65(PlayerPedId(), 0.0, -1, 1, 1)
     ClearPedDamageDecalByZone(PlayerPedId(), 10, "ALL")
     Citizen.InvokeNative(0x7F5D88333EE8A86F, PlayerPedId(), 1)
+    TriggerServerEvent("RSGCore:Server:SetMetaData", "cleanliness", RSGCore.Functions.GetPlayerData().metadata["cleanliness"] + 25)
 end
 
 LoadAnim = function(dic)
