@@ -5,6 +5,9 @@ Config.Debug = false
 -- enable xmas weather
 Config.EnableXmas = false
 
+-- pause menu
+Config.PauseReadBook = false
+
 ConsumeablesEat = {
     ["bread"] = math.random(10, 20),
     ["stew"] = math.random(80, 100),

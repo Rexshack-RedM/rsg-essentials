@@ -55,7 +55,7 @@ Citizen.CreateThread(function()
     while true do
         Wait(0)
         local ped = PlayerPedId()
-        if IsPauseMenuActive() and not PauseOpen then
+        if IsPauseMenuActive() and not PauseOpen and Config.PauseReadBook then
             SetCurrentPedWeapon(ped, 0xA2719263, true) -- set unarmed
             SetCurrentPedWeapon(ped, GetHashKey("weapon_unarmed"))
             if not IsPedOnMount(ped) then
