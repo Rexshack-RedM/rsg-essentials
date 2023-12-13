@@ -27,6 +27,7 @@ local Webhooks = {
     ['adminmenu'] = '',
     ['report'] = '',
     ['horsetrainer'] = '',
+    ['crafting'] = '',
 }
 
 local Colors = { -- https://www.spycolor.com/
