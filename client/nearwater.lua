@@ -77,57 +77,57 @@ Citizen.CreateThread(function()
                         -- wash
                         local Wash = CreateVarString(10, 'LITERAL_STRING', Config.WaterTypes[k]["name"])
                         local entity = Config.WaterTypes[k]["waterhash"] 
-						exports['rsg-target']:AddCircleZone(v.name, coords, 5, {
-						name = v.name,
-						debugPoly = false,
-						}, {
+                        exports['rsg-target']:AddCircleZone(v.name, coords, 5, {
+                        name = v.name,
+                        debugPoly = false,
+                        }, {
                         options = {
                             {
                                 icon = "fas fa-horse-head",
                                 label = "Wash!",
                                 targeticon = "fas fa-eye",
                                 type = "client",
-								action = function()
-								TriggerEvent('rsg-river:client:lavati')
-								end,
+                                action = function()
+                                TriggerEvent('rsg-river:client:lavati')
+                                end,
                             },
-							{
-								icon = "fas fa-horse-head",
+                            {
+                                icon = "fas fa-horse-head",
                                 label = "Drink!",
                                 targeticon = "fas fa-eye",
                                 type = "client",
-								action = function()
-								TriggerEvent('rsg-river:client:drink')
-								end,
-							},
+                                action = function()
+                                TriggerEvent('rsg-river:client:drink')
+                                end,
+                            },
                             {
-								icon = "fas fa-horse-head",
+                                icon = "fas fa-horse-head",
                                 label = "Wash Rocks!",
                                 targeticon = "fas fa-eye",
                                 type = "client",
-								action = function()
-								TriggerEvent('rsg-mining:client:StartRockPan')
-								end,
-							},
+                                action = function()
+                                TriggerEvent('rsg-mining:client:StartRockPan')
+                                end,
+                            },
                             {
-								icon = "fas fa-horse-head",
+                                icon = "fas fa-horse-head",
                                 label = "Fill Farmer Bucket!",
                                 targeticon = "fas fa-eye",
                                 type = "client",
-								action = function()
-								TriggerEvent('rsg-farmer:client:collectwater')
-								end,
-							},
-							{
-								icon = "fas fa-horse-head",
+                                action = function()
+                                TriggerEvent('rsg-farmer:client:collectwater')
+                                end,
+                            },
+                            {
+                                icon = "fas fa-horse-head",
                                 label = "Refill Canteen!",
                                 targeticon = "fas fa-eye",
-								item = 'canteen0',
+                                item = 'canteen0',
                                 type = "client",
-								action = function()
-								TriggerEvent('rsg-canteen:client:fillupcanteen')
-								end,
-							}
+                                action = function()
+                                TriggerEvent('rsg-canteen:client:fillupcanteen')
+                                end,
+                            }
                         },
                         distance = 2.5,
                     })
