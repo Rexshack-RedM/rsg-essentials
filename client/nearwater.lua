@@ -37,10 +37,26 @@ function DrinkPrompt()
     end)
 end
 
--- find water and set prompt
+function RockPrompt()
+    Citizen.CreateThread(function()
+        local str ="Wash Rocks"
+        local wait = 0
+        RockPrompt = Citizen.InvokeNative(0x04F97DE45A519419)
+        PromptSetControlAction(RockPrompt, RSGCore.Shared.Keybinds['E'])
+        str = CreateVarString(10, 'LITERAL_STRING', str)
+        PromptSetText(RockPrompt, str)
+        PromptSetEnabled(RockPrompt, true)
+        PromptSetVisible(RockPrompt, true)
+        PromptSetHoldMode(RockPrompt, true)
+        PromptSetGroup(RockPrompt, RiverGroup)
+        PromptRegisterEnd(RockPrompt)
+    end)
+end
+
 Citizen.CreateThread(function()
     WashPrompt()
     DrinkPrompt()
+    RockPrompt()
 
     while true do
         Wait(4)
@@ -60,18 +76,61 @@ Citizen.CreateThread(function()
                     if IsEntityInWater(playerPed) then
                         -- wash
                         local Wash = CreateVarString(10, 'LITERAL_STRING', Config.WaterTypes[k]["name"])
-                        PromptSetActiveGroupThisFrame(RiverGroup, Wash)
-                        
-                        if PromptHasHoldModeCompleted(WashPrompt) then
-                            StartWash("amb_misc@world_human_wash_face_bucket@ground@male_a@idle_d", "idle_l")
-                        end
-                        -- drink
-                        local drink = CreateVarString(10, 'LITERAL_STRING', Config.WaterTypes[k]["name"])
-                        PromptSetActiveGroupThisFrame(RiverGroup, drink)
-                        
-                        if PromptHasHoldModeCompleted(DrinkPrompt) then
-                            TriggerEvent('rsg-river:client:drink')    
-                        end
+                        local entity = Config.WaterTypes[k]["waterhash"] 
+						exports['rsg-target']:AddCircleZone(v.name, coords, 5, {
+						name = v.name,
+						debugPoly = false,
+						}, {
+                        options = {
+                            {
+                                icon = "fas fa-horse-head",
+                                label = "Wash!",
+                                targeticon = "fas fa-eye",
+                                type = "client",
+								action = function()
+								TriggerEvent('rsg-river:client:lavati')
+								end,
+                            },
+							{
+								icon = "fas fa-horse-head",
+                                label = "Drink!",
+                                targeticon = "fas fa-eye",
+                                type = "client",
+								action = function()
+								TriggerEvent('rsg-river:client:drink')
+								end,
+							},
+                            {
+								icon = "fas fa-horse-head",
+                                label = "Wash Rocks!",
+                                targeticon = "fas fa-eye",
+                                type = "client",
+								action = function()
+								TriggerEvent('rsg-mining:client:StartRockPan')
+								end,
+							},
+                            {
+								icon = "fas fa-horse-head",
+                                label = "Fill Farmer Bucket!",
+                                targeticon = "fas fa-eye",
+                                type = "client",
+								action = function()
+								TriggerEvent('rsg-farmer:client:collectwater')
+								end,
+							},
+							{
+								icon = "fas fa-horse-head",
+                                label = "Refill Canteen!",
+                                targeticon = "fas fa-eye",
+								item = 'canteen0',
+                                type = "client",
+								action = function()
+								TriggerEvent('rsg-canteen:client:fillupcanteen')
+								end,
+							}
+                        },
+                        distance = 2.5,
+                    })
                     end
                 end
             end
@@ -101,6 +160,12 @@ AddEventHandler('rsg-river:client:drink', function()
     ClearPedTasks(PlayerPedId())
 end)
 
+---Wash face animation
+AddEventHandler('rsg-river:client:lavati', function()
+    local src = source
+    StartWash("amb_misc@world_human_wash_face_bucket@ground@male_a@idle_d", "idle_l")
+end)
+
 -- wash action
 StartWash = function(dic, anim)
     LoadAnim(dic)
@@ -112,7 +177,8 @@ StartWash = function(dic, anim)
     N_0xe3144b932dfdff65(PlayerPedId(), 0.0, -1, 1, 1)
     ClearPedDamageDecalByZone(PlayerPedId(), 10, "ALL")
     Citizen.InvokeNative(0x7F5D88333EE8A86F, PlayerPedId(), 1)
-    TriggerServerEvent("RSGCore:Server:SetMetaData", "cleanliness", RSGCore.Functions.GetPlayerData().metadata["cleanliness"] + 25)
+    TriggerServerEvent("RSGCore:Server:SetMetaData", "cleanliness", 100)
+    
 end
 
 LoadAnim = function(dic)
