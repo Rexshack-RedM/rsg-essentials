@@ -83,8 +83,8 @@ Citizen.CreateThread(function()
                         }, {
                         options = {
                             {
-                                icon = "fas fa-horse-head",
-                                label = "Wash!",
+                                icon = "fas fa-hands-bubbles",
+                                label = "Wash",
                                 targeticon = "fas fa-eye",
                                 type = "client",
                                 action = function()
@@ -92,8 +92,8 @@ Citizen.CreateThread(function()
                                 end,
                             },
                             {
-                                icon = "fas fa-horse-head",
-                                label = "Drink!",
+                                icon = "fas fa-glass-water-droplet",
+                                label = "Drink",
                                 targeticon = "fas fa-eye",
                                 type = "client",
                                 action = function()
@@ -101,8 +101,8 @@ Citizen.CreateThread(function()
                                 end,
                             },
                             {
-                                icon = "fas fa-horse-head",
-                                label = "Wash Rocks!",
+                                icon = "fas fa-gem",
+                                label = "Wash Rocks",
                                 targeticon = "fas fa-eye",
                                 type = "client",
                                 action = function()
@@ -110,8 +110,8 @@ Citizen.CreateThread(function()
                                 end,
                             },
                             {
-                                icon = "fas fa-horse-head",
-                                label = "Fill Farmer Bucket!",
+                                icon = "fas fa-bucket",
+                                label = "Fill Farmer Bucket",
                                 targeticon = "fas fa-eye",
                                 type = "client",
                                 action = function()
@@ -119,8 +119,8 @@ Citizen.CreateThread(function()
                                 end,
                             },
                             {
-                                icon = "fas fa-horse-head",
-                                label = "Refill Canteen!",
+                                icon = "fas fa-fill-drip",
+                                label = "Re-Fill Canteen",
                                 targeticon = "fas fa-eye",
                                 item = 'canteen0',
                                 type = "client",
