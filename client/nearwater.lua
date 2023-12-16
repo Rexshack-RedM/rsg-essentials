@@ -76,64 +76,61 @@ Citizen.CreateThread(function()
                     if IsEntityInWater(playerPed) then
                         -- wash
                         local Wash = CreateVarString(10, 'LITERAL_STRING', Config.WaterTypes[k]["name"])
-                        --PromptSetActiveGroupThisFrame(RiverGroup, Wash)
-                        
                         local entity = Config.WaterTypes[k]["waterhash"] 
-						exports['rsg-target']:AddCircleZone(v.name, coords, 5, {
-						name = v.name,
-						debugPoly = false,
-						}, {
+                        exports['rsg-target']:AddCircleZone(v.name, coords, 5, {
+                        name = v.name,
+                        debugPoly = false,
+                        }, {
                         options = {
                             {
                                 icon = "fas fa-hands-bubbles",
                                 label = "Wash",
                                 targeticon = "fas fa-eye",
                                 type = "client",
-								action = function()
-								TriggerEvent('rsg-river:client:lavati')
-								end,
+                                action = function()
+                                TriggerEvent('rsg-river:client:lavati')
+                                end,
                             },
-							{
-								icon = "fas fa-glass-water-droplet",
+                            {
+                                icon = "fas fa-glass-water-droplet",
                                 label = "Drink",
                                 targeticon = "fas fa-eye",
                                 type = "client",
-								action = function()
-								TriggerEvent('rsg-river:client:drink')
-								end,
-							},
+                                action = function()
+                                TriggerEvent('rsg-river:client:drink')
+                                end,
+                            },
                             {
-								icon = "fas fa-gem",
+                                icon = "fas fa-gem",
                                 label = "Wash Rocks",
                                 targeticon = "fas fa-eye",
                                 type = "client",
-								action = function()
-								TriggerEvent('rsg-river:client:washrocks')
-								end,
-							},
+                                action = function()
+                                TriggerEvent('rsg-mining:client:StartRockPan')
+                                end,
+                            },
                             {
-								icon = "fas fa-bucket",
+                                icon = "fas fa-bucket",
                                 label = "Fill Farmer Bucket",
                                 targeticon = "fas fa-eye",
                                 type = "client",
-								action = function()
-								TriggerEvent('rsg-farmer:client:collectwater')
-								end,
-							},
-							{
-								icon = "fas fa-fill",
+                                action = function()
+                                TriggerEvent('rsg-farmer:client:collectwater')
+                                end,
+                            },
+                            {
+                                icon = "fas fa-fill-drip",
                                 label = "Re-Fill Canteen",
                                 targeticon = "fas fa-eye",
-								item = 'canteen0',
+                                item = 'canteen0',
                                 type = "client",
-								action = function()
-								TriggerEvent('rsg-canteen:client:fillupcanteen')
-								end,
-							}
+                                action = function()
+                                TriggerEvent('rsg-canteen:client:fillupcanteen')
+                                end,
+                            }
                         },
                         distance = 2.5,
                     })
-                    
                     end
                 end
             end
@@ -141,28 +138,6 @@ Citizen.CreateThread(function()
 
         ::continue::
     end
-end)
-
-AddEventHandler('rsg-river:client:washrocks', function()
-    isWashing = true
-    TaskStartScenarioInPlace(PlayerPedId(), GetHashKey('WORLD_HUMAN_CROUCH_INSPECT'), -1, true, false, false, false)
-
-    RSGCore.Functions.Progressbar("washing", "Washing Rocks...", math.random(12000, 18000), false, true,
-    {
-        disableMovement = true,
-        disableCarMovement = true,
-        disableMouse = true,
-        disableCombat = true,
-        LocalPlayer.state:set("inv_busy", true, true)
-    }, {}, {}, {}, function()
-        ClearPedTasksImmediately(PlayerPedId())
-        FreezeEntityPosition(PlayerPedId(), false)
-        ClearPedTasks(PlayerPedId())
-        isWashing = false
-
-        TriggerServerEvent('rsg-mining:server:washrocks')
-    end)
-    LocalPlayer.state:set("inv_busy", false, true)
 end)
 
 -- drink action
@@ -185,7 +160,7 @@ AddEventHandler('rsg-river:client:drink', function()
     ClearPedTasks(PlayerPedId())
 end)
 
-
+---Wash face animation
 AddEventHandler('rsg-river:client:lavati', function()
     local src = source
     StartWash("amb_misc@world_human_wash_face_bucket@ground@male_a@idle_d", "idle_l")
