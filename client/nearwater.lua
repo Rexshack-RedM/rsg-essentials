@@ -185,11 +185,12 @@ AddEventHandler('rsg-river:client:drink', function()
     ClearPedTasks(PlayerPedId())
 end)
 
----PROVA LAVATI CON TARGET 
+
 AddEventHandler('rsg-river:client:lavati', function()
     local src = source
     StartWash("amb_misc@world_human_wash_face_bucket@ground@male_a@idle_d", "idle_l")
 end)
+
 -- wash action
 StartWash = function(dic, anim)
     LoadAnim(dic)
