@@ -28,7 +28,7 @@ RegisterNetEvent('rsg-waterpump:client:drinking', function()
         SetCurrentPedWeapon(PlayerPedId(), GetHashKey("weapon_unarmed"))
         Citizen.Wait(100)
         if not IsPedOnMount(ped) and not IsPedInAnyVehicle(ped) then
-            TaskStartScenarioInPlace(ped, GetHashKey('WORLD_HUMAN_DRINK_FLASK'), -1, true, false, false, false)
+			TaskStartScenarioInPlace(ped, GetHashKey('WORLD_HUMAN_BUCKET_DRINK_GROUND'), -1, true, false, false, false)
         end
         Wait(5000)
         TriggerServerEvent("RSGCore:Server:SetMetaData", "thirst", RSGCore.Functions.GetPlayerData().metadata["thirst"] + math.random(25, 50))
