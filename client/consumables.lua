@@ -41,45 +41,25 @@ AddEventHandler('rsg-essentials:client:DrinkingAnimation', function()
 end)
 
 RegisterNetEvent("consumables:client:Drink", function(itemName)
-    if isBusy then return end
-
-    local ped = PlayerPedId()
-    local coords = GetEntityCoords(ped)
-    local boneIndex = GetEntityBoneIndexByName(ped, "SKEL_R_Finger00")
-    local prop = CreateObject(GetHashKey("p_flask01x"), coords, true, true, true)
-    isBusy = not isBusy
-
-    SetCurrentPedWeapon(ped, `WEAPON_UNARMED`, true)
-    FreezeEntityPosition(ped, true)
-    ClearPedTasksImmediately(ped)
-
-    TriggerEvent('rsg-essentials:client:DrinkingAnimation')
-
-    Wait(2700) -- Timing is very important here :D
-
-    AttachEntityToEntity(prop, ped, boneIndex, 0.05, -0.14, -0.02, -75.0, 4.0, -12.0, true, true, true, false, 0, true)
-
-    RSGCore.Functions.Progressbar("drinking-water", "Drinking from the Flask", 4500, false, true,
-    {
-        disableMovement = true,
-        disableCarMovement = true,
-        disableMouse = false,
-        disableCombat = true,
-    }, {}, {}, {}, function()
-        ClearPedTasks(ped)
-        FreezeEntityPosition(ped, false)
-        SetCurrentPedWeapon(ped, GetHashKey("WEAPON_UNARMED"), true)
-
+    if isBusy then
+        return
+    else
         isBusy = not isBusy
-
-        SetEntityAsNoLongerNeeded(prop)
-        DeleteEntity(prop)
-        DeleteObject(prop)
-
+        sleep = 5000
+        SetCurrentPedWeapon(PlayerPedId(), GetHashKey("weapon_unarmed"))
+        Citizen.Wait(100)
+        if not IsPedOnMount(PlayerPedId()) and not IsPedInAnyVehicle(PlayerPedId()) then
+            doAnim("p_mugcoffee01x", "SKEL_R_FINGER12", 0.0, -0.05, 0.03, 0.0, 180.0, 180.0, 'action', 'mech_inventory@drinking@coffee', sleep)
+            TaskPlayAnim(PlayerPedId(), dict, 'idle_a', 5.0, 5.0, -1, 1, false, false, false)
+        end
+        Wait(sleep)
+        TriggerEvent("inventory:client:ItemBox", RSGCore.Shared.Items[itemName], "remove")
         TriggerServerEvent("RSGCore:Server:SetMetaData", "thirst", RSGCore.Functions.GetPlayerData().metadata["thirst"] + ConsumeablesDrink[itemName])
-
-        RSGCore.Functions.Notify("You drank from your Flask!", 'success', 3000)
-    end)
+        lib.notify({ title = 'Success', description = 'You had a drink!', type = 'success', duration = 5000 })
+        ClearPedTasks(PlayerPedId())
+        AnimDetatch (sleep)
+        isBusy = not isBusy
+    end
 end)
 
 RegisterNetEvent("consumables:client:Smoke", function(itemName)
@@ -107,6 +87,7 @@ RegisterNetEvent("consumables:client:Smoke", function(itemName)
         Wait(sleep)
         TriggerEvent("inventory:client:ItemBox", RSGCore.Shared.Items[itemName], "remove")
         TriggerServerEvent('hud:server:RelieveStress', math.random(20, 40))
+        lib.notify({ title = 'Success', description = 'You had a smoke!', type = 'success', duration = 5000 })
         ClearPedTasks(PlayerPedId())
         AnimDetatch (sleep)
         isBusy = not isBusy
@@ -174,9 +155,9 @@ RegisterNetEvent('consumables:client:UseFieldBandage', function()
             SetEntityHealth(ped, GetEntityHealth(ped) + 10)
         end, function() -- Cancel
             StopAnimTask(ped, "mini_games@story@mob4@heal_jules@bandage@arthur", "bandage_fast", 1.0)
-            RSGCore.Functions.Notify(Lang:t('error.canceled'), "error")
+            lib.notify({ title = 'Error', description = Lang:t('error.canceled'), type = 'error', duration = 5000 })
         end)
     else
-        RSGCore.Functions.Notify('you don\'t have any field bandages!', 'error')
+        lib.notify({ title = 'Error', 'you don\'t have any field bandages!', type = 'error', duration = 5000 })
     end
 end)

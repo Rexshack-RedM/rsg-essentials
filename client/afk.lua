@@ -57,9 +57,9 @@ CreateThread(function()
                             if time > 0 then
                                 local _type = timeMinutes[tostring(time)]
                                 if _type == 'minutes' then
-                                    RSGCore.Functions.Notify(Lang:t('afk.will_kick') .. math.ceil(time / 60) .. Lang:t('afk.time_minutes'), 'error', 10000)
+                                    lib.notify({ title = Lang:t('afk.will_kick'), description = math.ceil(time / 60) .. Lang:t('afk.time_seconds'), type = 'error', duration = 5000 })
                                 elseif _type == 'seconds' then
-                                    RSGCore.Functions.Notify(Lang:t('afk.will_kick') .. time .. Lang:t('afk.time_seconds'), 'error', 10000)
+                                    lib.notify({ title = Lang:t('afk.will_kick'), description = time .. Lang:t('afk.time_seconds'), type = 'error', duration = 5000 })
                                 end
                                 time -= 1
                             else

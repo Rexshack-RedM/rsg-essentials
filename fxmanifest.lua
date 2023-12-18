@@ -3,13 +3,14 @@ rdr3_warning 'I acknowledge that this is a prerelease build of RedM, and I am aw
 game 'rdr3'
 
 description 'rsg-essentials'
-version '1.1.5'
+version '1.1.7'
 
 shared_scripts {
     '@rsg-core/shared/locale.lua',
     'locales/en.lua',
     'locales/*.lua',
     'config.lua',
+    '@ox_lib/init.lua'
 }
 
 client_scripts {
@@ -24,5 +25,6 @@ lua54 'yes'
 
 dependencies {
     'rsg-core',
-    'rsg-menu'
+    'rsg-menu',
+    'ox_lib'
 }
