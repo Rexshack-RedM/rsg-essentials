@@ -34,7 +34,7 @@ CreateUseableItem()
 RSGCore.Functions.CreateUseableItem("cigarette", function(source, item)
     local Player = RSGCore.Functions.GetPlayer(source)
     if Player.Functions.RemoveItem(item.name, 1, item.slot) then
-        TriggerClientEvent("consumables:client:Smoke", source, item.name)
+        TriggerClientEvent("consumables:client:SmokeCicarette", source, item.name)
     end
 end)
 
