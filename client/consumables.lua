@@ -67,7 +67,7 @@ RegisterNetEvent("consumables:client:Smoke", function(itemName)
         return
     else
         isBusy = not isBusy
-        local sleep = 10000
+        local sleep = 5000
         SetCurrentPedWeapon(PlayerPedId(), GetHashKey("weapon_unarmed"))
         Citizen.Wait(100)
         local cigar = nil
@@ -75,14 +75,46 @@ RegisterNetEvent("consumables:client:Smoke", function(itemName)
             local item_model = nil
             local pX, pY, pZ, rX, rY, rZ = nil, nil, nil, nil, nil, nil
             if itemName == "cigar" then
-                sleep = 20000
+                sleep = 30000
                 item_model = "p_cigar01x"
                 pX, pY, pZ, rX, rY, rZ = 0.0, 0.03, 0.0, 0.0, 00.0, 0.0
             else
                 item_model = "p_cigarette_cs01x"
                 pX, pY, pZ, rX, rY, rZ = 0.0, 0.03, 0.01, 0.0, 180.0, 90.0
             end
-            doAnim(item_model, "SKEL_R_FINGER12", pX, pY, pZ, rX, rY, rZ, 'base', 'amb_wander@code_human_smoking_wander@cigar@male_a@base', sleep)
+            doAnim(item_model, "SKEL_R_FINGER12", pX, pY, pZ, rX, rY, rZ, 'idle_a', 'amb_rest@world_human_smoking@male_a@idle_a', sleep)
+        end
+        Wait(sleep)
+        TriggerEvent("inventory:client:ItemBox", RSGCore.Shared.Items[itemName], "remove")
+        TriggerServerEvent('hud:server:RelieveStress', math.random(30, 50))
+        lib.notify({ title = 'Success', description = 'You had a smoke!', type = 'success', duration = 5000 })
+        ClearPedTasks(PlayerPedId())
+        AnimDetatch (sleep)
+        isBusy = not isBusy
+    end
+end)
+
+RegisterNetEvent("consumables:client:SmokeCicarette", function(itemName)
+    if isBusy then
+        return
+    else
+        isBusy = not isBusy
+        local sleep = 5000
+        SetCurrentPedWeapon(PlayerPedId(), GetHashKey("weapon_unarmed"))
+        Citizen.Wait(100)
+        local cigar = nil
+        if not IsPedOnMount(PlayerPedId()) and not IsPedInAnyVehicle(PlayerPedId()) then
+            local item_model = nil
+            local pX, pY, pZ, rX, rY, rZ = nil, nil, nil, nil, nil, nil
+            if itemName == "cigarette" then
+                sleep = 30000
+                item_model = "P_CIGARETTE01X"
+                pX, pY, pZ, rX, rY, rZ = 0.0, 0.03, 0.01, 0.0, 180.0, 90.0
+            else
+                item_model = "p_cigarette_cs01x"
+                pX, pY, pZ, rX, rY, rZ = 0.0, 0.03, 0.0, 0.0, 00.0, 0.0
+            end
+            doAnim(item_model, "SKEL_R_FINGER12", pX, pY, pZ, rX, rY, rZ, 'idle_a', 'amb_rest@world_human_smoking@male_a@idle_a', sleep)
         end
         Wait(sleep)
         TriggerEvent("inventory:client:ItemBox", RSGCore.Shared.Items[itemName], "remove")
