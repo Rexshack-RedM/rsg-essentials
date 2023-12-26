@@ -30,12 +30,21 @@ ConsumeablesDrink = {
     ["water"] = math.random(35, 54),
 }
 
+-- Go to Discord Developers Portal (https://discord.com/developers)
+
 Config.Discord = {
-    ["discord_id"]              = 12345678910,
-    ["discord_joinurl"]         = "",
-    ["discord_connecturl"]      = "https://example.org",
-    ["discord_big_image"]       = "dc_rich",
-    ["discord_small_image"]     = "dc_rich_small",
+    DiscordAppID = 12345678910111213,
+    AppBigAssetID = 'big_img.png!',
+    AppBigAssetText = 'big text img!',
+    AppSmallAssetID = 'small_img.png',
+    AppSmallAssetText = 'small text img!',
+    FirstButtonPlaceholder = 'text enters the channel',
+    FirstButtonLink = 'https://discord.gg/channel-id',
+    SecondButtonPlaceholder = 'visit site text',
+    SecondButtonLink = 'https://example.org',
+
+    UpdateEvery = 60000, -- In ms. (60000ms = 1 minute)
+    Template = 'ID: {ID} | Name: {NAME} | {PLAYERS_COUNT}' -- {NAME}, {ID}, {PLAYERS_COUNT}
 }
 
 -- discord webhook config
