@@ -122,7 +122,7 @@ Citizen.CreateThread(function()
                                 icon = "fas fa-fill-drip",
                                 label = "Re-Fill Canteen",
                                 targeticon = "fas fa-eye",
-                                item = 'canteen0',
+                                --item = 'canteen0', -- JoewAlabel It is bugged not showing this option. Fixed now.
                                 type = "client",
                                 action = function()
                                 TriggerEvent('rsg-canteen:client:fillupcanteen')

@@ -14,6 +14,14 @@ exports['rsg-target']:AddTargetModel(WaterOutlet, {
             icon = "far fa-eye",
             label = Lang:t('label.take_a_drink'),
             distance = 2.0
+        },
+		-- JoewAlabel Added option to Refill canteen on Waterpumps too.
+		{
+            type = "client",
+            event = 'rsg-canteen:client:fillupcanteenwaterpump',
+            icon = "far fa-eye",
+            label = "Refill Canteen",
+            distance = 2.0
         }
     }
 })
