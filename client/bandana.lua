@@ -4,7 +4,7 @@ RegisterNetEvent('rsg-bandana:client:ToggleBandana')
 AddEventHandler('rsg-bandana:client:ToggleBandana', function()
     local ped = PlayerPedId()
     local male = IsPedMale(ped)
-    local neckwear = exports['rsg-clothes']:GetClothesCurrentComponentHash('neckwear')
+    local neckwear = exports['rsg-appearance']:GetClothesCurrentComponentHash('neckwear')
 
     -- Beard of Power: https://www.nexusmods.com/skyrimspecialedition/mods/42635
     -- local beardofpower = exports['rsg-appearance']:GetBodyCurrentComponentHash('beard')
