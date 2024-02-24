@@ -3,7 +3,9 @@ function EnableEagleeye(player, enable)
 end
 
 AddEventHandler('RSGCore:Client:OnPlayerLoaded', function()
-    EnableEagleeye(PlayerId(), true)
+    if Config.EnableEagleEye then
+        EnableEagleeye(PlayerId(), true)
+    end
 end)
 
 AddEventHandler("onResourceStop", function(resourceName)

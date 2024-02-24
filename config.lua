@@ -5,6 +5,9 @@ Config.Debug = false
 -- enable xmas weather
 Config.EnableXmas = false
 
+-- enable eagleeye
+Config.EnableEagleEye = true
+
 -- pause menu
 Config.PauseReadBook = false
 
