@@ -73,3 +73,15 @@ Citizen.CreateThread(function()
         end
     end
 end)
+
+-- Disable Controls 
+Citizen.CreateThread(function()
+    while true do
+        Citizen.Wait(3)
+        --DisableControlAction(0, 0xAC4BD4F1, true) -- Disable weapon wheel | TAB (while holding)
+        --DisableControlAction(0, 0xB238FE0B, true) -- Disable toggle holster | TAB TAB (fast tapping)
+
+        -- LEFT ALT HUD
+        DisableControlAction(0, 0xCF8A4ECA, true) -- disable left alt hud | LEFT ALT (fast tapping)
+    end
+end)
