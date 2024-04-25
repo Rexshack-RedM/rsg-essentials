@@ -37,44 +37,25 @@ function DrinkPrompt()
     end)
 end
 
-function RockPrompt()
-    Citizen.CreateThread(function()
-        local str ="Wash Rocks"
-        local wait = 0
-        RockPrompt = Citizen.InvokeNative(0x04F97DE45A519419)
-        PromptSetControlAction(RockPrompt, RSGCore.Shared.Keybinds['E'])
-        str = CreateVarString(10, 'LITERAL_STRING', str)
-        PromptSetText(RockPrompt, str)
-        PromptSetEnabled(RockPrompt, true)
-        PromptSetVisible(RockPrompt, true)
-        PromptSetHoldMode(RockPrompt, true)
-        PromptSetGroup(RockPrompt, RiverGroup)
-        PromptRegisterEnd(RockPrompt)
-    end)
-end
-
-Citizen.CreateThread(function()
+CreateThread(function()
     WashPrompt()
     DrinkPrompt()
-    RockPrompt()
 
     while true do
         Wait(4)
 
-        local playerPed = PlayerPedId()
-        local weapon = Citizen.InvokeNative(0x8425C5F057012DAB, playerPed)
-        local weaponName = Citizen.InvokeNative(0x89CF5FF3D363311E, weapon, Citizen.ResultAsString())
-        local coords = GetEntityCoords(playerPed)
-        local water = Citizen.InvokeNative(0x5BA7A68A346A5A91,coords.x+3, coords.y+3, coords.z)
-        local running = IsControlPressed(0, 0x8FFC75D6) or IsDisabledControlPressed(0, 0x8FFC75D6)
+        local weapon = GetPedCurrentHeldWeapon(cache.ped)
+        local weaponName = GetWeaponName(weapon, Citizen.ResultAsString())
+        local coords = GetEntityCoords(cache.ped)
+        local water = GetWaterMapZoneAtCoords(coords.x+3, coords.y+3, coords.z)
+        local running = IsControlPressed(0, RSGCore.Shared.Keybinds['SHIFT']) or IsDisabledControlPressed(0, RSGCore.Shared.Keybinds['SHIFT'])
 
         if running or weaponName == "WEAPON_FISHINGROD" then goto continue end
 
         for k,v in pairs(Config.WaterTypes) do 
             if water == Config.WaterTypes[k]["waterhash"]  then
-                if IsPedOnFoot(playerPed) then
-                    if IsEntityInWater(playerPed) then
-                        -- wash
+                if IsPedOnFoot(cache.ped) then
+                    if IsEntityInWater(cache.ped) then
                         local Wash = CreateVarString(10, 'LITERAL_STRING', Config.WaterTypes[k]["name"])
                         local entity = Config.WaterTypes[k]["waterhash"] 
                         exports['rsg-target']:AddCircleZone(v.name, coords, 5, {
@@ -100,34 +81,6 @@ Citizen.CreateThread(function()
                                 TriggerEvent('rsg-river:client:drink')
                                 end,
                             },
-                            {
-                                icon = "fas fa-gem",
-                                label = "Wash Rocks",
-                                targeticon = "fas fa-eye",
-                                type = "client",
-                                action = function()
-                                TriggerEvent('rsg-mining:client:StartRockPan')
-                                end,
-                            },
-                            {
-                                icon = "fas fa-bucket",
-                                label = "Fill Farmer Bucket",
-                                targeticon = "fas fa-eye",
-                                type = "client",
-                                action = function()
-                                TriggerEvent('rsg-farmer:client:collectwater')
-                                end,
-                            },
-                            {
-                                icon = "fas fa-fill-drip",
-                                label = "Re-Fill Canteen",
-                                targeticon = "fas fa-eye",
-                                item = 'canteen0',
-                                type = "client",
-                                action = function()
-                                TriggerEvent('rsg-canteen:client:fillupcanteen')
-                                end,
-                            }
                         },
                         distance = 2.5,
                     })
@@ -135,7 +88,6 @@ Citizen.CreateThread(function()
                 end
             end
         end
-
         ::continue::
     end
 end)
@@ -148,16 +100,16 @@ AddEventHandler('rsg-river:client:drink', function()
         DeleteObject(nativerioprop)
         drink = 0
     end
-    local playerPed = PlayerPedId()
-    Citizen.Wait(0)
-    if IsPedMale(playerPed) then
-        TaskStartScenarioInPlace(playerPed, GetHashKey('WORLD_HUMAN_BUCKET_DRINK_GROUND'), -1, true, false, false, false)
+
+    Wait(0)
+    if IsPedMale(cache.ped) then
+        TaskStartScenarioInPlace(cache.ped, GetHashKey('WORLD_HUMAN_BUCKET_DRINK_GROUND'), -1, true, false, false, false)
     else
-        TaskStartScenarioInPlace(playerPed, GetHashKey('WORLD_HUMAN_CROUCH_INSPECT'), -1, true, false, false, false)
+        TaskStartScenarioInPlace(cache.ped, GetHashKey('WORLD_HUMAN_CROUCH_INSPECT'), -1, true, false, false, false)
     end
-    Citizen.Wait(17000)
+    Wait(17000)
     TriggerServerEvent("RSGCore:Server:SetMetaData", "thirst", RSGCore.Functions.GetPlayerData().metadata["thirst"] + math.random(50, 100))
-    ClearPedTasks(PlayerPedId())
+    ClearPedTasks(cache.ped)
 end)
 
 ---Wash face animation
@@ -169,27 +121,26 @@ end)
 -- wash action
 StartWash = function(dic, anim)
     LoadAnim(dic)
-    TaskPlayAnim(PlayerPedId(), dic, anim, 1.0, 8.0, 5000, 0, 0.0, false, false, false)
-    Citizen.Wait(5000)
-    ClearPedTasks(PlayerPedId())
-    ClearPedEnvDirt(PlayerPedId())
-    ClearPedBloodDamage(PlayerPedId())
-    N_0xe3144b932dfdff65(PlayerPedId(), 0.0, -1, 1, 1)
-    ClearPedDamageDecalByZone(PlayerPedId(), 10, "ALL")
-    Citizen.InvokeNative(0x7F5D88333EE8A86F, PlayerPedId(), 1)
+    TaskPlayAnim(cache.ped, dic, anim, 1.0, 8.0, 5000, 0, 0.0, false, false, false)
+    Wait(5000)
+    ClearPedTasks(cache.ped)
+    ClearPedEnvDirt(cache.ped)
+    ClearPedBloodDamage(cache.ped)
+    SetPedDirtCleaned(cache.ped, 0.0, -1, 1, 1)
+    ClearPedDamageDecalByZone(cache.ped, 10, "ALL")
+    ClearPedBloodDamageFacial(cache.ped, 1)
     TriggerServerEvent("RSGCore:Server:SetMetaData", "cleanliness", 100)
-    
 end
 
 LoadAnim = function(dic)
     RequestAnimDict(dic)
     while not (HasAnimDictLoaded(dic)) do
-        Citizen.Wait(0)
+        Wait(0)
     end
 end
 
 function whenKeyJustPressed(key)
-    if Citizen.InvokeNative(0x580417101DDB492F, 0, key) then
+    if IsControlJustPressed(0, key) then
         return true
     else
         return false
@@ -197,11 +148,11 @@ function whenKeyJustPressed(key)
 end
 
 -- debug water hash
-Citizen.CreateThread(function()
+CreateThread(function()
     while true do
-        Citizen.Wait(1)
-        local coords = GetEntityCoords(PlayerPedId())
-        local water = Citizen.InvokeNative(0x5BA7A68A346A5A91,coords.x+3, coords.y+3, coords.z)
+        Wait(1)
+        local coords = GetEntityCoords(cache.ped)
+        local water = GetWaterMapZoneAtCoords(coords.x+3, coords.y+3, coords.z)
         if Config.Debug == true then
             print("water: "..tostring(water))
             Wait(5000)
