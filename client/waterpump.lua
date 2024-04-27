@@ -20,19 +20,18 @@ exports['rsg-target']:AddTargetModel(WaterOutlet, {
 
 -- waterpump drink water
 RegisterNetEvent('rsg-waterpump:client:drinking', function()
-    if isBusy then
-        return
-    else
-        isBusy = not isBusy
-        local ped = PlayerPedId()
-        SetCurrentPedWeapon(PlayerPedId(), GetHashKey("weapon_unarmed"))
-        Citizen.Wait(100)
-        if not IsPedOnMount(ped) and not IsPedInAnyVehicle(ped) then
-            TaskStartScenarioInPlace(ped, GetHashKey('WORLD_HUMAN_BUCKET_DRINK_GROUND'), -1, true, false, false, false)
-        end
-        Wait(5000)
-        TriggerServerEvent("RSGCore:Server:SetMetaData", "thirst", RSGCore.Functions.GetPlayerData().metadata["thirst"] + math.random(25, 50))
-        ClearPedTasks(ped)
-        isBusy = not isBusy
+    
+    if isBusy then return end
+
+    isBusy = true
+    SetCurrentPedWeapon(cache.ped, joaat('weapon_unarmed'))
+    Wait(100)
+    if not IsPedOnMount(cache.ped) and not IsPedInAnyVehicle(cache.ped) then
+        TaskStartScenarioInPlace(cache.ped, joaat('WORLD_HUMAN_BUCKET_DRINK_GROUND'), -1, true, false, false, false)
     end
+    Wait(5000)
+    TriggerServerEvent('RSGCore:Server:SetMetaData', 'thirst', RSGCore.Functions.GetPlayerData().metadata['thirst'] + math.random(25, 50))
+    ClearPedTasks(cache.ped)
+    isBusy = false
+
 end)
