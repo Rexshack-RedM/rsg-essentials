@@ -46,7 +46,7 @@ local Translations = {
     },
     log = {
         weapon_removed = 'Arma Rimossa!',
-        had_weapon_them_that_they_did_not_have = '** @staff ** ${firstname} ${lastname} aveva un'arma su di loro che non avevano nel loro inventario: il sistema anticheat ha rimosso l'arma',
+        had_weapon_them_that_they_did_not_have = '** @staff ** ${firstname} ${lastname} aveva unarma su di loro che non avevano nel loro inventario: il sistema anticheat ha rimosso larma',
         test_webhook = 'Test Webhook',
         webhook_setup_successfully = 'Webhook configurato con successo',
         test_your_discord_webhook = 'Testa il tuo Webhook Discord per i Log (Solo per gli Dei)',
