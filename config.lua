@@ -11,6 +11,9 @@ Config.EnableEagleEye = true
 -- pause menu
 Config.PauseReadBook = false
 
+--Stop shuffle when entering wagons
+Config.StopAutoShuffle = true
+
 ConsumeablesEat = {
     ["bread"] = math.random(10, 20),
     ["stew"] = math.random(80, 100),
