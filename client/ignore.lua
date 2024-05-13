@@ -13,3 +13,7 @@ CreateThread(function()
         end
     end
 end)
+
+if Config.StopAutoShuffle then
+    SetPedConfigFlag(cache.ped, 65, true) -- PCF_PreventAutoShuffleToDriversSeat
+end
