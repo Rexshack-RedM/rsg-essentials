@@ -73,11 +73,11 @@ Config.Density = {
     -- Scenario Ped Density
     [6] = 1.0,
     -- Parked Vehicle Density
-    [7] = 1.0,
+    [7] = 0.0,
     -- Random Vehicle Density
-    [8] = 1.0,
+    [8] = 0.0,
     -- Vehicle Density
-    [9] = 1.0,
+    [9] = 0.0,
 }
 
 -- water types config
