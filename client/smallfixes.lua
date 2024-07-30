@@ -85,3 +85,21 @@ Citizen.CreateThread(function()
         DisableControlAction(0, 0xCF8A4ECA, true) -- disable left alt hud | LEFT ALT (fast tapping)
     end
 end)
+
+-- Handle Dead or Dying Animals
+CreateThread(function()
+    local pedPool = {}
+    while true do
+        sleep = 900000 -- every 15 mins
+        local pedPool = GetGamePool('CPed')
+        for i = 1, #pedPool do
+            local ped = pedPool[i]
+            local animal = GetIsAnimal(pedPool[i])
+            if IsPedDeadOrDying(ped) == 1 and animal then
+                SetEntityAsNoLongerNeeded(ped)
+                --DeleteEntity(ped) -- this will delete animals in trasit to the butcher!
+            end
+        end
+        Wait(sleep)
+    end
+end)
