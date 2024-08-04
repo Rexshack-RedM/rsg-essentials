@@ -6,38 +6,40 @@ WaterOutlet = {
     -717759843, -- p_wellpumpnbx01x
 }
 
-if Config.canteenPump then
-    exports['rsg-target']:AddTargetModel(WaterOutlet, {
-        options = {
-            {
-                type = "client",
-                event = 'rsg-waterpump:client:drinking',
-                icon = "far fa-eye",
-                label = Lang:t('label.take_a_drink'),
-                distance = 2.0
-            },
-            {
-                type = "client",
-                event = 'rsg-waterpump:client:canteenfill',
-                icon = "far fa-eye",
-                label = 'Fill up your canteen',
-                distance = 2.0
+CreateThread(function()
+    if Config.canteenPump then
+        exports['rsg-target']:AddTargetModel(WaterOutlet, {
+            options = {
+                {
+                    type = "client",
+                    event = 'rsg-waterpump:client:drinking',
+                    icon = "far fa-eye",
+                    label = Lang:t('label.take_a_drink'),
+                    distance = 2.0
+                },
+                {
+                    type = "client",
+                    event = 'rsg-waterpump:client:canteenfill',
+                    icon = "far fa-eye",
+                    label = 'Fill up your canteen',
+                    distance = 2.0
+                }
             }
-        }
-    })
-else
-    exports['rsg-target']:AddTargetModel(WaterOutlet, {
-        options = {
-            {
-                type = "client",
-                event = 'rsg-waterpump:client:drinking',
-                icon = "far fa-eye",
-                label = Lang:t('label.take_a_drink'),
-                distance = 2.0
+        })
+    else
+        exports['rsg-target']:AddTargetModel(WaterOutlet, {
+            options = {
+                {
+                    type = "client",
+                    event = 'rsg-waterpump:client:drinking',
+                    icon = "far fa-eye",
+                    label = Lang:t('label.take_a_drink'),
+                    distance = 2.0
+                }
             }
-        }
-    })
-end
+        })
+    end
+end)
 
 RegisterNetEvent('rsg-waterpump:client:canteenfill', function()
     if Config.canteenPump then
