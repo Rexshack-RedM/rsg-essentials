@@ -14,6 +14,9 @@ Config.PauseReadBook = false
 --Stop shuffle when entering wagons
 Config.StopAutoShuffle = true
 
+--can players fill the canteen from a water pump
+Config.canteenPump = true
+
 ConsumeablesEat = {
     ["bread"] = math.random(10, 20),
     ["stew"] = math.random(80, 100),
