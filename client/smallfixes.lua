@@ -86,20 +86,54 @@ Citizen.CreateThread(function()
     end
 end)
 
--- Handle Dead or Dying Animals
+-- handle dead or dying animals / thanks to rms_dnb
+local pickedUpAnimals = {}
+
 CreateThread(function()
-    local pedPool = {}
     while true do
-        sleep = 900000 -- every 15 mins
+        local sleep = 900000 -- every 15 min
+        print("Starting dead animal cleanup cycle")
         local pedPool = GetGamePool('CPed')
+        print("Number of PEDs in pool: " .. #pedPool)
+        local deadAnimalsCount = 0
+
         for i = 1, #pedPool do
             local ped = pedPool[i]
-            local animal = GetIsAnimal(pedPool[i])
-            if IsPedDeadOrDying(ped) == 1 and animal then
-                SetEntityAsNoLongerNeeded(ped)
-                --DeleteEntity(ped) -- this will delete animals in trasit to the butcher!
+            
+            -- Check if the ped is an animal
+            if Citizen.InvokeNative(0x9A100F1CF4546629, ped) and IsEntityDead(ped) then
+                print("Dead animal found: " .. ped)
+                
+                -- Check if the animal is attached to another entity
+                if IsEntityAttached(ped) then
+                    -- Mark the animal as picked up
+                    pickedUpAnimals[ped] = true
+                    print("Animal is attached and marked as picked up: " .. ped)
+                elseif not pickedUpAnimals[ped] then
+                    -- Check if the entity still exists
+                    if DoesEntityExist(ped) then
+                        -- Try to delete the entity
+                        DeleteEntity(ped)
+                        
+                        -- Check if deletion was successful
+                        if DoesEntityExist(ped) then
+                            print("Failed to delete animal: " .. ped)
+                            SetEntityAsNoLongerNeeded(ped)
+                            SetEntityHealth(ped, 0)
+                        else
+                            print("Successfully deleted animal: " .. ped)
+                            deadAnimalsCount = deadAnimalsCount + 1
+                        end
+                    else
+                        print("Animal no longer exists: " .. ped)
+                    end
+                else
+                    print("Animal was picked up previously and will not be deleted: " .. ped)
+                end
             end
         end
+        print("Dead animals processed: " .. deadAnimalsCount)
+        print("Cleanup cycle complete. Waiting for next cycle...")
         Wait(sleep)
     end
 end)
