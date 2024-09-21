@@ -18,25 +18,11 @@ Config.StopAutoShuffle = true
 Config.canteenPump = true
 
 ConsumeablesEat = {
-    ["bread"] = math.random(10, 20),
-    ["stew"] = math.random(80, 100),
-    ["consumable_meat_game_cooked"] = math.random(20, 40),
-    ["big_game_meat_cooked"] = math.random(30, 60),
-    ["consumable_meat_stringy_cooked"] = math.random(30, 40),
-    ["consumable_meat_tender_pork_cooked"] = math.random(20, 30),
-    ["consumable_meat_herptile_cooked"] = math.random(30, 40),
-    ["consumable_meat_gristly_mutton_cooked"] = math.random(30, 70),
-    ["consumable_meat_prime_beef_cooked"] = math.random(30, 60),
-    ["consumable_meat_plump_bird_cooked"] = math.random(20, 35),
-    ["consumable_meat_exotic_bird_cooked"] = math.random(20, 45),
-    ["consumable_meat_mature_venison_cooked"] = math.random(40, 70),
-    ["consumable_meat_gamey_bird_cooked"] = math.random(30, 60),
-    ["cooked_fish"] = math.random(30, 60),
-    ["cooked_meat"] = math.random(20, 40),
+    ['consumable_bread_roll'] = math.random(10, 20),
 }
 
 ConsumeablesDrink = {
-    ["water"] = math.random(35, 54),
+    ['consumable_water_filtered'] = math.random(35, 54),
 }
 
 -- Go to Discord Developers Portal (https://discord.com/developers)
