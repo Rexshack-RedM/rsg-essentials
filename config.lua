@@ -17,12 +17,26 @@ Config.StopAutoShuffle = true
 --can players fill the canteen from a water pump
 Config.canteenPump = true
 
-ConsumeablesEat = {
-    ['consumable_bread_roll'] = math.random(10, 20),
-}
-
-ConsumeablesDrink = {
-    ['consumable_water_filtered'] = math.random(35, 54),
+-- consumables config
+Config.Consumables = {
+    Eat = { -- default food items
+        ['consumable_bread_roll'] = {
+            item = 'consumable_bread_roll',
+            hunger = 25,
+            thirst = 0,
+            stress = 5,
+            propname = 'p_bread_14_ab_s_a'
+        },
+    },
+    Drink = { -- default drink items
+        ['consumable_water_filtered'] = {
+            item = 'consumable_water_filtered',
+            hunger = 0,
+            thirst = 25,
+            stress = 5,
+            propname = 'p_bottlebeer01a'
+        },
+    },
 }
 
 -- Go to Discord Developers Portal (https://discord.com/developers)
