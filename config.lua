@@ -20,8 +20,8 @@ Config.canteenPump = true
 -- consumables config
 Config.Consumables = {
     Eat = { -- default food items
-        ['consumable_bread_roll'] = {
-            item = 'consumable_bread_roll',
+        ['bread'] = {
+            item = 'bread',
             hunger = 25,
             thirst = 0,
             stress = 5,
@@ -29,8 +29,8 @@ Config.Consumables = {
         },
     },
     Drink = { -- default drink items
-        ['consumable_water_filtered'] = {
-            item = 'consumable_water_filtered',
+        ['water'] = {
+            item = 'water',
             hunger = 0,
             thirst = 25,
             stress = 5,
