@@ -58,7 +58,7 @@ RegisterNetEvent('rsg-waterpump:client:canteenfill', function()
             ClearPedTasks(cache.ped)
             LocalPlayer.state:set("inv_busy", false, true)
         else
-            RSGCore.Functions.Notify('You do not have a canteen to fill.', 'error')
+            lib.notify({ title = 'Error', description = 'You do not have a canteen to fill.', type = 'error', duration = 7000 })
         end
     end
 end)
