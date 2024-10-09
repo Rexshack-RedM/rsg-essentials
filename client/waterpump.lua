@@ -44,19 +44,20 @@ end)
 RegisterNetEvent('rsg-waterpump:client:canteenfill', function()
     if Config.canteenPump then
         if RSGCore.Functions.HasItem('canteen0') then
-            LocalPlayer.state:set("inv_busy", true, true)
-            if lib.progressCircle({
+            LocalPlayer.state:set('inv_busy', true, true)
+            if lib.progressBar({
                 duration = 15000,
                 position = 'bottom',
                 useWhileDead = false,
                 canCancel = false,
+                disableControl = true,
+                disable = { move = true, mouse = true },
+                anim = { scenario = 'WORLD_HUMAN_CROUCH_INSPECT' },
                 label = 'Filling up Your Canteen',
-                TaskStartScenarioInPlace(cache.ped, joaat('WORLD_HUMAN_CROUCH_INSPECT'), -1, true, false, false, false)
             }) then
                 TriggerServerEvent('rsg-canteen:server:givefullcanteen')
             end
-            ClearPedTasks(cache.ped)
-            LocalPlayer.state:set("inv_busy", false, true)
+            LocalPlayer.state:set('inv_busy', false, true)
         else
             lib.notify({ title = 'Error', description = 'You do not have a canteen to fill.', type = 'error', duration = 7000 })
         end
