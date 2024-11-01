@@ -43,47 +43,30 @@ CreateThread(function()
 
     while true do
         Wait(4)
-
-        local weapon = GetPedCurrentHeldWeapon(cache.ped)
-        local weaponName = GetWeaponName(weapon, Citizen.ResultAsString())
+        local weapon = Citizen.InvokeNative(0x8425C5F057012DAB, cache.ped)
+        local weaponName = Citizen.InvokeNative(0x89CF5FF3D363311E, weapon, Citizen.ResultAsString())
         local coords = GetEntityCoords(cache.ped)
-        local water = GetWaterMapZoneAtCoords(coords.x+3, coords.y+3, coords.z)
-        local running = IsControlPressed(0, RSGCore.Shared.Keybinds['SHIFT']) or IsDisabledControlPressed(0, RSGCore.Shared.Keybinds['SHIFT'])
-
+        local water = Citizen.InvokeNative(0x5BA7A68A346A5A91,coords.x+3, coords.y+3, coords.z)
+        local running = IsControlPressed(0, 0x8FFC75D6) or IsDisabledControlPressed(0, 0x8FFC75D6)
         if running or weaponName == "WEAPON_FISHINGROD" then goto continue end
-
         for k,v in pairs(Config.WaterTypes) do 
             if water == Config.WaterTypes[k]["waterhash"]  then
                 if IsPedOnFoot(cache.ped) then
                     if IsEntityInWater(cache.ped) then
+                        -- wash
                         local Wash = CreateVarString(10, 'LITERAL_STRING', Config.WaterTypes[k]["name"])
-                        local entity = Config.WaterTypes[k]["waterhash"] 
-                        exports['rsg-target']:AddCircleZone(v.name, coords, 5, {
-                        name = v.name,
-                        debugPoly = false,
-                        }, {
-                        options = {
-                            {
-                                icon = "fas fa-hands-bubbles",
-                                label = "Wash",
-                                targeticon = "fas fa-eye",
-                                type = "client",
-                                action = function()
-                                TriggerEvent('rsg-river:client:lavati')
-                                end,
-                            },
-                            {
-                                icon = "fas fa-glass-water-droplet",
-                                label = "Drink",
-                                targeticon = "fas fa-eye",
-                                type = "client",
-                                action = function()
-                                TriggerEvent('rsg-river:client:drink')
-                                end,
-                            },
-                        },
-                        distance = 2.5,
-                    })
+                        PromptSetActiveGroupThisFrame(RiverGroup, Wash)
+                        
+                        if PromptHasHoldModeCompleted(WashPrompt) then
+                            StartWash("amb_misc@world_human_wash_face_bucket@ground@male_a@idle_d", "idle_l")
+                        end
+                        -- drink
+                        local drink = CreateVarString(10, 'LITERAL_STRING', Config.WaterTypes[k]["name"])
+                        PromptSetActiveGroupThisFrame(RiverGroup, drink)
+                        
+                        if PromptHasHoldModeCompleted(DrinkPrompt) then
+                            TriggerEvent('rsg-river:client:drink')    
+                        end
                     end
                 end
             end
