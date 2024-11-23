@@ -61,14 +61,14 @@ CreateThread(function()
                         local Wash = CreateVarString(10, 'LITERAL_STRING', Config.WaterTypes[k]["name"])
                         PromptSetActiveGroupThisFrame(RiverGroup, Wash)
 
-                        if PromptHasHoldModeCompleted(WashPrompt) then
+                        if PromptHasHoldModeCompleted(WashPromp) then
                             StartWash("amb_misc@world_human_wash_face_bucket@ground@male_a@idle_d", "idle_l")
                         end
                         -- drink
                         local drink = CreateVarString(10, 'LITERAL_STRING', Config.WaterTypes[k]["name"])
                         PromptSetActiveGroupThisFrame(RiverGroup, drink)
 
-                        if PromptHasHoldModeCompleted(DrinkPrompt) then
+                        if PromptHasHoldModeCompleted(DrinkPromp) then
                             TriggerEvent('rsg-river:client:drink')
                         end
                     end
