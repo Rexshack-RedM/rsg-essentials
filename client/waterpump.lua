@@ -1,5 +1,6 @@
 local RSGCore = exports['rsg-core']:GetCoreObject()
 local isBusy = false
+lib.locale()
 
 local WaterOutlet = {
     -40350080, -- p_waterpump01x
@@ -8,34 +9,36 @@ local WaterOutlet = {
 
 CreateThread(function()
     if Config.canteenPump then
-        exports['rsg-target']:AddTargetModel(WaterOutlet, {
-            options = {
-                {
-                    type = "client",
-                    event = 'rsg-waterpump:client:drinking',
-                    icon = "far fa-eye",
-                    label = Lang:t('label.take_a_drink'),
-                    distance = 2.0
-                },
-                {
-                    type = "client",
-                    event = 'rsg-waterpump:client:canteenfill',
-                    icon = "far fa-eye",
-                    label = 'Fill up your canteen',
-                    distance = 2.0
-                }
+        exports.ox_target:addModel(WaterOutlet, {
+            {
+                name = 'waterpump_main_canteenfill',
+                event = 'rsg-waterpump:client:canteenfill',
+                icon = 'far fa-eye',
+                label = locale('cl_canteen_take_a'),
+                canInteract = function(_, distance)
+                    return distance < 3.0
+                end
+            },
+            {
+                name = 'waterpump_main_drinking',
+                event = 'rsg-waterpump:client:drinking',
+                icon = 'far fa-eye',
+                label = locale('cl_canteen_take_b'),
+                canInteract = function(_, distance)
+                    return distance < 3.0
+                end
             }
         })
     else
-        exports['rsg-target']:AddTargetModel(WaterOutlet, {
-            options = {
-                {
-                    type = "client",
-                    event = 'rsg-waterpump:client:drinking',
-                    icon = "far fa-eye",
-                    label = Lang:t('label.take_a_drink'),
-                    distance = 2.0
-                }
+        exports.ox_target:addModel(WaterOutlet, {
+            {
+                name = 'waterpump_main_drinking_c',
+                event = 'rsg-waterpump:client:drinking',
+                icon = 'far fa-eye',
+                label = locale('cl_canteen_take_b'),
+                canInteract = function(_, distance)
+                    return distance < 3.0
+                end
             }
         })
     end
@@ -53,13 +56,13 @@ RegisterNetEvent('rsg-waterpump:client:canteenfill', function()
                 disableControl = true,
                 disable = { move = true, mouse = true },
                 anim = { scenario = 'WORLD_HUMAN_CROUCH_INSPECT' },
-                label = 'Filling up Your Canteen',
+                label = locale('cl_canteen_take_c'),
             }) then
                 TriggerServerEvent('rsg-canteen:server:givefullcanteen')
             end
             LocalPlayer.state:set('inv_busy', false, true)
         else
-            lib.notify({ title = 'Error', description = 'You do not have a canteen to fill.', type = 'error', duration = 7000 })
+            lib.notify({ title = locale('cl_canteen_take_d'), description = locale('cl_canteen_take_e'), type = 'error', duration = 7000 })
         end
     end
 end)
@@ -78,4 +81,5 @@ RegisterNetEvent('rsg-waterpump:client:drinking', function()
     TriggerServerEvent('RSGCore:Server:SetMetaData', 'thirst', RSGCore.Functions.GetPlayerData().metadata['thirst'] + math.random(25, 50))
     ClearPedTasks(cache.ped)
     isBusy = false
+
 end)

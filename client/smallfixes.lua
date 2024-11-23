@@ -1,4 +1,5 @@
 local RSGCore = exports['rsg-core']:GetCoreObject()
+lib.locale()
 local PauseOpen = false
 
 -- ped drown / boat sink fix
@@ -80,7 +81,9 @@ Citizen.CreateThread(function()
         Citizen.Wait(3)
         --DisableControlAction(0, 0xAC4BD4F1, true) -- Disable weapon wheel | TAB (while holding)
         --DisableControlAction(0, 0xB238FE0B, true) -- Disable toggle holster | TAB TAB (fast tapping)
-
+        -- if WheelMenuSpace then
+        --     DisableControlAction(0, 0xCF8A4ECA, true) -- disable left alt hud | LEFT ALT (fast tapping)
+        -- end
         -- LEFT ALT HUD
         DisableControlAction(0, 0xCF8A4ECA, true) -- disable left alt hud | LEFT ALT (fast tapping)
     end
@@ -88,52 +91,51 @@ end)
 
 -- handle dead or dying animals / thanks to rms_dnb
 local pickedUpAnimals = {}
-
 CreateThread(function()
     while true do
         local sleep = 900000 -- every 15 min
-        print("Starting dead animal cleanup cycle")
+        print(locale('cl_clean_cycle'))
         local pedPool = GetGamePool('CPed')
-        print("Number of PEDs in pool: " .. #pedPool)
+        print(locale('cl_num_ped')..": " .. #pedPool)
         local deadAnimalsCount = 0
 
         for i = 1, #pedPool do
             local ped = pedPool[i]
-            
+
             -- Check if the ped is an animal
             if Citizen.InvokeNative(0x9A100F1CF4546629, ped) and IsEntityDead(ped) then
-                print("Dead animal found: " .. ped)
-                
+                print(locale('cl_num_animal')..": " .. ped)
+
                 -- Check if the animal is attached to another entity
                 if IsEntityAttached(ped) then
                     -- Mark the animal as picked up
                     pickedUpAnimals[ped] = true
-                    print("Animal is attached and marked as picked up: " .. ped)
+                    print(locale('cl_num_animal_b')..": " .. ped)
                 elseif not pickedUpAnimals[ped] then
                     -- Check if the entity still exists
                     if DoesEntityExist(ped) then
                         -- Try to delete the entity
                         DeleteEntity(ped)
-                        
+
                         -- Check if deletion was successful
                         if DoesEntityExist(ped) then
-                            print("Failed to delete animal: " .. ped)
+                            print(locale('cl_num_animal_c')..": " .. ped)
                             SetEntityAsNoLongerNeeded(ped)
                             SetEntityHealth(ped, 0)
                         else
-                            print("Successfully deleted animal: " .. ped)
+                            print(locale('cl_num_animal_d')..": " .. ped)
                             deadAnimalsCount = deadAnimalsCount + 1
                         end
                     else
-                        print("Animal no longer exists: " .. ped)
+                        print(locale('cl_num_animal_e')..": " .. ped)
                     end
                 else
-                    print("Animal was picked up previously and will not be deleted: " .. ped)
+                    print(locale('cl_num_animal_f')..": " .. ped)
                 end
             end
         end
-        print("Dead animals processed: " .. deadAnimalsCount)
-        print("Cleanup cycle complete. Waiting for next cycle...")
+        print(locale('cl_num_animal_g')..": " .. deadAnimalsCount)
+        print(locale('cl_num_animal_h'))
         Wait(sleep)
     end
 end)

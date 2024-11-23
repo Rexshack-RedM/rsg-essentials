@@ -1,4 +1,3 @@
-
 CreateThread(function()
     Wait(0)
     if Config.EnableXmas == true then

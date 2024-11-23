@@ -1,7 +1,8 @@
 local RSGCore = exports['rsg-core']:GetCoreObject()
+lib.locale()
 
 RegisterNetEvent('KickForAFK', function()
-    DropPlayer(source, 'You Have Been Kicked For Being AFK')
+    DropPlayer(source, locale('sv_kick'))
 end)
 
 RSGCore.Functions.CreateCallback('rsg-afkkick:server:GetPermissions', function(source, cb)
