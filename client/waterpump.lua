@@ -2,7 +2,7 @@ local RSGCore = exports['rsg-core']:GetCoreObject()
 local isBusy = false
 lib.locale()
 
-WaterOutlet = {
+local WaterOutlet = {
     -40350080, -- p_waterpump01x
     -717759843, -- p_wellpumpnbx01x
 }

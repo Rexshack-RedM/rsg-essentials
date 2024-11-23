@@ -10,7 +10,7 @@ AddEventHandler('rsg-bandana:client:ToggleBandana', function()
         if not male then
             StartTaskItemInteraction(cache.ped, `KIT_BANDANA`, `BANDANA_ON_RIGHT_HAND`, 1, 0, -1082130432)
             Wait(700)
-            ApplyShopItemToPed(PlayerPedId(), 0xC615A086, true, true, true)
+            ApplyShopItemToPed(cache.ped, 0xC615A086, true, true, true)
             UpdatePedVariation(cache.ped, 0, 1, 1, 1, false)
 
             bandana = true
