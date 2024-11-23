@@ -15,12 +15,12 @@ DataView = {
         Int64 = { code = "i8", size = 8 },
         Uint64 = { code = "I8", size = 8 },
 
-        LuaInt = { code = "j", size = 8 }, 
-        UluaInt = { code = "J", size = 8 }, 
-        LuaNum = { code = "n", size = 8}, 
+        LuaInt = { code = "j", size = 8 },
+        UluaInt = { code = "J", size = 8 },
+        LuaNum = { code = "n", size = 8},
         Float32 = { code = "f", size = 4 },
-        Float64 = { code = "d", size = 8 }, 
-        String = { code = "z", size = -1, }, 
+        Float64 = { code = "d", size = 8 },
+        String = { code = "z", size = -1, },
     },
 
     FixedTypes = {

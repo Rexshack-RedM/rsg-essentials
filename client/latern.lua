@@ -20,7 +20,7 @@ CreateThread(function()
     while true do
         Wait(0)
         local heldweapon = Citizen.InvokeNative(0x8425C5F057012DAB, cache.ped)
-		
+
         if heldweapon == -164645981 then
             lantern = true
         elseif heldweapon == 1527076334 then

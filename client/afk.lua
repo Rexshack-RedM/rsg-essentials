@@ -1,4 +1,5 @@
 local RSGCore = exports['rsg-core']:GetCoreObject()
+lib.locale()
 local isLoggedIn = LocalPlayer.state.isLoggedIn
 local ignoredGroups = {
     ['mod'] = true,
@@ -57,9 +58,9 @@ CreateThread(function()
                             if time > 0 then
                                 local _type = timeMinutes[tostring(time)]
                                 if _type == 'minutes' then
-                                    lib.notify({ title = Lang:t('afk.will_kick'), description = math.ceil(time / 60) .. Lang:t('afk.time_seconds'), type = 'error', duration = 5000 })
+                                    lib.notify({ title = locale('cl_will_kick'), description = math.ceil(time / 60) .. locale('cl_time_seconds'), type = 'error', duration = 5000 })
                                 elseif _type == 'seconds' then
-                                    lib.notify({ title = Lang:t('afk.will_kick'), description = time .. Lang:t('afk.time_seconds'), type = 'error', duration = 5000 })
+                                    lib.notify({ title = locale('cl_will_kick'), description = time .. locale('cl_time_seconds'), type = 'error', duration = 5000 })
                                 end
                                 time -= 1
                             else

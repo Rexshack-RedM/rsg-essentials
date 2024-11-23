@@ -1,39 +1,40 @@
 local RSGCore = exports['rsg-core']:GetCoreObject()
-local WashPrompt
-local DrinkPrompt
+local WashPromp
+local DrinkPromp
 local RiverGroup = GetRandomIntInRange(0, 0xffffff)
+lib.locale()
 
 -- set wash prompt
 function WashPrompt()
     Citizen.CreateThread(function()
-        local str ="Wash"
+        local str = locale('cl_wash')
         local wait = 0
-        WashPrompt = Citizen.InvokeNative(0x04F97DE45A519419)
-        PromptSetControlAction(WashPrompt, RSGCore.Shared.Keybinds['ENTER'])
+        WashPromp = Citizen.InvokeNative(0x04F97DE45A519419)
+        PromptSetControlAction(WashPromp, RSGCore.Shared.Keybinds['ENTER'])
         str = CreateVarString(10, 'LITERAL_STRING', str)
-        PromptSetText(WashPrompt, str)
-        PromptSetEnabled(WashPrompt, true)
-        PromptSetVisible(WashPrompt, true)
-        PromptSetHoldMode(WashPrompt, true)
-        PromptSetGroup(WashPrompt, RiverGroup)
-        PromptRegisterEnd(WashPrompt)
+        PromptSetText(WashPromp, str)
+        PromptSetEnabled(WashPromp, true)
+        PromptSetVisible(WashPromp, true)
+        PromptSetHoldMode(WashPromp, true)
+        PromptSetGroup(WashPromp, RiverGroup)
+        PromptRegisterEnd(WashPromp)
     end)
 end
 
 -- set drink prompt
 function DrinkPrompt()
     Citizen.CreateThread(function()
-        local str ="Drink"
+        local str =locale('cl_drink')
         local wait = 0
-        DrinkPrompt = Citizen.InvokeNative(0x04F97DE45A519419)
-        PromptSetControlAction(DrinkPrompt, RSGCore.Shared.Keybinds['J'])
+        DrinkPromp = Citizen.InvokeNative(0x04F97DE45A519419)
+        PromptSetControlAction(DrinkPromp, RSGCore.Shared.Keybinds['J'])
         str = CreateVarString(10, 'LITERAL_STRING', str)
-        PromptSetText(DrinkPrompt, str)
-        PromptSetEnabled(DrinkPrompt, true)
-        PromptSetVisible(DrinkPrompt, true)
-        PromptSetHoldMode(DrinkPrompt, true)
-        PromptSetGroup(DrinkPrompt, RiverGroup)
-        PromptRegisterEnd(DrinkPrompt)
+        PromptSetText(DrinkPromp, str)
+        PromptSetEnabled(DrinkPromp, true)
+        PromptSetVisible(DrinkPromp, true)
+        PromptSetHoldMode(DrinkPromp, true)
+        PromptSetGroup(DrinkPromp, RiverGroup)
+        PromptRegisterEnd(DrinkPromp)
     end)
 end
 
@@ -43,29 +44,32 @@ CreateThread(function()
 
     while true do
         Wait(4)
+
         local weapon = Citizen.InvokeNative(0x8425C5F057012DAB, cache.ped)
         local weaponName = Citizen.InvokeNative(0x89CF5FF3D363311E, weapon, Citizen.ResultAsString())
         local coords = GetEntityCoords(cache.ped)
         local water = Citizen.InvokeNative(0x5BA7A68A346A5A91,coords.x+3, coords.y+3, coords.z)
         local running = IsControlPressed(0, 0x8FFC75D6) or IsDisabledControlPressed(0, 0x8FFC75D6)
+
         if running or weaponName == "WEAPON_FISHINGROD" then goto continue end
-        for k,v in pairs(Config.WaterTypes) do 
-            if water == Config.WaterTypes[k]["waterhash"]  then
+
+        for k,v in pairs(Config.WaterTypes) do
+            if water == Config.WaterTypes[k]["waterhash"] then
                 if IsPedOnFoot(cache.ped) then
                     if IsEntityInWater(cache.ped) then
                         -- wash
                         local Wash = CreateVarString(10, 'LITERAL_STRING', Config.WaterTypes[k]["name"])
                         PromptSetActiveGroupThisFrame(RiverGroup, Wash)
-                        
+
                         if PromptHasHoldModeCompleted(WashPrompt) then
                             StartWash("amb_misc@world_human_wash_face_bucket@ground@male_a@idle_d", "idle_l")
                         end
                         -- drink
                         local drink = CreateVarString(10, 'LITERAL_STRING', Config.WaterTypes[k]["name"])
                         PromptSetActiveGroupThisFrame(RiverGroup, drink)
-                        
+
                         if PromptHasHoldModeCompleted(DrinkPrompt) then
-                            TriggerEvent('rsg-river:client:drink')    
+                            TriggerEvent('rsg-river:client:drink')
                         end
                     end
                 end

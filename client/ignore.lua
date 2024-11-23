@@ -2,7 +2,7 @@
 CreateThread(function()
     while true do
         Wait(10)
-        local size = GetNumberOfEvents(0)   
+        local size = GetNumberOfEvents(0)
         if size > 0 then
             for i = 0, size - 1 do
                 local eventAtIndex = GetEventAtIndex(0, i)
