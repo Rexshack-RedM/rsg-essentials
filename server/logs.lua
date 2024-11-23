@@ -1,4 +1,5 @@
 local RSGCore = exports['rsg-core']:GetCoreObject()
+lib.locale()
 
 local Webhooks = {
     ['default'] = '',
@@ -68,6 +69,6 @@ RegisterNetEvent('rsg-log:server:CreateLog', function(name, title, color, messag
     end
 end)
 
-RSGCore.Commands.Add('testwebhook', Lang:t('log.test_your_discord_webhook'), {}, false, function()
-    TriggerEvent('rsg-log:server:CreateLog', 'testwebhook', Lang:t('log.test_webhook'), 'default', Lang:t('log.webhook_setup_successfully'))
+RSGCore.Commands.Add('testwebhook', locale('sv_test_your_webhook'), {}, false, function()
+    TriggerEvent('rsg-log:server:CreateLog', 'testwebhook', locale('sv_test_webhook'), 'default', locale('sv_webhook_successfully'))
 end, 'god')
