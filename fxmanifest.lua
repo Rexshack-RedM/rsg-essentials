@@ -6,11 +6,8 @@ description 'rsg-essentials'
 version '2.2.6'
 
 shared_scripts {
-    '@rsg-core/shared/locale.lua',
-    'locales/en.lua',
-    'locales/*.lua',
-    'config.lua',
-    '@ox_lib/init.lua'
+    '@ox_lib/init.lua',
+    'config.lua'
 }
 
 client_scripts {
@@ -20,10 +17,13 @@ client_scripts {
 server_scripts {
     'server/*.lua'
 }
-
-lua54 'yes'
+files {
+    'locales/*.json',
+}
 
 dependencies {
     'rsg-core',
     'ox_lib'
 }
+
+lua54 'yes'
