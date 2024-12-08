@@ -86,6 +86,7 @@ Citizen.CreateThread(function()
         -- end
         -- LEFT ALT HUD
         DisableControlAction(0, 0xCF8A4ECA, true) -- disable left alt hud | LEFT ALT (fast tapping)
+        DisableControlAction(0, 0x9CC7A1A4, true) -- disable Ability Loadout prompt
     end
 end)
 
