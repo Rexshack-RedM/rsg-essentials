@@ -20,6 +20,10 @@
     "cl_num_animal_f" : "Animal was picked up previously and will not be deleted",
     "cl_num_animal_g" : "Dead animals processed",
     "cl_num_animal_h" : "Cleanup cycle complete. Waiting for next cycle...",
+
+    "cl_pvp_toggle_on" : "PvP is ON",
+    "cl_pvp_toggle_off" : "PvP is OFF",
+    
     "sv_kick" : "You Have Been Kicked For Being AFK",
     "sv_bandana" : "Bandana on/off",
     "sv_test_your_webhook" : "Test Your Discord Webhook For Logs (God Only)",
