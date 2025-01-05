@@ -140,3 +140,27 @@ CreateThread(function()
         Wait(sleep)
     end
 end)
+
+RegisterNetEvent('rsg-essentials:client:pvpToggle',function()
+    local ped = PlayerPedId()
+
+    if pvp == true then
+        SetRelationshipBetweenGroups(1,`PLAYER`, `PLAYER`)
+        NetworkSetFriendlyFireOption(false)
+        Citizen.InvokeNative(0xB8DE69D9473B7593, ped, 6) -- Disable choking other people
+
+        pvp = false
+
+        lib.notify({ title = locale('cl_pvp_toggle_off'), type = 'info', icon = 'fa-solid fa-shield', iconAnimation = 'shake', duration = 7000 })
+        return
+    end
+
+    SetRelationshipBetweenGroups(5, `PLAYER`, `PLAYER`)
+    NetworkSetFriendlyFireOption(true)
+    Citizen.InvokeNative(0x949B2F9ED2917F5D, ped, 6) -- Enable choking other people
+
+    pvp = true
+
+    lib.notify({ title = locale('cl_pvp_toggle_on'), type = 'info', icon = 'fa-solid fa-shield', iconAnimation = 'shake', duration = 7000 })
+
+end)
