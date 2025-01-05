@@ -5,9 +5,6 @@ Config.Debug = false
 -- enable xmas weather
 Config.EnableXmas = false
 
--- enable eagleeye
-Config.EnableEagleEye = true
-
 -- pause menu
 Config.PauseReadBook = false
 
@@ -20,6 +17,22 @@ Config.canteenPump = true
 -- Determines whether crouching is required to interact with water bodies.
 -- Set to `true` to force crouching, or `false` to allow interaction without crouching.
 Config.Crouch = true
+
+-- Configuration for enabling/disabling Eagle Eye based on player roles.
+-- This allows server admins to control which roles (jobs) can use Eagle Eye.
+Config.EagleEye = {
+    -- Enable Eagle Eye for all players, regardless of their job.
+    -- Set the everyone field to `false` to allow only job specific to use Eagle Eye.
+    everyone = {
+        enabled = true, -- Default: true (only specific jobs can use Eagle Eye on false)
+    },
+    vallaw = {
+        enabled = false, 
+    },
+    rholaw = {
+        enabled = false, 
+    }
+}
 
 -- Go to Discord Developers Portal (https://discord.com/developers)
 
