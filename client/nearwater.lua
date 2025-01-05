@@ -56,7 +56,13 @@ CreateThread(function()
         for k,v in pairs(Config.WaterTypes) do
             if water == Config.WaterTypes[k]["waterhash"] then
                 if IsPedOnFoot(cache.ped) then
-                    if IsEntityInWater(cache.ped) then
+                    if IsEntityInWater(cache.ped)then
+                        if Config.Crouch then
+                            local crouched = GetPedCrouchMovement(cache.ped)
+                            if crouched == 0 then goto continue end
+                        end
+                
+                        if not IsPedStill(cache.ped)then goto continue end
                         -- wash
                         local Wash = CreateVarString(10, 'LITERAL_STRING', Config.WaterTypes[k]["name"])
                         PromptSetActiveGroupThisFrame(RiverGroup, Wash)
