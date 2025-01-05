@@ -17,6 +17,10 @@ Config.StopAutoShuffle = true
 --can players fill the canteen from a water pump
 Config.canteenPump = true
 
+-- Determines whether crouching is required to interact with water bodies.
+-- Set to `true` to force crouching, or `false` to allow interaction without crouching.
+Config.Crouch = true
+
 -- Go to Discord Developers Portal (https://discord.com/developers)
 
 Config.Discord = {
