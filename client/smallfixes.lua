@@ -31,7 +31,7 @@ CreateThread(function()
         for i = 1, #vehiclePool do
             wagon = vehiclePool[i]
             -- is wagon stopped
-            if IsEntityAVehicle(wagon) and IsVehicleStopped(wagon) then
+            if IsEntityAVehicle(wagon) and IsVehicleStopped(wagon) and not IsEntityAMissionEntity(wagon) then
                 -- get the horse
                 horse = GetPedInDraftHarness(wagon, 0)
                 -- if vehicle stopped but the horse walks = buggy wagon
@@ -42,6 +42,8 @@ CreateThread(function()
                         if driver then
                             DeleteEntity(driver)
                         end
+                        RemoveVehicleLightPropSets(wagon)
+                        RemoveVehiclePropSets(wagon)
                         DeleteEntity(wagon)
                     end
                 end
