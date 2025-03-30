@@ -20,6 +20,8 @@
     "cl_num_animal_f" : "L'animal a déjà été ramassé et ne sera pas supprimé",
     "cl_num_animal_g" : "Carcasses d'animaux traitées",
     "cl_num_animal_h" : "Cycle de nettoyage terminé. En attente du prochain cycle...",
+    "cl_pvp_toggle_on" : "PvP is ON",
+    "cl_pvp_toggle_off" : "PvP is OFF",
     "sv_kick" : "Vous avez été expulsé pour inactivité (AFK)",
     "sv_bandana" : "Bandana activé/désactivé",
     "sv_test_your_webhook" : "Tester votre webhook Discord pour les logs (God uniquement)",
@@ -28,6 +30,5 @@
     "sv_print_drizzle" : "30 minutes avant l'orage : bruine",
     "sv_print_shower" : "15 minutes avant l'orage : averse",
     "sv_print_rain" : "10 minutes avant l'orage : pluie",
-    "sv_print_storm" : "5 minutes avant l'orage : orage"
-
+    "sv_print_thunderstorm" : "5 minutes avant l'orage : orage"
 }
