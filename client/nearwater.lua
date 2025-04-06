@@ -42,45 +42,49 @@ CreateThread(function()
     WashPrompt()
     DrinkPrompt()
 
+    local sleep = 1000
     while true do
-        Wait(4)
+        Wait(sleep)
+        sleep = 1000
+        if not IsPedStill(cache.ped) then goto continue end
+        if not IsPedOnFoot(cache.ped) or not IsEntityInWater(cache.ped) then goto continue end
+
+        if Config.Crouch then
+            local crouched = GetPedCrouchMovement(cache.ped)
+            if crouched == 0 then goto continue end
+        end
+
+        local coords = GetEntityCoords(cache.ped)
+        local water = Citizen.InvokeNative(0x5BA7A68A346A5A91,coords.x+3, coords.y+3, coords.z)
+        if not water then goto continue end
 
         local weapon = Citizen.InvokeNative(0x8425C5F057012DAB, cache.ped)
         local weaponName = Citizen.InvokeNative(0x89CF5FF3D363311E, weapon, Citizen.ResultAsString())
-        local coords = GetEntityCoords(cache.ped)
-        local water = Citizen.InvokeNative(0x5BA7A68A346A5A91,coords.x+3, coords.y+3, coords.z)
-        local running = IsControlPressed(0, 0x8FFC75D6) or IsDisabledControlPressed(0, 0x8FFC75D6)
-
-        if running or weaponName == "WEAPON_FISHINGROD" then goto continue end
+        if weaponName == "WEAPON_FISHINGROD" then goto continue end
 
         for k,v in pairs(Config.WaterTypes) do
             if water == Config.WaterTypes[k]["waterhash"] then
-                if IsPedOnFoot(cache.ped) then
-                    if IsEntityInWater(cache.ped)then
-                        if Config.Crouch then
-                            local crouched = GetPedCrouchMovement(cache.ped)
-                            if crouched == 0 then goto continue end
-                        end
                 
-                        if not IsPedStill(cache.ped)then goto continue end
-                        -- wash
-                        local Wash = CreateVarString(10, 'LITERAL_STRING', Config.WaterTypes[k]["name"])
-                        PromptSetActiveGroupThisFrame(RiverGroup, Wash)
+                -- wash
+                local Wash = CreateVarString(10, 'LITERAL_STRING', Config.WaterTypes[k]["name"])
+                PromptSetActiveGroupThisFrame(RiverGroup, Wash)
 
-                        if PromptHasHoldModeCompleted(WashPromp) then
-                            StartWash("amb_misc@world_human_wash_face_bucket@ground@male_a@idle_d", "idle_l")
-                        end
-                        -- drink
-                        local drink = CreateVarString(10, 'LITERAL_STRING', Config.WaterTypes[k]["name"])
-                        PromptSetActiveGroupThisFrame(RiverGroup, drink)
-
-                        if PromptHasHoldModeCompleted(DrinkPromp) then
-                            TriggerEvent('rsg-river:client:drink')
-                        end
-                    end
+                if PromptHasHoldModeCompleted(WashPromp) then
+                    StartWash("amb_misc@world_human_wash_face_bucket@ground@male_a@idle_d", "idle_l")
                 end
+                -- drink
+                local drink = CreateVarString(10, 'LITERAL_STRING', Config.WaterTypes[k]["name"])
+                PromptSetActiveGroupThisFrame(RiverGroup, drink)
+
+                if PromptHasHoldModeCompleted(DrinkPromp) then
+                    TriggerEvent('rsg-river:client:drink')
+                end
+                
+                sleep = 4
+                break
             end
         end
+
         ::continue::
     end
 end)
@@ -141,14 +145,15 @@ function whenKeyJustPressed(key)
 end
 
 -- debug water hash
-CreateThread(function()
-    while true do
-        Wait(1)
-        local coords = GetEntityCoords(cache.ped)
-        local water = GetWaterMapZoneAtCoords(coords.x+3, coords.y+3, coords.z)
-        if Config.Debug == true then
+if Config.Debug == true then
+    CreateThread(function()
+        while true do
+            Wait(1)
+            local coords = GetEntityCoords(cache.ped)
+            local water = GetWaterMapZoneAtCoords(coords.x+3, coords.y+3, coords.z)
+        
             print("water: "..tostring(water))
             Wait(5000)
         end
-    end
-end)
+    end)
+end

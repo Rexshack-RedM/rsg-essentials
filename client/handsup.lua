@@ -4,7 +4,9 @@ CreateThread(function()
     while true do
         Wait(7)
 
-        if IsControlJustPressed(0, RSGCore.Shared.Keybinds['X']) then
+        local keybind = RSGCore.Shared.Keybinds['X']
+
+        if IsControlJustPressed(0, keybind) then
             RSGCore.Functions.GetPlayerData(function(PlayerData)
                 if not PlayerData.metadata["isdead"]
                 and not IsEntityDead(cache.ped) -- unconditional death
@@ -13,6 +15,9 @@ CreateThread(function()
                     local animDict = "script_proc@robberies@homestead@lonnies_shack@deception"
 
                     if not IsEntityPlayingAnim(cache.ped, animDict, "hands_up_loop", 3) then
+                        SetCurrentPedWeapon(cache.ped, joaat('weapon_unarmed'))
+                        LocalPlayer.state:set("inv_busy", true, true)
+
                         if not HasAnimDictLoaded(animDict) then
                             RequestAnimDict(animDict)
                             while not HasAnimDictLoaded(animDict) do
@@ -24,6 +29,7 @@ CreateThread(function()
                         RequestAnimDict(animDict)
                     else
                         ClearPedSecondaryTask(cache.ped)
+                        LocalPlayer.state:set("inv_busy", false, true)
                     end
                 end
             end)
