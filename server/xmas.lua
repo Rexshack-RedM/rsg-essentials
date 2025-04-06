@@ -1,6 +1,6 @@
-CreateThread(function()
-    Wait(0)
-    if Config.EnableXmas == true then
+if Config.EnableXmas == true then
+    CreateThread(function()
+        Wait(0)
         exports.weathersync:setWeatherPattern({
             ['snowlight'] = {
                 ['snow'] = 20,
@@ -30,8 +30,8 @@ CreateThread(function()
             }
         })
         exports.weathersync:setWeather('snowlight', 10.0, false, true)
-    end
-end)
+    end)
+end
 
 AddEventHandler('onResourceStop', function(resource)
     if GetCurrentResourceName() ~= resource then

@@ -12,9 +12,10 @@ end)
 
 -- change voice proximity
 CreateThread(function()
+    local keybind = RSGCore.Shared.Keybinds['RIGHTBRACKET']
     while true do
-        Wait(0)
-        if IsControlJustPressed(0, RSGCore.Shared.Keybinds['RIGHTBRACKET']) then
+        Wait(7)
+        if IsControlJustPressed(0, keybind) then
             ExecuteCommand('cycleproximity')
         end
     end
@@ -56,7 +57,7 @@ end)
 -- pause menu animation
 CreateThread(function()
     while true do
-        Wait(0)
+        Wait(100)
 
         if IsPauseMenuActive() and not PauseOpen and Config.PauseReadBook then
             SetCurrentPedWeapon(cache.ped, 0xA2719263, true) -- set unarmed
@@ -110,24 +111,26 @@ CreateThread(function()
                 print(locale('cl_num_animal')..": " .. ped)
 
                 -- Check if the animal is attached to another entity
-                if IsEntityAttached(ped) then
+                if IsEntityAttachedToAnyPed(ped) then
                     -- Mark the animal as picked up
                     pickedUpAnimals[ped] = true
                     print(locale('cl_num_animal_b')..": " .. ped)
                 elseif not pickedUpAnimals[ped] then
                     -- Check if the entity still exists
                     if DoesEntityExist(ped) then
-                        -- Try to delete the entity
-                        DeleteEntity(ped)
+                        if GetPedTimeOfDeath(ped) < GetGameTimer() then --check if dead long enough
+                            -- Try to delete the entity
+                            DeleteEntity(ped)
 
-                        -- Check if deletion was successful
-                        if DoesEntityExist(ped) then
-                            print(locale('cl_num_animal_c')..": " .. ped)
-                            SetEntityAsNoLongerNeeded(ped)
-                            SetEntityHealth(ped, 0)
-                        else
-                            print(locale('cl_num_animal_d')..": " .. ped)
-                            deadAnimalsCount = deadAnimalsCount + 1
+                            -- Check if deletion was successful
+                            if DoesEntityExist(ped) then
+                                print(locale('cl_num_animal_c')..": " .. ped)
+                                SetEntityAsNoLongerNeeded(ped)
+                                SetEntityHealth(ped, 0)
+                            else
+                                print(locale('cl_num_animal_d')..": " .. ped)
+                                deadAnimalsCount = deadAnimalsCount + 1
+                            end
                         end
                     else
                         print(locale('cl_num_animal_e')..": " .. ped)

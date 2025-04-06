@@ -18,7 +18,7 @@ local davylantern = false
 
 CreateThread(function()
     while true do
-        Wait(0)
+        Wait(100)
         local heldweapon = Citizen.InvokeNative(0x8425C5F057012DAB, cache.ped)
 
         if heldweapon == -164645981 then
