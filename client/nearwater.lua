@@ -105,7 +105,7 @@ AddEventHandler('rsg-river:client:drink', function()
         TaskStartScenarioInPlace(cache.ped, GetHashKey('WORLD_HUMAN_CROUCH_INSPECT'), -1, true, false, false, false)
     end
     Wait(17000)
-    TriggerServerEvent("RSGCore:Server:SetMetaData", "thirst", RSGCore.Functions.GetPlayerData().metadata["thirst"] + math.random(50, 100))
+    TriggerEvent('hud:client:UpdateThirst', LocalPlayer.state.thirst + math.random(50, 100))
     ClearPedTasks(cache.ped)
 end)
 
@@ -126,7 +126,7 @@ StartWash = function(dic, anim)
     SetPedDirtCleaned(cache.ped, 0.0, -1, 1, 1)
     ClearPedDamageDecalByZone(cache.ped, 10, "ALL")
     ClearPedBloodDamageFacial(cache.ped, 1)
-    TriggerServerEvent("RSGCore:Server:SetMetaData", "cleanliness", 100)
+    TriggerEvent('hud:client:UpdateCleanliness', 100)
 end
 
 LoadAnim = function(dic)
