@@ -13,7 +13,7 @@ CreateThread(function()
             {
                 name = 'waterpump_main_canteenfill',
                 event = 'rsg-waterpump:client:canteenfill',
-                icon = 'far fa-eye',
+                icon = 'fa fa-bottle-droplet',
                 label = locale('cl_canteen_take_a'),
                 canInteract = function(_, distance)
                     return distance < 3.0
@@ -22,7 +22,7 @@ CreateThread(function()
             {
                 name = 'waterpump_main_drinking',
                 event = 'rsg-waterpump:client:drinking',
-                icon = 'far fa-eye',
+                icon = 'fa fa-droplet',
                 label = locale('cl_canteen_take_b'),
                 canInteract = function(_, distance)
                     return distance < 3.0
@@ -34,7 +34,7 @@ CreateThread(function()
             {
                 name = 'waterpump_main_drinking_c',
                 event = 'rsg-waterpump:client:drinking',
-                icon = 'far fa-eye',
+                icon = 'fa fa-droplet',
                 label = locale('cl_canteen_take_b'),
                 canInteract = function(_, distance)
                     return distance < 3.0
@@ -48,6 +48,9 @@ RegisterNetEvent('rsg-waterpump:client:canteenfill', function()
     if Config.canteenPump then
         if RSGCore.Functions.HasItem('canteen0') then
             LocalPlayer.state:set('inv_busy', true, true)
+            SetCurrentPedWeapon(cache.ped, joaat('weapon_unarmed'))
+            Wait(100)
+            
             if lib.progressBar({
                 duration = 15000,
                 position = 'bottom',
@@ -69,17 +72,21 @@ end)
 
 -- waterpump drink water
 RegisterNetEvent('rsg-waterpump:client:drinking', function()
-    if isBusy then return end
-
-    isBusy = true
     SetCurrentPedWeapon(cache.ped, joaat('weapon_unarmed'))
     Wait(100)
+    
     if not IsPedOnMount(cache.ped) and not IsPedInAnyVehicle(cache.ped) then
-        TaskStartScenarioInPlace(cache.ped, joaat('WORLD_HUMAN_BUCKET_DRINK_GROUND'), -1, true, false, false, false)
+        if lib.progressBar({
+            duration = 7000,
+            position = 'bottom',
+            useWhileDead = false,
+            canCancel = false,
+            disableControl = true,
+            disable = { move = true, mouse = true },
+            anim = { scenario = 'WORLD_HUMAN_CROUCH_INSPECT' },
+            label = locale('cl_canteen_take_b'),
+        }) then
+            TriggerEvent('hud:client:UpdateThirst', LocalPlayer.state.thirst + math.random(25, 50))
+        end
     end
-    Wait(5000)
-    TriggerServerEvent('RSGCore:Server:SetMetaData', 'thirst', RSGCore.Functions.GetPlayerData().metadata['thirst'] + math.random(25, 50))
-    ClearPedTasks(cache.ped)
-    isBusy = false
-
 end)
