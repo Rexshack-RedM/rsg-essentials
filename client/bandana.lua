@@ -4,7 +4,7 @@ RegisterNetEvent('rsg-bandana:client:ToggleBandana')
 AddEventHandler('rsg-bandana:client:ToggleBandana', function()
     local male = IsPedMale(cache.ped)
     local neckwear = exports['rsg-appearance']:GetClothesCurrentComponentHash('neckwear')
-    local applybeard = exports['rsg-appearance']:GetBodyCurrentComponentHash('beard')
+    local applybeard = exports['rsg-appearance']:GetComponentId('beard').hash
 
     if not bandana then
         if not male then
