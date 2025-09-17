@@ -2,6 +2,9 @@ Config = Config or {}
 
 Config.Debug = false
 
+-- enable first person shooting
+Config.FirstPersonShooting = false
+
 -- enable xmas weather
 Config.EnableXmas = false
 
