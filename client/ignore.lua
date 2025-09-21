@@ -1,17 +1,16 @@
--- removes events and challenge notfications
+-- removes events and challenge notifications
 CreateThread(function()
-    local hashComplete = joaat('EVENT_CHALLENGE_GOAL_COMPLETE')
-    local hashReward = joaat('EVENT_CHALLENGE_REWARD')
-    local hashDaily = joaat('EVENT_DAILY_CHALLENGE_STREAK_COMPLETED')
-
     while true do
         Wait(10)
         local size = GetNumberOfEvents(0)
         if size > 0 then
             for i = 0, size - 1 do
-                local eventAtIndex = GetEventAtIndex(0, i)
-                if eventAtIndex == hashComplete or eventAtIndex == hashReward or eventAtIndex == hashDaily then 
-                    UiFeedClearAllChannels()
+                local eventRDO = GetEventAtIndex(0, i)
+                if eventRDO == GetHashKey("EVENT_CHALLENGE_GOAL_COMPLETE") 
+                or eventRDO == GetHashKey("EVENT_CHALLENGE_REWARD")
+                or eventRDO == GetHashKey("EVENT_CHALLENGE_GOAL_UPDATE")
+                or eventRDO == GetHashKey("EVENT_DAILY_CHALLENGE_STREAK_COMPLETED") then 
+                    Citizen.InvokeNative(0x6035E8FBCA32AC5E)
                 end
             end
         end
