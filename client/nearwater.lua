@@ -91,7 +91,6 @@ end)
 
 -- drink action
 AddEventHandler('rsg-river:client:drink', function()
-    local src = source
     if drink ~= 0 then
         SetEntityAsMissionEntity(drink)
         DeleteObject(nativerioprop)
@@ -111,7 +110,6 @@ end)
 
 ---Wash face animation
 AddEventHandler('rsg-river:client:lavati', function()
-    local src = source
     StartWash("amb_misc@world_human_wash_face_bucket@ground@male_a@idle_d", "idle_l")
 end)
 
