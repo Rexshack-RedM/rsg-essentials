@@ -1,11 +1,11 @@
 local RSGCore = exports['rsg-core']:GetCoreObject()
 
-
 function EnableEagleeye(player, enable)
     Citizen.InvokeNative(0xA63FCAD3A6FEC6D2, player, enable)
-    print(enable and "Eagle Eye Enabled" or "Eagle Eye Disabled")
+    if Config.Debug then
+        print(enable and "Eagle Eye Enabled" or "Eagle Eye Disabled")
+    end
 end
-
 
 function ShouldEnableEagleEye(job)
     if Config.EagleEye.everyone.enabled then
@@ -28,18 +28,15 @@ function HandleEagleEyeAccess()
     end
 end
 
-
 AddEventHandler('RSGCore:Client:OnPlayerLoaded', function()
     HandleEagleEyeAccess()
 end)
-
 
 RegisterNetEvent('RSGCore:Client:OnJobUpdate')
 AddEventHandler('RSGCore:Client:OnJobUpdate', function(JobInfo)
     PlayerJob = JobInfo
     HandleEagleEyeAccess()
 end)
-
 
 AddEventHandler("onResourceStart", function(resourceName)
     if GetCurrentResourceName() ~= resourceName then
