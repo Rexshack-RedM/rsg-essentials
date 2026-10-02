@@ -95,53 +95,60 @@ end)
 
 -- handle dead or dying animals / thanks to rms_dnb
 local pickedUpAnimals = {}
+
 CreateThread(function()
     while true do
-        local sleep = 900000 -- every 15 min
-        print(locale('cl_clean_cycle'))
-        local pedPool = GetGamePool('CPed')
-        print(locale('cl_num_ped')..": " .. #pedPool)
-        local deadAnimalsCount = 0
+        local sleep = Config.CleanupInterval
 
-        for i = 1, #pedPool do
-            local ped = pedPool[i]
+        -- Only run the loop if enabled in the config
+        if Config.EnableAnimalCleanup then
+            print(locale('cl_clean_cycle'))
+            local pedPool = GetGamePool('CPed')
+            print(locale('cl_num_ped')..": " .. #pedPool)
+            local deadAnimalsCount = 0
 
-            -- Check if the ped is an animal
-            if Citizen.InvokeNative(0x9A100F1CF4546629, ped) and IsEntityDead(ped) then
-                print(locale('cl_num_animal')..": " .. ped)
+            for i = 1, #pedPool do
+                local ped = pedPool[i]
 
-                -- Check if the animal is attached to another entity
-                if IsEntityAttachedToAnyPed(ped) then
-                    -- Mark the animal as picked up
-                    pickedUpAnimals[ped] = true
-                    print(locale('cl_num_animal_b')..": " .. ped)
-                elseif not pickedUpAnimals[ped] then
-                    -- Check if the entity still exists
-                    if DoesEntityExist(ped) then
-                        if GetPedTimeOfDeath(ped) < GetGameTimer() then --check if dead long enough
-                            -- Try to delete the entity
-                            DeleteEntity(ped)
+                -- Check if the ped is an animal[cite: 1]
+                if Citizen.InvokeNative(0x9A100F1CF4546629, ped) and IsEntityDead(ped) then
+                    print(locale('cl_num_animal')..": " .. ped)
 
-                            -- Check if deletion was successful
-                            if DoesEntityExist(ped) then
-                                print(locale('cl_num_animal_c')..": " .. ped)
-                                SetEntityAsNoLongerNeeded(ped)
-                                SetEntityHealth(ped, 0)
-                            else
-                                print(locale('cl_num_animal_d')..": " .. ped)
-                                deadAnimalsCount = deadAnimalsCount + 1
+                    -- Check if the animal is attached to another entity[cite: 1]
+                    if IsEntityAttachedToAnyPed(ped) then
+                        -- Mark the animal as picked up[cite: 1]
+                        pickedUpAnimals[ped] = true
+                        print(locale('cl_num_animal_b')..": " .. ped)
+                    elseif not pickedUpAnimals[ped] then
+                        -- Check if the entity still exists[cite: 1]
+                        if DoesEntityExist(ped) then
+                            if GetPedTimeOfDeath(ped) < GetGameTimer() then -- check if dead long enough[cite: 1]
+                                -- Try to delete the entity[cite: 1]
+                                DeleteEntity(ped)
+
+                                -- Check if deletion was successful (Fixed logic inversion)
+                                if DoesEntityExist(ped) then
+                                    -- Deletion failed; fallback to letting the engine handle it eventually
+                                    print(locale('cl_num_animal_c')..": " .. ped)
+                                    SetEntityAsNoLongerNeeded(ped)
+                                else
+                                    -- Deletion succeeded[cite: 1]
+                                    print(locale('cl_num_animal_d')..": " .. ped)
+                                    deadAnimalsCount = deadAnimalsCount + 1
+                                end
                             end
+                        else
+                            print(locale('cl_num_animal_e')..": " .. ped)
                         end
                     else
-                        print(locale('cl_num_animal_e')..": " .. ped)
+                        print(locale('cl_num_animal_f')..": " .. ped)
                     end
-                else
-                    print(locale('cl_num_animal_f')..": " .. ped)
                 end
             end
+            print(locale('cl_num_animal_g')..": " .. deadAnimalsCount)
+            print(locale('cl_num_animal_h'))
         end
-        print(locale('cl_num_animal_g')..": " .. deadAnimalsCount)
-        print(locale('cl_num_animal_h'))
+
         Wait(sleep)
     end
 end)

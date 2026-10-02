@@ -3,11 +3,11 @@ rdr3_warning 'I acknowledge that this is a prerelease build of RedM, and I am aw
 game 'rdr3'
 
 description 'rsg-essentials'
-version '2.3.13'
+version '2.3.14'
 
 shared_scripts {
     '@ox_lib/init.lua',
-    'config.lua'
+    'shared/config.lua'
 }
 
 client_scripts {

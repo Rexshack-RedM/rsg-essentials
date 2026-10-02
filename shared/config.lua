@@ -2,6 +2,10 @@ Config = Config or {}
 
 Config.Debug = false
 
+-- animal cleanup
+Config.EnableAnimalCleanup = false
+Config.CleanupInterval = 900000 -- ms (15 mins)
+
 -- enable first person shooting
 Config.FirstPersonShooting = false
 
