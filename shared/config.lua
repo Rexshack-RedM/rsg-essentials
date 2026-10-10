@@ -70,19 +70,19 @@ Config.Density = {
     -- Scenario Animal Density
     [2] = 1.0,
     -- Ambient Human Density
-    [3] = 0.0,
+    [3] = 1.0,
     -- Scenario Human Density
-    [4] = 0.0,
+    [4] = 1.0,
     -- Ambient Ped Density
     [5] = 1.0,
     -- Scenario Ped Density
     [6] = 1.0,
     -- Parked Vehicle Density
-    [7] = 0.0,
+    [7] = 1.0,
     -- Random Vehicle Density
-    [8] = 0.0,
+    [8] = 1.0,
     -- Vehicle Density
-    [9] = 0.0,
+    [9] = 1.0,
 }
 
 -- water types config
