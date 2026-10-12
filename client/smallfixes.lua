@@ -10,17 +10,6 @@ CreateThread(function()
     end
 end)
 
--- change voice proximity
-CreateThread(function()
-    local keybind = RSGCore.Shared.Keybinds['RIGHTBRACKET']
-    while true do
-        Wait(7)
-        if IsControlJustPressed(0, keybind) then
-            ExecuteCommand('cycleproximity')
-        end
-    end
-end)
-
 -- wagon stuck fix
 CreateThread(function()
     local vehiclePool = {}
