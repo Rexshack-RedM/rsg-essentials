@@ -1,10 +1,9 @@
 local RSGCore = exports['rsg-core']:GetCoreObject()
 
 CreateThread(function()
+    local keybind = RSGCore.Shared.Keybinds['X'] -- resolved once, not every tick
     while true do
-        Wait(7)
-
-        local keybind = RSGCore.Shared.Keybinds['X']
+        Wait(0) -- Wait(7) could miss the single frame IsControlJustPressed is true
 
         if IsControlJustPressed(0, keybind) then
             RSGCore.Functions.GetPlayerData(function(PlayerData)

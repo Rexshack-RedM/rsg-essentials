@@ -7,6 +7,9 @@ CreateThread(function()
     while true do
         Wait(0)
         SetPedResetFlag(cache.ped, 364)
+        -- merged from the separate 'Disable Controls' thread (one per-frame thread instead of two)
+        DisableControlAction(0, 0xCF8A4ECA, true) -- disable left alt hud | LEFT ALT (fast tapping)
+        DisableControlAction(0, 0x9CC7A1A4, true) -- disable Ability Loadout prompt
     end
 end)
 
@@ -67,7 +70,8 @@ CreateThread(function()
     end
 end)
 
--- Disable Controls 
+-- Disable Controls (now handled in the ped drown fix thread above)
+--[[
 Citizen.CreateThread(function()
     while true do
         Citizen.Wait(3)
@@ -81,6 +85,7 @@ Citizen.CreateThread(function()
         DisableControlAction(0, 0x9CC7A1A4, true) -- disable Ability Loadout prompt
     end
 end)
+]]
 
 -- handle dead or dying animals / thanks to rms_dnb
 local pickedUpAnimals = {}

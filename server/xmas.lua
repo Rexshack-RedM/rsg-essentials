@@ -1,4 +1,7 @@
-if Config.EnableXmas == true then
+-- weathersync is optional (server now uses rsg-weather); skip cleanly when it isn't running
+local hasWeathersync = GetResourceState('weathersync') == 'started'
+
+if Config.EnableXmas == true and hasWeathersync then
     CreateThread(function()
         Wait(0)
         exports.weathersync:setWeatherPattern({
@@ -37,6 +40,8 @@ AddEventHandler('onResourceStop', function(resource)
     if GetCurrentResourceName() ~= resource then
         return
     end
+    -- previously errored on every stop because weathersync isn't installed
+    if not (Config.EnableXmas and hasWeathersync) then return end
     exports.weathersync:resetWeatherPattern()
     exports.weathersync:resetWeather()
 end)

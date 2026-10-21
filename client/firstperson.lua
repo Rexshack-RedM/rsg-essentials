@@ -1,21 +1,20 @@
 local forced = false
 
-Citizen.CreateThread(function()
+-- forces first person while free-aiming; thread exits entirely when disabled in config
+CreateThread(function()
+    if not Config.FirstPersonShooting then return end
+    local playerId = PlayerId()
     while true do
-        Wait(1)
-        if IsPlayerFreeAiming(PlayerId()) and Config.FirstPersonShooting then
-            firstperson = Citizen.InvokeNative(0x90DA5BA5C2635416)
-            if firstperson == true and forced == false then
-                forced = false
-            else
-                Citizen.InvokeNative(0x90DA5BA5C2635416)
-                forced = true
-            end
+        if IsPlayerFreeAiming(playerId) then
+            Citizen.InvokeNative(0x90DA5BA5C2635416) -- force first person cam this frame
+            forced = true
+            Wait(0)
         else
-            if forced == true then
+            if forced then
                 Citizen.InvokeNative(0x1CFB749AD4317BDE)
                 forced = false
             end
+            Wait(100) -- idle while not aiming (was every frame)
         end
     end
 end)
