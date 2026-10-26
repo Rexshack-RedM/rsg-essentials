@@ -23,7 +23,6 @@
     "cl_pvp_toggle_on" : "PvP ATIVADO",
     "cl_pvp_toggle_off" : "PvP DESATIVADO",
     "sv_kick" : "Você foi expulso por estar AFK",
-    "sv_bandana" : "alternar bandana",
     "sv_test_your_webhook" : "Testar seu Webhook do Discord para Logs (Apenas Deus)",
     "sv_test_webhook" : "Testar Webhook",
     "sv_webhook_successfully" : "Webhook configurado com sucesso",

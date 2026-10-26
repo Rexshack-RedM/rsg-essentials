@@ -23,7 +23,6 @@
     "cl_pvp_toggle_on" : "PvP is ON",
     "cl_pvp_toggle_off" : "PvP is OFF",
     "sv_kick": "Te han expulsado por estar ausente",
-    "sv_bandana": "Bandana activada/desactivada",
     "sv_test_your_webhook": "Prueba tu webhook de Discord para ver si hay registros (solo Dios)",
     "sv_test_webhook": "Prueba el webhook",
     "sv_webhook_successfully": "Webhook configurado correctamente",

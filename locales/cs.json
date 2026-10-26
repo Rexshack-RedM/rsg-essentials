@@ -23,7 +23,6 @@
     "cl_pvp_toggle_on" : "PvP je ZAPNUTO",
     "cl_pvp_toggle_off" : "PvP je VYPNUTO",
     "sv_kick" : "Byli jste vyhozeni za AFK",
-    "sv_bandana" : "Šátek zap/vyp",
     "sv_test_your_webhook" : "Otestovat váš Discord webhook pro záznamy (pouze Bůh)",
     "sv_test_webhook" : "Test webhooku",
     "sv_webhook_successfully" : "Webhook úspěšně nastaven",

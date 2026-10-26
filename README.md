@@ -6,7 +6,7 @@
 ![Platform](https://img.shields.io/badge/platform-RedM-darkred)
 ![License](https://img.shields.io/badge/license-GPL--3.0-green)
 
-> A collection of small but essential features: AFK kick, Discord rich presence, eagle eye access, first-person shooting handling, bandana toggle, map zone labels, door unlocks, water interactions, and more. Modular client/server files make it easy to enable only what you need.
+> A collection of small but essential features: AFK kick, Discord rich presence, eagle eye access, first-person shooting handling, map zone labels, door unlocks, water interactions, and more. Modular client/server files make it easy to enable only what you need.
 
 ---
 
@@ -30,9 +30,6 @@
 - Kicks AFK players after a timeout (default **1800s**).
 - Staff groups (`mod`, `admin`, `god`) are exempt.
 - Client shows step-down warnings; server handles **DropPlayer**.
-
-### 🧣 Bandana (`client/bandana.lua`, `server/bandana.lua`)
-- Toggle bandana on/off with proper ped meta tags.
 
 ### 🦅 Eagle Eye Access (`client/eagleeye.lua`)
 - Per‑job control via `Config.EagleEye`: allow **everyone**, or only specific jobs (`vallaw`, `rholaw`, etc.).
