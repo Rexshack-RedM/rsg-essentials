@@ -2,6 +2,21 @@ Config = Config or {}
 
 Config.Debug = false
 
+-- afk kick
+Config.AFK = {
+    Enabled       = true,
+    KickAfter     = 1800, -- seconds standing still before kick
+    IgnoredGroups = { mod = true, admin = true, god = true }, -- permission groups never kicked
+    WarnAt        = { 900, 600, 300, 150, 60, 30, 20, 10 }, -- seconds remaining when a warning shows
+}
+
+-- river wash / drink
+Config.River = {
+    DrinkThirst   = { min = 50, max = 100 }, -- thirst restored per drink
+    DrinkDuration = 17000, -- ms
+    WashDuration  = 5000,  -- ms
+}
+
 -- animal cleanup
 Config.EnableAnimalCleanup = false
 Config.CleanupInterval = 900000 -- ms (15 mins)
@@ -17,9 +32,6 @@ Config.PauseReadBook = false
 
 --Stop shuffle when entering wagons
 Config.StopAutoShuffle = true
-
---can players fill the canteen from a water pump
-Config.canteenPump = true
 
 -- Determines whether crouching is required to interact with water bodies.
 -- Set to `true` to force crouching, or `false` to allow interaction without crouching.

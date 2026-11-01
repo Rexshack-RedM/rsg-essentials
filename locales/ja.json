@@ -1,0 +1,18 @@
+{
+    "cl_afk_title": "放置警告",
+    "cl_afk_minutes": "放置のため%d分後にキックされます",
+    "cl_afk_seconds": "放置のため%d秒後にキックされます",
+    "cl_hideui": "すべてのUIの表示切替（スクリーンショット用など）",
+    "cl_wash": "洗う",
+    "cl_drink": "飲む",
+    "cl_pvp_toggle_on": "PvP オン",
+    "cl_pvp_toggle_off": "PvP オフ",
+    "sv_kick": "放置のためキックされました",
+    "sv_test_your_webhook": "ログ用Discord Webhookをテスト（Godのみ）",
+    "sv_test_webhook": "Webhookテスト",
+    "sv_webhook_successfully": "Webhookの設定に成功しました",
+    "sv_print_drizzle": "嵐まで30分 : 霧雨",
+    "sv_print_shower": "嵐まで15分 : にわか雨",
+    "sv_print_rain": "嵐まで10分 : 雨",
+    "sv_print_thunderstorm": "嵐まで5分 : 雷雨"
+}

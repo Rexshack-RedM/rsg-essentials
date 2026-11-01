@@ -1,0 +1,18 @@
+{
+    "cl_afk_title": "Avertisment AFK",
+    "cl_afk_minutes": "Vei fi dat afară în %d minut(e) pentru că ești AFK",
+    "cl_afk_seconds": "Vei fi dat afară în %d secundă(e) pentru că ești AFK",
+    "cl_hideui": "Comută toate interfețele (ex. pentru capturi de ecran)",
+    "cl_wash": "Spală-te",
+    "cl_drink": "Bea",
+    "cl_pvp_toggle_on": "PvP este PORNIT",
+    "cl_pvp_toggle_off": "PvP este OPRIT",
+    "sv_kick": "Ai fost dat afară pentru că ai fost AFK",
+    "sv_test_your_webhook": "Testează webhook-ul Discord pentru loguri (doar God)",
+    "sv_test_webhook": "Testează webhook",
+    "sv_webhook_successfully": "Webhook configurat cu succes",
+    "sv_print_drizzle": "30 min până la furtună : burniță",
+    "sv_print_shower": "15 min până la furtună : aversă",
+    "sv_print_rain": "10 min până la furtună : ploaie",
+    "sv_print_thunderstorm": "5 min până la furtună : furtună cu tunete"
+}

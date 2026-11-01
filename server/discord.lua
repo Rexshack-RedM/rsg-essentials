@@ -1,19 +1,23 @@
+-- discord rich presence text; built server-side on request (rate limited per player)
+local lastRequest = {}
+
 RegisterNetEvent('rsg-discord:getdata', function()
-    local activePlayers = GetPlayers()
-    local playerName = GetPlayerName(source)
-    local maxServerCapacity = GetConvarInt("sv_maxClients", 48)
-    local template = Config.Discord.Template
+    local src = source
+    local now = os.time()
+    if lastRequest[src] and now - lastRequest[src] < 10 then return end
+    lastRequest[src] = now
 
     local replacements = {
-        ["{ID}"] = source,
-        ["{NAME}"] = playerName,
-        ["{PLAYERS_COUNT}"] = #activePlayers .. "/" .. maxServerCapacity,
+        ID = src,
+        NAME = GetPlayerName(src) or '',
+        PLAYERS_COUNT = ('%d/%d'):format(#GetPlayers(), GetConvarInt('sv_maxclients', 48)),
     }
-
-    local pattern = "{(.-)}"
-    local result = template:gsub(pattern, function(key)
-        return replacements['{' .. key .. '}'] or key
+    local text = Config.Discord.Template:gsub('{(.-)}', function(key)
+        return tostring(replacements[key] or key)
     end)
+    TriggerClientEvent('rsg-discord:receivedata', src, text)
+end)
 
-    TriggerClientEvent('rsg-discord:receivedata', source, result)
+AddEventHandler('playerDropped', function()
+    lastRequest[source] = nil
 end)

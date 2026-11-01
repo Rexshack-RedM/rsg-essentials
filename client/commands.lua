@@ -1,10 +1,9 @@
-lib.locale()
--- Toggle all UI ON/OFF
+-- toggle all UI on/off (e.g. for screenshots)
 RegisterCommand('hideui', function()
     TriggerEvent('HideAllUI')
-end)
+end, false)
 
-CreateThread(function ()
+CreateThread(function()
     Wait(1000)
-    TriggerEvent('chat:addSuggestion','/hideui', locale('cl_hideui'), {})
+    TriggerEvent('chat:addSuggestion', '/hideui', locale('cl_hideui'), {})
 end)

@@ -6,134 +6,85 @@
 ![Platform](https://img.shields.io/badge/platform-RedM-darkred)
 ![License](https://img.shields.io/badge/license-GPL--3.0-green)
 
-> A collection of small but essential features: AFK kick, Discord rich presence, eagle eye access, first-person shooting handling, map zone labels, door unlocks, water interactions, and more. Modular client/server files make it easy to enable only what you need.
+> A collection of small but essential features: AFK kick, Discord rich presence, Discord logging, eagle eye access, hands up / pointing, lantern holstering, river wash & drink, map zone colours, door unlocks, PvP toggle, restart storm, Christmas weather and more.
 
 ---
 
 ## 🛠️ Dependencies
-- [**rsg-core**](https://github.com/Rexshack-RedM/rsg-core) 🤠
-- [**ox_lib**](https://github.com/Rexshack-RedM/ox_lib) ⚙️ *(locales, progress bars, UI)*
-- [**oxmysql**](https://github.com/overextended/oxmysql) 🗄️ *(logs where applicable)*
-- [**rsg-inventory**](https://github.com/Rexshack-RedM/rsg-inventory) 🎒 *(for certain inventory interactions)*
-- [**ox_target**](https://github.com/overextended/ox_target) 🎯 *(for water pump interaction)*
-- [**weathersync**](https://github.com/Rexshack-RedM/weathersync) 🌦️
-- [**rsg-weapons**](https://github.com/Rexshack-RedM/rsg-weapons) 🔫 *(for weapon check/remove events)*
+- [**rsg-core**](https://github.com/Rexshack-RedM/rsg-core) 🤠 *(locales, notify, callbacks, commands — no ox_lib needed)*
 
-**Locales:** `locales/en.json, fr.json, es.json, pt-br.json` (loaded via `lib.locale()`).  
-**Config:** `config.lua` exposes toggles and parameters for each module.
+**Optional**
+- [**rsg-weather**](https://github.com/Rexshack-RedM/rsg-weather) 🌦️ *(restart storm + Christmas weather)*
+- [**rsg-weapons**](https://github.com/Rexshack-RedM/rsg-weapons) 🔫 *(weapon remove event)*
+- [**rsg-radialmenu**](https://github.com/Rexshack-RedM/rsg-radialmenu) *(PvP toggle button)*
+
+**Locales:** `en, de, el, es, fr, ja, nl, pl, pt-br, ro` (+ `cs`) loaded by rsg-core. Set the language with `setr rsg:locale de`.
 
 ---
 
-## ✨ Features (by module)
+## ✨ Features
 
-### 👞 AFK Kick (`client/afk.lua`, `server/afk.lua`)
-- Kicks AFK players after a timeout (default **1800s**).
-- Staff groups (`mod`, `admin`, `god`) are exempt.
-- Client shows step-down warnings; server handles **DropPlayer**.
-
-### 🦅 Eagle Eye Access (`client/eagleeye.lua`)
-- Per‑job control via `Config.EagleEye`: allow **everyone**, or only specific jobs (`vallaw`, `rholaw`, etc.).
-- Automatically enables/disables on resource start/stop and player job changes.
-
-### 🎮 First Person Shooting (`client/firstperson.lua`)
-- If `Config.FirstPersonShooting = true`, forces first‑person while free‑aiming, and restores afterward.
-
-### 🙌 Hands Up (`client/handsup.lua`)
-- Simple hands‑up behaviour with task cleanup and taser handling.
-
-### 💬 Discord Rich Presence (`client/discord.lua`, `server/discord.lua`)
-- Uses **Discord Application ID** and asset IDs from `Config.Discord`.
-- Two buttons (text + links) and live **Rich Presence** updates with `{ID}`, `{NAME}`, `{PLAYERS_COUNT}` replacement in `Config.Discord.Template`.
-
-### 🗺️ Map Zones (`client/zones.lua`)
-- Adds localized **zone/region/territory** names; credit to **Viyu88** (see file header).
-
-### 🔓 Unlock Doors (`client/unlockdoors.lua`)
-- Unlocks a curated set of shop/clinic doors by hash at resource start.
-
-### 💧 Near Water & Water Pump (`client/nearwater.lua`, `client/waterpump.lua`)
-- Wash/drink prompts near natural water sources with `RSGCore.Shared.Keybinds` prompts.
-- **Water pump** interactions via **ox_target**; fills canteen items (checks `canteen0`), plays progress bar and animation.
-
-### 👆 Pointing (`client/pointing.lua`)
-- Enables RDR2 pointing with proper task toggles.
-
-### 🔧 Small Fixes (`client/smallfixes.lua`)
-- Wagon driver seat handling and minor QoL fixes.
-
-### 🧠 Density (`client/density.lua`)
-- Control peds/traffic/animal density using natives.
-
-### 🧍 Stop Auto Shuffle (`config.lua`)
-- Option to stop auto-shuffle to driver seat for wagons (`Config.StopAutoShuffle = true`).
-
-### 🔫 Weapon Check (`client/weaponcheck.lua`)
-- Removes weapons from ped slots on event `rsg-core:client:RemoveWeaponFromTab`, integrates with `rsg-weapons` and unequips if needed.
-
-### 🌩️ Storm & Xmas (`server/storm.lua`, `server/xmas.lua`)
-- **Storm**: reacts to `txAdmin:events:announcement` to trigger thunderstorm prints and optional weather sync.
-- **Xmas**: toggles Xmas weather with `weathersync` (if `Config.EnableXmas = true`).
-
-### 📝 Logs (`server/logs.lua`)
-- Webhook‑based logging (configure `Webhooks` table) with fallbacks to default channel.
+| Module | Files | What it does |
+|---|---|---|
+| AFK kick | `client/afk.lua`, `server/afk.lua` | Kicks players who stand still for `Config.AFK.KickAfter` seconds, with countdown warnings. Staff groups in `Config.AFK.IgnoredGroups` are exempt (checked on client **and** server). |
+| Discord rich presence | `client/discord.lua`, `server/discord.lua` | App ID, assets, two buttons and a live status from `Config.Discord.Template` (`{ID}`, `{NAME}`, `{PLAYERS_COUNT}`). |
+| Discord logs | `server/logs.lua` | `rsg-log:server:CreateLog` webhook logger used by many RSG resources. `/testwebhook` (god). |
+| Eagle eye | `client/eagleeye.lua` | Everyone, or only jobs listed in `Config.EagleEye`. Updates on job change. |
+| First-person aiming | `client/firstperson.lua` | Forces first person while free-aiming (`Config.FirstPersonShooting`). |
+| Hands up | `client/handsup.lua` | `X` raises / lowers hands (blocked when dead or cuffed), sets `inv_busy`. |
+| Pointing | `client/pointing.lua` | Hold `B` to point. |
+| Lantern holster | `client/latern.lua` | Puts the lantern back on the hip when switching weapons. |
+| River wash & drink | `client/nearwater.lua` | Crouch in a named river/lake for **Wash** (`ENTER`) and **Drink** (`J`) prompts. Thirst amount and timings in `Config.River`. |
+| Map zones | `client/zones.lua` | Colours map regions listed in `Config.Zones` (credit Viyu88). |
+| Door unlocks | `client/unlockdoors.lua` | Unlocks a few shop / clinic doors. |
+| Weapon check | `client/weaponcheck.lua` | Removes any held weapon that isn't in the player's inventory. |
+| Max cores | `client/maxcores.lua` | Fills health & stamina cores on character load. |
+| Density | `client/density.lua` | Ped / animal / vehicle density multipliers from `Config.Density`. |
+| Ignore events | `client/ignore.lua` | Hides challenge popups; stops auto-shuffle to the driver seat (`Config.StopAutoShuffle`). |
+| Small fixes | `client/smallfixes.lua` | Drown / boat-sink fix, disabled left-alt HUD & loadout prompt, stuck ambient wagon removal, pause-menu book reading (`Config.PauseReadBook`), dead animal cleanup (`Config.EnableAnimalCleanup`), PvP toggle event. |
+| Hide UI | `client/commands.lua` | `/hideui` toggles all UI. |
+| Restart storm | `server/storm.lua` | Builds up a storm via rsg-weather before a txAdmin scheduled restart. |
+| Christmas | `server/xmas.lua` | Snow weather pattern via rsg-weather (`Config.EnableXmas`). |
+| Version check | `server/versionchecker.lua` | Checks GitHub for updates on start. |
 
 ---
 
-## 📜 Example Config Highlights
-```lua
-Config.Debug = false
-Config.FirstPersonShooting = false
-Config.EnableXmas = false
-Config.PauseReadBook = false
-Config.StopAutoShuffle = true
-
-Config.EagleEye = {
-  everyone = { enabled = true },
-  vallaw = { enabled = false },
-  rholaw = { enabled = false }
-}
-
-Config.Discord = {
-  DiscordAppID = 12345678910111213,
-  AppBigAssetID = 'big_img.png!',
-  AppBigAssetText = 'big text img!',
-  AppSmallAssetID = 'small_img.png!',
-  AppSmallAssetText = 'small text img!',
-  FirstButtonPlaceholder = 'Discord',
-  FirstButtonLink = 'https://discord.gg/yourserver',
-  SecondButtonPlaceholder = 'Website',
-  SecondButtonLink = 'https://example.com',
-  UpdateEvery = 15000,
-  Template = '{NAME} (ID: {ID}) | {PLAYERS_COUNT} online'
-}
-
--- Water areas and pumps are configured in config.lua and client files
-```
+## 📡 Events & callbacks
+| Name | Side | Notes |
+|---|---|---|
+| `rsg-essentials:client:pvpToggle` | client | Toggles PvP / friendly fire. |
+| `rsg-log:server:CreateLog` | server | `(name, title, color, message, tagEveryone)`. Server calls are unrestricted; client calls are rate limited, can't `@everyone` and are stamped with the sender's id. |
+| `rsg-core:client:RemoveWeaponFromTab` | client | Removes a weapon from the ped (rsg-weapons). |
+| `rsg-essentials:server:getPermissions` | callback | Used by AFK kick. |
 
 ---
 
-## 📂 Installation
-1. Place `rsg-essentials` inside your `resources/[rsg]` folder.
-2. Ensure **rsg-core**, **ox_lib**, **ox_target**, and any optional dependencies you use are installed.
-3. Configure `config.lua` (Discord, Eagle Eye, Xmas, etc.).
-4. Add to your `server.cfg`:
-   ```cfg
-   ensure ox_lib
-   ensure rsg-core
-   ensure ox_target
-   ensure rsg-essentials
-   ```
-5. Restart your server.
+## ⚙️ Installation
+1. Put `rsg-essentials` in `resources/[framework]`.
+2. `ensure rsg-essentials` after `rsg-core` (and after `rsg-weather` if you use the storm/xmas features).
+3. Add your webhook URLs in `server/logs.lua` and Discord app details in `Config.Discord`.
+4. Adjust `shared/config.lua` and restart.
 
 ---
 
-## 🌍 Locales
-Provided in `locales/`: `en`, `fr`, `es`, `pt-br`.  
-`lib.locale()` is used across client/server modules.
+## 📝 Changelog — 3.2.0
+- Removed the ox_lib dependency (rsg-core locales / notify, `cache.ped` → `PlayerPedId()`).
+- **Security:** client-sent `rsg-log:server:CreateLog` can no longer spam webhooks or ping `@everyone`.
+- **Security:** AFK staff exemption re-checked on the server; event renamed to `rsg-essentials:server:afkKick`.
+- Rich presence requests rate limited.
+- Christmas weather ported from weathersync to rsg-weather (was silently doing nothing).
+- Fixed AFK minute warnings showing "seconds"; warnings now replace each other instead of stacking.
+- Fixed lantern holster logic (dead branches), river drink erroring on undefined globals, thirst now clamped 0–100, prompts cleaned up on stop.
+- Stuck-wagon fix and animal cleanup no longer touch player-driven, script-owned or other clients' entities.
+- Hands up no longer reloads the anim dict every press; resets `inv_busy` on stop. Eagle eye no longer errors on restart before login.
+- Removed dead code: ~350-line unused `zoneNames` table, DataView library (replaced with a few lines), commented-out thread, unused canteen config/locales.
+- Added `el`, `ja`, `nl`, `ro` locales; all locale files share the same keys.
 
 ---
 
 ## 💎 Credits
-- Map Zones data credit to **Viyu88** (see `client/zones.lua`).  
-- RSG / Rexshack-RedM and community contributors.  
-- License: **GPL‑3.0**.
+- RSG / Rexshack-RedM and community contributors
+- Viyu88 (map zone colours), rms_dnb (animal cleanup)
+- License: GPL-3.0
+
+Support: https://buymeacoffee.com/rexshack

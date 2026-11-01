@@ -1,5 +1,3 @@
-lib.locale()
-
 -- Weather stages before a txAdmin scheduled restart
 local stages = {
     [1800] = { weather = 'drizzle',      msg = 'sv_print_drizzle' },      -- 30 mins

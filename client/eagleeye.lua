@@ -1,54 +1,31 @@
 local RSGCore = exports['rsg-core']:GetCoreObject()
 
-function EnableEagleeye(player, enable)
-    Citizen.InvokeNative(0xA63FCAD3A6FEC6D2, player, enable)
-    if Config.Debug then
-        print(enable and "Eagle Eye Enabled" or "Eagle Eye Disabled")
-    end
+local function setEagleEye(enable)
+    Citizen.InvokeNative(0xA63FCAD3A6FEC6D2, PlayerId(), enable) -- _ENABLE_EAGLEEYE
+    if Config.Debug then print(enable and 'Eagle Eye Enabled' or 'Eagle Eye Disabled') end
 end
 
-function ShouldEnableEagleEye(job)
-    if Config.EagleEye.everyone.enabled then
-        return true
-    end
-
-    if Config.EagleEye[job] and Config.EagleEye[job].enabled then
-        return true
-    end
-
-    return false
+local function canUseEagleEye(job)
+    if Config.EagleEye.everyone.enabled then return true end
+    local cfg = job and Config.EagleEye[job]
+    return cfg and cfg.enabled or false
 end
 
-function HandleEagleEyeAccess()
-    local playerJob = RSGCore.Functions.GetPlayerData().job.name
-    if ShouldEnableEagleEye(playerJob) then
-        EnableEagleeye(PlayerId(), true)
-    else
-        EnableEagleeye(PlayerId(), false)
+local function refresh(job)
+    if not job then
+        local data = RSGCore.Functions.GetPlayerData()
+        job = data and data.job and data.job.name
     end
+    setEagleEye(canUseEagleEye(job))
 end
 
-AddEventHandler('RSGCore:Client:OnPlayerLoaded', function()
-    HandleEagleEyeAccess()
+AddEventHandler('RSGCore:Client:OnPlayerLoaded', function() refresh() end)
+RegisterNetEvent('RSGCore:Client:OnJobUpdate', function(job) refresh(job and job.name) end)
+
+AddEventHandler('onResourceStart', function(res)
+    if res == GetCurrentResourceName() and LocalPlayer.state.isLoggedIn then refresh() end
 end)
 
-RegisterNetEvent('RSGCore:Client:OnJobUpdate')
-AddEventHandler('RSGCore:Client:OnJobUpdate', function(JobInfo)
-    PlayerJob = JobInfo
-    HandleEagleEyeAccess()
-end)
-
-AddEventHandler("onResourceStart", function(resourceName)
-    if GetCurrentResourceName() ~= resourceName then
-        return
-    end
-    HandleEagleEyeAccess() 
-end)
-
--- Event handler for when the resource stops
-AddEventHandler("onResourceStop", function(resourceName)
-    if GetCurrentResourceName() ~= resourceName then
-        return
-    end
-    EnableEagleeye(PlayerId(), false)
+AddEventHandler('onResourceStop', function(res)
+    if res == GetCurrentResourceName() then setEagleEye(false) end
 end)

@@ -1,80 +1,59 @@
 local RSGCore = exports['rsg-core']:GetCoreObject()
-lib.locale()
+
 local isLoggedIn = LocalPlayer.state.isLoggedIn
-local ignoredGroups = {
-    ['mod'] = true,
-    ['admin'] = true,
-    ['god'] = true
-}
-local secondsUntilKick = 1800 -- AFK Kick Time Limit (in seconds)
 local checkUser = true
-local prevPos, time = nil, nil
-local timeMinutes = {
-    ['900'] = 'minutes',
-    ['600'] = 'minutes',
-    ['300'] = 'minutes',
-    ['150'] = 'minutes',
-    ['60'] = 'minutes',
-    ['30'] = 'seconds',
-    ['20'] = 'seconds',
-    ['10'] = 'seconds',
-}
+local warnAt = {}
+for _, s in ipairs(Config.AFK.WarnAt) do warnAt[s] = true end
 
 local function updatePermissionLevel()
-    RSGCore.Functions.TriggerCallback('rsg-afkkick:server:GetPermissions', function(userGroups)
-        for k in pairs(userGroups) do
-            if ignoredGroups[k] then
+    RSGCore.Functions.TriggerCallback('rsg-essentials:server:getPermissions', function(groups)
+        checkUser = true
+        for group in pairs(groups or {}) do
+            if Config.AFK.IgnoredGroups[group] then
                 checkUser = false
                 break
             end
-            checkUser = true
         end
     end)
 end
 
 RegisterNetEvent('RSGCore:Client:OnPlayerLoaded', function()
-    updatePermissionLevel()
     isLoggedIn = true
+    updatePermissionLevel()
 end)
 
 RegisterNetEvent('RSGCore:Client:OnPlayerUnload', function()
     isLoggedIn = false
 end)
 
-RegisterNetEvent('RSGCore:Client:OnPermissionUpdate', function()
-    updatePermissionLevel()
-end)
+RegisterNetEvent('RSGCore:Client:OnPermissionUpdate', updatePermissionLevel)
 
 CreateThread(function()
+    if not Config.AFK.Enabled then return end
+    if isLoggedIn then updatePermissionLevel() end -- resource restart while logged in
+
+    local prevPos, timeLeft
     while true do
         Wait(1000)
-        local playerPed = PlayerPedId()
-        if isLoggedIn then
-            if checkUser then
-                local currentPos = GetEntityCoords(playerPed, true)
-                if prevPos then
-                    if currentPos == prevPos then
-                        if time then
-                            if time > 0 then
-                                local _type = timeMinutes[tostring(time)]
-                                if _type == 'minutes' then
-                                    lib.notify({ title = locale('cl_will_kick'), description = math.ceil(time / 60) .. locale('cl_time_seconds'), type = 'error', duration = 5000 })
-                                elseif _type == 'seconds' then
-                                    lib.notify({ title = locale('cl_will_kick'), description = time .. locale('cl_time_seconds'), type = 'error', duration = 5000 })
-                                end
-                                time -= 1
-                            else
-                                TriggerServerEvent('KickForAFK')
-                            end
-                        else
-                            time = secondsUntilKick
-                        end
-                    else
-                        time = secondsUntilKick
-                    end
+        if isLoggedIn and checkUser then
+            local pos = GetEntityCoords(PlayerPedId())
+            if prevPos and #(pos - prevPos) < 0.05 then
+                timeLeft = (timeLeft or Config.AFK.KickAfter) - 1
+                if timeLeft <= 0 then
+                    TriggerServerEvent('rsg-essentials:server:afkKick')
+                    timeLeft = Config.AFK.KickAfter
+                elseif warnAt[timeLeft] then
+                    local desc = timeLeft >= 60
+                        and locale('cl_afk_minutes', math.ceil(timeLeft / 60))
+                        or locale('cl_afk_seconds', timeLeft)
+                    RSGCore.Functions.Notify({ id = 'rsg_afk', title = locale('cl_afk_title'), description = desc, type = 'warning', icon = 'fa-solid fa-hourglass-half', duration = 5000 })
                 end
-                prevPos = currentPos
+            else
+                timeLeft = nil
             end
+            prevPos = pos
+        else
+            prevPos, timeLeft = nil, nil
         end
     end
 end)

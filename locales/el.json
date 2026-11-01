@@ -1,0 +1,18 @@
+{
+    "cl_afk_title": "Προειδοποίηση AFK",
+    "cl_afk_minutes": "Θα αποβληθείς σε %d λεπτό(ά) επειδή είσαι AFK",
+    "cl_afk_seconds": "Θα αποβληθείς σε %d δευτερόλεπτο(α) επειδή είσαι AFK",
+    "cl_hideui": "Εναλλαγή όλων των UI (π.χ. για στιγμιότυπα)",
+    "cl_wash": "Πλύσιμο",
+    "cl_drink": "Πιες",
+    "cl_pvp_toggle_on": "Το PvP είναι ΕΝΕΡΓΟ",
+    "cl_pvp_toggle_off": "Το PvP είναι ΑΝΕΝΕΡΓΟ",
+    "sv_kick": "Αποβλήθηκες επειδή ήσουν AFK",
+    "sv_test_your_webhook": "Δοκίμασε το Discord webhook για logs (μόνο God)",
+    "sv_test_webhook": "Δοκιμή Webhook",
+    "sv_webhook_successfully": "Το webhook ρυθμίστηκε επιτυχώς",
+    "sv_print_drizzle": "30 λεπτά μέχρι την καταιγίδα : ψιχάλα",
+    "sv_print_shower": "15 λεπτά μέχρι την καταιγίδα : μπόρα",
+    "sv_print_rain": "10 λεπτά μέχρι την καταιγίδα : βροχή",
+    "sv_print_thunderstorm": "5 λεπτά μέχρι την καταιγίδα : καταιγίδα"
+}

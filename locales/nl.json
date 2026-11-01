@@ -1,0 +1,18 @@
+{
+    "cl_afk_title": "AFK-waarschuwing",
+    "cl_afk_minutes": "Je wordt over %d minuut/minuten gekickt wegens AFK",
+    "cl_afk_seconds": "Je wordt over %d seconde(n) gekickt wegens AFK",
+    "cl_hideui": "Alle UI's aan/uit (bijv. voor screenshots)",
+    "cl_wash": "Wassen",
+    "cl_drink": "Drinken",
+    "cl_pvp_toggle_on": "PvP staat AAN",
+    "cl_pvp_toggle_off": "PvP staat UIT",
+    "sv_kick": "Je bent gekickt wegens AFK",
+    "sv_test_your_webhook": "Test je Discord-webhook voor logs (alleen God)",
+    "sv_test_webhook": "Webhook testen",
+    "sv_webhook_successfully": "Webhook succesvol ingesteld",
+    "sv_print_drizzle": "30 min tot de storm : motregen",
+    "sv_print_shower": "15 min tot de storm : bui",
+    "sv_print_rain": "10 min tot de storm : regen",
+    "sv_print_thunderstorm": "5 min tot de storm : onweer"
+}

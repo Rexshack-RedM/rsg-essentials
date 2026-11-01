@@ -1,12 +1,13 @@
 fx_version 'cerulean'
 rdr3_warning 'I acknowledge that this is a prerelease build of RedM, and I am aware my resources *will* become incompatible once RedM ships.'
 game 'rdr3'
+lua54 'yes'
 
 description 'rsg-essentials'
-version '3.1.1'
+version '3.2.0'
 
 shared_scripts {
-    '@ox_lib/init.lua',
+    '@rsg-core/shared/locale.lua',
     'shared/config.lua'
 }
 
@@ -17,13 +18,11 @@ client_scripts {
 server_scripts {
     'server/*.lua'
 }
+
 files {
-    'locales/*.json',
+    'locales/*.json'
 }
 
 dependencies {
-    'rsg-core',
-    'ox_lib'
+    'rsg-core'
 }
-
-lua54 'yes'
