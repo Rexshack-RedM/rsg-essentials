@@ -6,7 +6,7 @@
 ![Platform](https://img.shields.io/badge/platform-RedM-darkred)
 ![License](https://img.shields.io/badge/license-GPL--3.0-green)
 
-> A collection of small but essential features: AFK kick, Discord rich presence, Discord logging, eagle eye access, hands up / pointing, lantern holstering, river wash & drink, map zone colours, door unlocks, PvP toggle, restart storm, Christmas weather and more.
+> A collection of small but essential features: AFK kick, Discord rich presence, Discord logging, eagle eye access, hands up / pointing, lantern holstering, river wash & drink, map zone colours, door unlocks, restart storm, Christmas weather and more.
 
 ---
 
@@ -16,7 +16,7 @@
 **Optional**
 - [**rsg-weather**](https://github.com/Rexshack-RedM/rsg-weather) 🌦️ *(restart storm + Christmas weather)*
 - [**rsg-weapons**](https://github.com/Rexshack-RedM/rsg-weapons) 🔫 *(weapon remove event)*
-- [**rsg-radialmenu**](https://github.com/Rexshack-RedM/rsg-radialmenu) *(PvP toggle button)*
+- [**rsg-radialmenu**](https://github.com/Rexshack-RedM/rsg-radialmenu)
 
 **Locales:** `en, de, el, es, fr, ja, nl, pl, pt-br, ro` (+ `cs`) loaded by rsg-core. Set the language with `setr rsg:locale de`.
 
@@ -41,7 +41,7 @@
 | Max cores | `client/maxcores.lua` | Fills health & stamina cores on character load. |
 | Density | `client/density.lua` | Ped / animal / vehicle density multipliers from `Config.Density`. |
 | Ignore events | `client/ignore.lua` | Hides challenge popups; stops auto-shuffle to the driver seat (`Config.StopAutoShuffle`). |
-| Small fixes | `client/smallfixes.lua` | Drown / boat-sink fix, disabled left-alt HUD & loadout prompt, stuck ambient wagon removal, pause-menu book reading (`Config.PauseReadBook`), dead animal cleanup (`Config.EnableAnimalCleanup`), PvP toggle event. |
+| Small fixes | `client/smallfixes.lua` | Drown / boat-sink fix, disabled left-alt HUD & loadout prompt, stuck ambient wagon removal, pause-menu book reading (`Config.PauseReadBook`), dead animal cleanup (`Config.EnableAnimalCleanup`). |
 | Hide UI | `client/commands.lua` | `/hideui` toggles all UI. |
 | Restart storm | `server/storm.lua` | Builds up a storm via rsg-weather before a txAdmin scheduled restart. |
 | Christmas | `server/xmas.lua` | Snow weather pattern via rsg-weather (`Config.EnableXmas`). |
@@ -52,7 +52,6 @@
 ## 📡 Events & callbacks
 | Name | Side | Notes |
 |---|---|---|
-| `rsg-essentials:client:pvpToggle` | client | Toggles PvP / friendly fire. |
 | `rsg-log:server:CreateLog` | server | `(name, title, color, message, tagEveryone)`. Server calls are unrestricted; client calls are rate limited, can't `@everyone` and are stamped with the sender's id. |
 | `rsg-core:client:RemoveWeaponFromTab` | client | Removes a weapon from the ped (rsg-weapons). |
 | `rsg-essentials:server:getPermissions` | callback | Used by AFK kick. |

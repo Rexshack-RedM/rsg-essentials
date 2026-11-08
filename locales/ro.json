@@ -5,8 +5,6 @@
     "cl_hideui": "Comută toate interfețele (ex. pentru capturi de ecran)",
     "cl_wash": "Spală-te",
     "cl_drink": "Bea",
-    "cl_pvp_toggle_on": "PvP este PORNIT",
-    "cl_pvp_toggle_off": "PvP este OPRIT",
     "sv_kick": "Ai fost dat afară pentru că ai fost AFK",
     "sv_test_your_webhook": "Testează webhook-ul Discord pentru loguri (doar God)",
     "sv_test_webhook": "Testează webhook",

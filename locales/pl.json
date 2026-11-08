@@ -5,8 +5,6 @@
     "cl_hideui": "Przełącz wszystkie UI (np. do zrzutów ekranu)",
     "cl_wash": "Umyj się",
     "cl_drink": "Napij się",
-    "cl_pvp_toggle_on": "PvP WŁĄCZONE",
-    "cl_pvp_toggle_off": "PvP WYŁĄCZONE",
     "sv_kick": "Zostałeś wyrzucony za bycie AFK",
     "sv_test_your_webhook": "Przetestuj webhook Discord dla logów (tylko God)",
     "sv_test_webhook": "Testuj webhook",

@@ -85,17 +85,3 @@ CreateThread(function()
     end
 end)
 
--- pvp toggle (used by rsg-radialmenu)
-local pvp = false
-RegisterNetEvent('rsg-essentials:client:pvpToggle', function()
-    local ped = PlayerPedId()
-    pvp = not pvp
-    SetRelationshipBetweenGroups(pvp and 5 or 1, `PLAYER`, `PLAYER`)
-    NetworkSetFriendlyFireOption(pvp)
-    if pvp then
-        Citizen.InvokeNative(0x949B2F9ED2917F5D, ped, 6) -- enable choking
-    else
-        Citizen.InvokeNative(0xB8DE69D9473B7593, ped, 6) -- disable choking
-    end
-    RSGCore.Functions.Notify({ id = 'rsg_pvp', title = locale(pvp and 'cl_pvp_toggle_on' or 'cl_pvp_toggle_off'), type = 'inform', icon = 'fa-solid fa-shield', duration = 7000 })
-end)

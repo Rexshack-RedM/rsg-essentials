@@ -5,8 +5,6 @@
     "cl_hideui": "Zapnout/vypnout všechna UI (např. pro snímky obrazovky)",
     "cl_wash": "Umýt se",
     "cl_drink": "Napít se",
-    "cl_pvp_toggle_on": "PvP ZAPNUTO",
-    "cl_pvp_toggle_off": "PvP VYPNUTO",
     "sv_kick": "Byl jsi vyhozen kvůli AFK",
     "sv_test_your_webhook": "Otestuj Discord webhook pro logy (jen God)",
     "sv_test_webhook": "Test webhooku",

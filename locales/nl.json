@@ -5,8 +5,6 @@
     "cl_hideui": "Alle UI's aan/uit (bijv. voor screenshots)",
     "cl_wash": "Wassen",
     "cl_drink": "Drinken",
-    "cl_pvp_toggle_on": "PvP staat AAN",
-    "cl_pvp_toggle_off": "PvP staat UIT",
     "sv_kick": "Je bent gekickt wegens AFK",
     "sv_test_your_webhook": "Test je Discord-webhook voor logs (alleen God)",
     "sv_test_webhook": "Webhook testen",
