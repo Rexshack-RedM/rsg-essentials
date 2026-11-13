@@ -86,4 +86,4 @@
 - Viyu88 (map zone colours), rms_dnb (animal cleanup)
 - License: GPL-3.0
 
-Support: https://buymeacoffee.com/rexshack
+Support the Project : https://rexshack.tebex.store/

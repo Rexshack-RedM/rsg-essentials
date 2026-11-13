@@ -107,4 +107,4 @@ Client-sent logs cannot spam webhooks or ping `@everyone`. The AFK staff exempti
 | Storm/xmas does nothing | rsg-weather must be started |
 | Staff kicked for AFK | Add their group to `AFK.IgnoredGroups` |
 
-Support: https://buymeacoffee.com/rexshack
+Support the Project : https://rexshack.tebex.store/
