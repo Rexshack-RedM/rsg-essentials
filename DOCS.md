@@ -108,3 +108,85 @@ Client-sent logs cannot spam webhooks or ping `@everyone`. The AFK staff exempti
 | Staff kicked for AFK | Add their group to `AFK.IgnoredGroups` |
 
 Support the Project : https://rexshack.tebex.store/
+
+<!-- BEGIN AUTO-REFERENCE (generated from the code; re-run the generator instead of editing by hand) -->
+
+## Technical reference
+
+Generated from the source of **rsg-essentials 3.2.1**. Names, arguments and defaults below are read straight from the code.
+
+### Dependencies
+
+`rsg-core`
+
+### Configuration
+
+| Option | Default | Notes |
+|---|---|---|
+| `Config.Debug` | `false` |  |
+| `Config.AFK` | `table` | afk kick |
+| `Config.River` | `table` | river wash / drink |
+| `Config.EnableAnimalCleanup` | `false` | animal cleanup |
+| `Config.CleanupInterval` | `900000` | ms (15 mins) |
+| `Config.FirstPersonShooting` | `false` | enable first person shooting |
+| `Config.EnableXmas` | `false` | enable xmas weather |
+| `Config.PauseReadBook` | `false` | pause menu |
+| `Config.StopAutoShuffle` | `true` | Stop shuffle when entering wagons |
+| `Config.Crouch` | `true` | Set to `true` to force crouching, or `false` to allow interaction without crouching. |
+| `Config.EagleEye` | `table` | This allows server admins to control which roles (jobs) can use Eagle Eye. |
+| `Config.Discord` | `table` | Go to Discord Developers Portal (https://discord.com/developers) |
+| `Config.DiscordWHImage` | `'https://cdn.discordapp.com/attachments/1032260791669375006/1066811751` | discord webhook config |
+| `Config.DiscordWHLogUserName` | `'Rexshack Gaming Logs'` |  |
+| `Config.DiscordWHAuthorName` | `'Rexshack Gaming'` |  |
+| `Config.Density` | `table` | density config |
+| `Config.WaterTypes` | `table` | water types config |
+| `Config.Zones` | `table` | map zones |
+
+### Callbacks
+
+| Callback | Side | Arguments | File |
+|---|---|---|---|
+| `rsg-essentials:server:getPermissions` | server | `source, cb` | `server/afk.lua` |
+
+```lua
+-- client side
+RSGCore.Functions.TriggerCallback('rsg-essentials:server:getPermissions', function(result)
+    -- use result
+end)
+```
+
+### Events
+
+Server events can be fired by any client, so every handler re-validates the player, the arguments and any permission, distance or cooldown on the server. Never add a reward to a handler without those checks.
+
+| Event | Side | Arguments | File |
+|---|---|---|---|
+| `RSGCore:Client:OnPlayerLoaded` | client | `` | `client/afk.lua` |
+| `RSGCore:Client:OnPlayerUnload` | client | `` | `client/afk.lua` |
+| `RSGCore:Client:OnPermissionUpdate` | client | `` | `client/afk.lua` |
+| `rsg-discord:receivedata` | client | `richPresenceString` | `client/discord.lua` |
+| `RSGCore:Client:OnJobUpdate` | client | `job` | `client/eagleeye.lua` |
+| `rsg-core:client:RemoveWeaponFromTab` | client | `weaponName` | `client/weaponcheck.lua` |
+| `rsg-essentials:server:afkKick` | server | `` | `server/afk.lua` |
+| `rsg-discord:getdata` | server | `` | `server/discord.lua` |
+| `rsg-log:server:CreateLog` | server | `name, title, color, message, tagEveryone` | `server/logs.lua` |
+
+```lua
+-- from a client script
+TriggerServerEvent('rsg-essentials:server:afkKick')
+-- from a server script
+TriggerClientEvent('RSGCore:Client:OnPlayerLoaded', source)
+```
+
+### Commands
+
+| Command | Notes | File |
+|---|---|---|
+| `/hideui` |  | `client/commands.lua` |
+| `/testwebhook` | locale('sv_test_your_webhook') | `server/logs.lua` |
+
+### Locales
+
+Language files in `locales/`: `cs`, `de`, `el`, `en`, `es`, `fr`, `ja`, `nl`, `pl`, `pt-br`, `ro`. Set the language with `setr rsg:locale "en"`.
+
+<!-- END AUTO-REFERENCE -->
