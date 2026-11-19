@@ -1,0 +1,16 @@
+{
+    "cl_afk_title": "Предупреждение об AFK",
+    "cl_afk_minutes": "Вы будете кикнуты за AFK через %d мин.",
+    "cl_afk_seconds": "Вы будете кикнуты за AFK через %d с.",
+    "cl_hideui": "Включить/выключить весь интерфейс (например, для скриншотов)",
+    "cl_wash": "Умыться",
+    "cl_drink": "Пить",
+    "sv_kick": "Вы кикнуты за AFK",
+    "sv_test_your_webhook": "Проверить Discord-вебхук для логов (только для God)",
+    "sv_test_webhook": "Проверка вебхука",
+    "sv_webhook_successfully": "Вебхук успешно настроен",
+    "sv_print_drizzle": "30 минут до бури: морось",
+    "sv_print_shower": "15 минут до бури: ливень",
+    "sv_print_rain": "10 минут до бури: дождь",
+    "sv_print_thunderstorm": "5 минут до бури: гроза"
+}

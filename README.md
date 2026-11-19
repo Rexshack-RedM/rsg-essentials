@@ -18,7 +18,7 @@
 - [**rsg-weapons**](https://github.com/Rexshack-RedM/rsg-weapons) 🔫 *(weapon remove event)*
 - [**rsg-radialmenu**](https://github.com/Rexshack-RedM/rsg-radialmenu)
 
-**Locales:** `en, de, el, es, fr, ja, nl, pl, pt-br, ro` (+ `cs`) loaded by rsg-core. Set the language with `setr rsg:locale de`.
+**Locales:** `en, de, el, es, fr, ja, nl, pl, pt-br, ro, ru` (+ `cs`) loaded by rsg-core. Set the language with `setr rsg:locale de`.
 
 ---
 

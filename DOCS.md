@@ -33,7 +33,7 @@
 | `client/commands.lua` | `/hideui` |
 | `server/storm.lua`, `server/xmas.lua` | Restart storm and Christmas weather (rsg-weather) |
 | `server/versionchecker.lua` | GitHub version check |
-| `locales/*.json` | en, cs, de, el, es, fr, ja, nl, pl, pt-br, ro |
+| `locales/*.json` | en, cs, de, el, es, fr, ja, nl, pl, pt-br, ro, ru |
 
 ## 2. Modules
 | Module | What it does |
@@ -187,6 +187,6 @@ TriggerClientEvent('RSGCore:Client:OnPlayerLoaded', source)
 
 ### Locales
 
-Language files in `locales/`: `cs`, `de`, `el`, `en`, `es`, `fr`, `ja`, `nl`, `pl`, `pt-br`, `ro`. Set the language with `setr rsg:locale "en"`.
+Language files in `locales/`: `cs`, `de`, `el`, `en`, `es`, `fr`, `ja`, `nl`, `pl`, `pt-br`, `ro`, `ru`. Set the language with `setr rsg:locale "en"`.
 
 <!-- END AUTO-REFERENCE -->
