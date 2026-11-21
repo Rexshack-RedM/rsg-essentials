@@ -12,5 +12,7 @@
     "sv_print_drizzle": "30 min tot de storm : motregen",
     "sv_print_shower": "15 min tot de storm : bui",
     "sv_print_rain": "10 min tot de storm : regen",
-    "sv_print_thunderstorm": "5 min tot de storm : onweer"
+    "sv_print_thunderstorm": "5 min tot de storm : onweer",
+    "key_handsup": "Handen omhoog",
+    "key_point": "Wijzen"
 }

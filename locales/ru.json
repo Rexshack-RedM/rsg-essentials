@@ -12,5 +12,7 @@
     "sv_print_drizzle": "30 минут до бури: морось",
     "sv_print_shower": "15 минут до бури: ливень",
     "sv_print_rain": "10 минут до бури: дождь",
-    "sv_print_thunderstorm": "5 минут до бури: гроза"
+    "sv_print_thunderstorm": "5 минут до бури: гроза",
+    "key_handsup": "Поднять руки",
+    "key_point": "Указать"
 }

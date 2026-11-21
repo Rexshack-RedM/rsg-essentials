@@ -12,5 +12,7 @@
     "sv_print_drizzle": "30 min até a tempestade : garoa",
     "sv_print_shower": "15 min até a tempestade : pancada de chuva",
     "sv_print_rain": "10 min até a tempestade : chuva",
-    "sv_print_thunderstorm": "5 min até a tempestade : trovoada"
+    "sv_print_thunderstorm": "5 min até a tempestade : trovoada",
+    "key_handsup": "Mãos ao alto",
+    "key_point": "Apontar"
 }

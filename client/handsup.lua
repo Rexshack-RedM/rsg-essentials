@@ -8,31 +8,38 @@ local function lower(ped)
     handsUp = false
 end
 
-CreateThread(function()
-    local keybind = RSGCore.Shared.Keybinds['X']
-    while true do
-        Wait(0) -- IsControlJustPressed is only true for one frame
-        if IsControlJustPressed(0, keybind) then
-            local ped = PlayerPedId()
-            local pd = RSGCore.Functions.GetPlayerData()
-            local meta = pd and pd.metadata or {}
-            if IsEntityPlayingAnim(ped, animDict, animName, 3) then
-                lower(ped)
-            elseif not meta.isdead and not meta.ishandcuffed and not IsEntityDead(ped)
-                and not Citizen.InvokeNative(0x9682F850056C9ADE, ped) then -- IS_PED_CUFFED
-                SetCurrentPedWeapon(ped, `WEAPON_UNARMED`, true)
-                RequestAnimDict(animDict)
-                local timeout = GetGameTimer() + 3000
-                while not HasAnimDictLoaded(animDict) and GetGameTimer() < timeout do Wait(0) end
-                if HasAnimDictLoaded(animDict) then
-                    TaskPlayAnim(ped, animDict, animName, 2.0, -2.0, -1, 67109393, 0.0, false, 1245184, false, 'UpperbodyFixup_filter', false)
-                    LocalPlayer.state:set('inv_busy', true, true)
-                    handsUp = true
-                end
-            end
+local function toggleHandsUp()
+    local ped = PlayerPedId()
+    local pd = RSGCore.Functions.GetPlayerData()
+    local meta = pd and pd.metadata or {}
+    if IsEntityPlayingAnim(ped, animDict, animName, 3) then
+        lower(ped)
+    elseif not meta.isdead and not meta.ishandcuffed and not IsEntityDead(ped)
+        and not Citizen.InvokeNative(0x9682F850056C9ADE, ped) then -- IS_PED_CUFFED
+        SetCurrentPedWeapon(ped, `WEAPON_UNARMED`, true)
+        RequestAnimDict(animDict)
+        local timeout = GetGameTimer() + 3000
+        while not HasAnimDictLoaded(animDict) and GetGameTimer() < timeout do Wait(0) end
+        if HasAnimDictLoaded(animDict) then
+            TaskPlayAnim(ped, animDict, animName, 2.0, -2.0, -1, 67109393, 0.0, false, 1245184, false, 'UpperbodyFixup_filter', false)
+            LocalPlayer.state:set('inv_busy', true, true)
+            handsUp = true
         end
     end
-end)
+end
+
+if Config.UseKeyMapping then
+    -- rebindable key (rsg-core RegisterKey): no per-frame loop
+    RSGCore.Functions.RegisterKey('rsgessentials_handsup', locale('key_handsup'), Config.Keys.HandsUp, toggleHandsUp)
+else
+    CreateThread(function()
+        local keybind = RSGCore.Shared.Keybinds[Config.Keys.HandsUp]
+        while true do
+            Wait(0) -- IsControlJustPressed is only true for one frame
+            if IsControlJustPressed(0, keybind) then toggleHandsUp() end
+        end
+    end)
+end
 
 AddEventHandler('onResourceStop', function(res)
     if res == GetCurrentResourceName() and handsUp then lower(PlayerPedId()) end

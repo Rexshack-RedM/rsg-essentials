@@ -12,5 +12,7 @@
     "sv_print_drizzle": "30 min până la furtună : burniță",
     "sv_print_shower": "15 min până la furtună : aversă",
     "sv_print_rain": "10 min până la furtună : ploaie",
-    "sv_print_thunderstorm": "5 min până la furtună : furtună cu tunete"
+    "sv_print_thunderstorm": "5 min până la furtună : furtună cu tunete",
+    "key_handsup": "Mâinile sus",
+    "key_point": "Arată"
 }

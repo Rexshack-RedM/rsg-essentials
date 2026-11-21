@@ -12,5 +12,7 @@
     "sv_print_drizzle": "30 min do burzy : mżawka",
     "sv_print_shower": "15 min do burzy : przelotny deszcz",
     "sv_print_rain": "10 min do burzy : deszcz",
-    "sv_print_thunderstorm": "5 min do burzy : burza z piorunami"
+    "sv_print_thunderstorm": "5 min do burzy : burza z piorunami",
+    "key_handsup": "Ręce w górę",
+    "key_point": "Wskaż"
 }

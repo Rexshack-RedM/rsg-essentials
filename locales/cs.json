@@ -12,5 +12,7 @@
     "sv_print_drizzle": "30 min do bouře : mrholení",
     "sv_print_shower": "15 min do bouře : přeháňka",
     "sv_print_rain": "10 min do bouře : déšť",
-    "sv_print_thunderstorm": "5 min do bouře : bouřka"
+    "sv_print_thunderstorm": "5 min do bouře : bouřka",
+    "key_handsup": "Ruce vzhůru",
+    "key_point": "Ukázat"
 }

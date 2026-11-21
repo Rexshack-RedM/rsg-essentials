@@ -2,6 +2,16 @@ Config = Config or {}
 
 Config.Debug = false
 
+-- keys for hands up and pointing
+-- true: rebindable keys (rsg-core RegisterKey, needs rsg-core 3.5.0+). The names below are only the defaults,
+--       players change them in the game's key settings.
+-- false: poll the keys every frame (names must exist in RSGCore.Shared.Keybinds)
+Config.UseKeyMapping = true
+Config.Keys = {
+    HandsUp = 'X', -- press to raise / lower hands
+    Point   = 'B', -- hold to point
+}
+
 -- afk kick
 Config.AFK = {
     Enabled       = true,

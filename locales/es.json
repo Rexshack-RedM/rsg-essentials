@@ -12,5 +12,7 @@
     "sv_print_drizzle": "30 min para la tormenta : llovizna",
     "sv_print_shower": "15 min para la tormenta : chubasco",
     "sv_print_rain": "10 min para la tormenta : lluvia",
-    "sv_print_thunderstorm": "5 min para la tormenta : tormenta eléctrica"
+    "sv_print_thunderstorm": "5 min para la tormenta : tormenta eléctrica",
+    "key_handsup": "Manos arriba",
+    "key_point": "Señalar"
 }

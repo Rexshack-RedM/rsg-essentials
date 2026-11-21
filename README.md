@@ -31,8 +31,8 @@
 | Discord logs | `server/logs.lua` | `rsg-log:server:CreateLog` webhook logger used by many RSG resources. `/testwebhook` (god). |
 | Eagle eye | `client/eagleeye.lua` | Everyone, or only jobs listed in `Config.EagleEye`. Updates on job change. |
 | First-person aiming | `client/firstperson.lua` | Forces first person while free-aiming (`Config.FirstPersonShooting`). |
-| Hands up | `client/handsup.lua` | `X` raises / lowers hands (blocked when dead or cuffed), sets `inv_busy`. |
-| Pointing | `client/pointing.lua` | Hold `B` to point. |
+| Hands up | `client/handsup.lua` | `X` raises / lowers hands (blocked when dead or cuffed), sets `inv_busy`. Rebindable in the game's key settings. |
+| Pointing | `client/pointing.lua` | Hold `B` to point. Rebindable in the game's key settings. |
 | Lantern holster | `client/latern.lua` | Puts the lantern back on the hip when switching weapons. |
 | River wash & drink | `client/nearwater.lua` | Crouch in a named river/lake for **Wash** (`ENTER`) and **Drink** (`J`) prompts. Thirst amount and timings in `Config.River`. |
 | Map zones | `client/zones.lua` | Colours map regions listed in `Config.Zones` (credit Viyu88). |

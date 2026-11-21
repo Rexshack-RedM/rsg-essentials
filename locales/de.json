@@ -12,5 +12,7 @@
     "sv_print_drizzle": "30 Min. bis zum Sturm : Nieselregen",
     "sv_print_shower": "15 Min. bis zum Sturm : Schauer",
     "sv_print_rain": "10 Min. bis zum Sturm : Regen",
-    "sv_print_thunderstorm": "5 Min. bis zum Sturm : Gewitter"
+    "sv_print_thunderstorm": "5 Min. bis zum Sturm : Gewitter",
+    "key_handsup": "Hände hoch",
+    "key_point": "Zeigen"
 }

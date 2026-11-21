@@ -12,5 +12,7 @@
     "sv_print_drizzle": "30 min avant la tempête : bruine",
     "sv_print_shower": "15 min avant la tempête : averse",
     "sv_print_rain": "10 min avant la tempête : pluie",
-    "sv_print_thunderstorm": "5 min avant la tempête : orage"
+    "sv_print_thunderstorm": "5 min avant la tempête : orage",
+    "key_handsup": "Mains en l'air",
+    "key_point": "Pointer"
 }

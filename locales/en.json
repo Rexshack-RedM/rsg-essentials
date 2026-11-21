@@ -12,5 +12,7 @@
     "sv_print_drizzle": "30 mins until the storm : drizzle",
     "sv_print_shower": "15 mins until the storm : shower",
     "sv_print_rain": "10 mins until the storm : rain",
-    "sv_print_thunderstorm": "5 mins until the storm : thunderstorm"
+    "sv_print_thunderstorm": "5 mins until the storm : thunderstorm",
+    "key_handsup": "Hands up",
+    "key_point": "Point"
 }

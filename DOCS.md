@@ -1,4 +1,4 @@
-# rsg-essentials – Docs (v3.2.1)
+# rsg-essentials – Docs (v3.3.0)
 
 ## Contents
 1. Files
@@ -43,7 +43,7 @@
 | Discord logs | Webhook logger used by many RSG resources |
 | Eagle eye | Everyone, or only jobs listed in `Config.EagleEye`; updates on job change |
 | First-person aiming | Forces first person while free-aiming (`FirstPersonShooting`) |
-| Hands up / pointing | `X` raises/lowers hands (blocked when dead or cuffed); hold `B` to point |
+| Hands up / pointing | `X` raises/lowers hands (blocked when dead or cuffed); hold `B` to point. Both are rebindable (`Config.UseKeyMapping`, `Config.Keys`) |
 | Lantern holster | Lantern goes back on the hip when switching weapons |
 | River wash & drink | Crouch in a named river/lake for Wash and Drink prompts; thirst restored per `Config.River` |
 | Map zones | Colours regions in `Config.Zones` |
@@ -113,7 +113,7 @@ Support the Project : https://rexshack.tebex.store/
 
 ## Technical reference
 
-Generated from the source of **rsg-essentials 3.2.1**. Names, arguments and defaults below are read straight from the code.
+Generated from the source of **rsg-essentials 3.3.0**. Names, arguments and defaults below are read straight from the code.
 
 ### Dependencies
 
@@ -124,6 +124,8 @@ Generated from the source of **rsg-essentials 3.2.1**. Names, arguments and defa
 | Option | Default | Notes |
 |---|---|---|
 | `Config.Debug` | `false` |  |
+| `Config.UseKeyMapping` | `true` | Hands up and pointing use rebindable keys (rsg-core `RegisterKey`, needs rsg-core 3.5.0+). `false` polls `Config.Keys` every frame |
+| `Config.Keys` | `table` | `HandsUp = 'X'`, `Point = 'B'`: default key names. Players rebind them in the game's key settings |
 | `Config.AFK` | `table` | afk kick |
 | `Config.River` | `table` | river wash / drink |
 | `Config.EnableAnimalCleanup` | `false` | animal cleanup |

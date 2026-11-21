@@ -12,5 +12,7 @@
     "sv_print_drizzle": "嵐まで30分 : 霧雨",
     "sv_print_shower": "嵐まで15分 : にわか雨",
     "sv_print_rain": "嵐まで10分 : 雨",
-    "sv_print_thunderstorm": "嵐まで5分 : 雷雨"
+    "sv_print_thunderstorm": "嵐まで5分 : 雷雨",
+    "key_handsup": "手を上げる",
+    "key_point": "指をさす"
 }
