@@ -28,7 +28,7 @@
 |---|---|---|
 | AFK kick | `client/afk.lua`, `server/afk.lua` | Kicks players who stand still for `Config.AFK.KickAfter` seconds, with countdown warnings. Staff groups in `Config.AFK.IgnoredGroups` are exempt (checked on client **and** server). |
 | Discord rich presence | `client/discord.lua`, `server/discord.lua` | App ID, assets, two buttons and a live status from `Config.Discord.Template` (`{ID}`, `{NAME}`, `{PLAYERS_COUNT}`). |
-| Discord logs | `server/logs.lua` | `rsg-log:server:CreateLog` webhook logger used by many RSG resources. `/testwebhook` (god). |
+| Discord logs | `server/logs.lua` | `rsg-log:server:CreateLog` webhook logger used by many RSG resources. Version 3.3.1 queues and batches messages and retries when Discord rate limits. `/testwebhook` (god). |
 | Eagle eye | `client/eagleeye.lua` | Everyone, or only jobs listed in `Config.EagleEye`. Updates on job change. |
 | First-person aiming | `client/firstperson.lua` | Forces first person while free-aiming (`Config.FirstPersonShooting`). |
 | Hands up | `client/handsup.lua` | `X` raises / lowers hands (blocked when dead or cuffed), sets `inv_busy`. Rebindable in the game's key settings. |

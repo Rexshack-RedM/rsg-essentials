@@ -2,6 +2,11 @@
 
 All notable changes to rsg-essentials. Newest first.
 
+## 3.3.1
+
+### Changed
+- Discord logs are queued per webhook, sent in batches of up to 10 and retried when Discord rate limits or fails, instead of one request per log. `@everyone` is sent with the batch.
+
 ## 3.3.0
 
 ### Added

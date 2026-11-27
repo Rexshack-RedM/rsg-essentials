@@ -1,4 +1,4 @@
-# rsg-essentials – Docs (v3.3.0)
+# rsg-essentials – Docs (v3.3.1)
 
 ## Contents
 1. Files
@@ -17,7 +17,7 @@
 | `shared/config.lua` | All settings |
 | `client/afk.lua`, `server/afk.lua` | AFK kick |
 | `client/discord.lua`, `server/discord.lua` | Discord rich presence |
-| `server/logs.lua` | Discord webhook logger (`rsg-log:server:CreateLog`) |
+| `server/logs.lua` | Discord webhook logger (`rsg-log:server:CreateLog`). Logs are queued per webhook, sent up to 10 at a time every 2 seconds, retried on rate limits; each queue holds 500 |
 | `client/eagleeye.lua` | Eagle eye access by job |
 | `client/firstperson.lua` | First-person free-aim |
 | `client/handsup.lua`, `client/pointing.lua` | Hands up, pointing |
@@ -113,7 +113,7 @@ Support the Project : https://rexshack.tebex.store/
 
 ## Technical reference
 
-Generated from the source of **rsg-essentials 3.3.0**. Names, arguments and defaults below are read straight from the code.
+Generated from the source of **rsg-essentials 3.3.1**. Names, arguments and defaults below are read straight from the code.
 
 ### Dependencies
 
